@@ -48,6 +48,8 @@
       else if (next) {
         btn.textContent = (!anyStarted && next.num === 1) ? 'Start Lesson 1' : 'Continue: Lesson ' + next.num;
         btn.href = ROOT + next.id + '/';
+      } else if (document.querySelector('.lesson-row[data-lesson="' + P.FINAL_ID + '"][data-soon]')) {
+        btn.textContent = 'Review the lessons'; btn.href = ROOT + 'lesson-1/';   // Final Challenge not built yet
       } else { btn.textContent = 'Go to the Final Challenge'; btn.href = ROOT + P.FINAL_ID + '/'; }
     }
 

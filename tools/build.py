@@ -422,7 +422,7 @@ def build_lesson(l):
             heading, href, label = LESSONS[num]["title"], f"../lesson-{num + 1}/", f"Go to Lesson {num + 1} →"
         else:
             heading, href, label = FINAL_LABEL, "../final-challenge/", "Go to the Final Challenge →"
-        section = "Next Lesson" if num < TOTAL else "Next Step"
+        section = "Next Lesson" if num < TOTAL else "Next"
         paras = "".join(f"<p>{p}</p>" for p in l["next_preview"])
         next_ready = is_built(num + 1) if num < TOTAL else FINAL_SRC.exists() or (OUT / "shared" / "challenge-data.js").exists()
         next_block = (f'<section class="card"><div class="connection-title">{section}</div>'
@@ -576,9 +576,15 @@ def build_home():
         for i, f in enumerate(DATA["fit_check"], 1))
     outcomes = "".join(f"<li>{esc(o)}</li>" for o in DATA["outcomes"])
     built = sum(1 for l in LESSONS if is_built(l["num"]))
-    pilot_note = ("" if built == TOTAL else
-                  f'<div class="callout"><strong>This course is being released lesson by lesson.</strong> '
-                  f'{"Lesson 1 is" if built == 1 else f"{built} lessons are"} ready now. The other lessons and the Final Challenge are coming soon.</div>')
+    final_ready_home = FINAL_SRC.exists() or (OUT / "shared" / "challenge-data.js").exists()
+    if built < TOTAL:
+        pilot_note = (f'<div class="callout"><strong>This course is being released lesson by lesson.</strong> '
+                      f'{"Lesson 1 is" if built == 1 else f"{built} lessons are"} ready now. The other lessons and the Final Challenge are coming soon.</div>')
+    elif not final_ready_home:
+        pilot_note = ('<div class="callout"><strong>All six lessons are ready.</strong> '
+                      'The Final Challenge is coming soon.</div>')
+    else:
+        pilot_note = ""
 
     page = f"""{head(f"{COURSE} — PVA Academy", root, "A free, self-paced PVA Academy course for aspiring VAs: read a client request carefully, decide whether you can start, plan the work, and check it before you say it's done.")}
 <body data-root="{root}" data-page="home" data-next-course="{NEXT_COURSE[1]}">

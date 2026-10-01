@@ -204,5 +204,46 @@ window.CW_QUICK_CHECKS = {
     "explain": "A change can break something nearby. Check what you changed, what it touched, and what was right before."
    }
   ]
+ },
+ "lesson-6": {
+  "purpose": "A few questions that use the whole cycle.",
+  "questions": [
+   {
+    "id": "6.1",
+    "q": "Grace asks for a sheet for every Active stockist. One shop on the tracker is Pending. What do you do about that shop?",
+    "options": [
+     "Leave it out: the request says Active only",
+     "Make one anyway, just in case",
+     "Ask Grace before starting any sheet",
+     "Make one and mark it Pending"
+    ],
+    "answer": 0,
+    "explain": "The request and the tracker together settle it, so there's nothing to ask."
+   },
+   {
+    "id": "6.2",
+    "q": "One step needs Grace's answer, and her reply may come overnight. When do you ask?",
+    "options": [
+     "Before you start the rest, so the answer comes while you work",
+     "After everything else is done",
+     "Only if she asks how it's going",
+     "At the deadline"
+    ],
+    "answer": 0,
+    "explain": "Asking first means her answer is on its way while you do the parts that don't need it."
+   },
+   {
+    "id": "6.3",
+    "q": "In your Done Check, a column Grace asked to leave empty is empty. What do you do with it?",
+    "options": [
+     "Leave it: it matches the request",
+     "Fill it in to be helpful",
+     "Delete the column",
+     "Ask Grace if it's right"
+    ],
+    "answer": 0,
+    "explain": "Empty is what she asked for. Leave alone what's fine."
+   }
+  ]
  }
 };

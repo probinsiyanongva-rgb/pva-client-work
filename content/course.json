@@ -4501,7 +4501,716 @@
   },
   {
    "num": 6,
-   "title": "Putting It Together"
+   "title": "Putting It Together",
+   "mocks": {
+    "request": {
+     "kind": "email",
+     "subject": "Holiday pre-orders",
+     "from": "Grace Tan",
+     "from_email": "grace@harborhill.co",
+     "to": "ana@harborhill.co",
+     "date": "Monday",
+     "actions": [],
+     "label": "Email from Grace Tan: Holiday pre-orders",
+     "body": [
+      "Hi Ana! Holiday pre-orders are open. Please make a pre-order sheet for every stockist marked Active on the Stockist Tracker, using the Pre-order Template. Each sheet should list this year's holiday items with their wholesale price and an empty Quantity column, so the shops can fill it in. Leave out anything discontinued. Put each sheet in the shop's folder in Buyers and share it with them the usual way. I'm emailing all the stockists on Wednesday at 9 AM my time, so they need to be ready by then. Thanks!"
+     ]
+    },
+    "tracker": {
+     "kind": "sheet",
+     "name": "Stockist Tracker",
+     "cols": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+     ],
+     "rows": [
+      [
+       "Shop",
+       "Contact",
+       "Status",
+       "Pre-order sheet",
+       "Notes"
+      ],
+      [
+       "Paper Moon Goods",
+       "orders@papermoon.example.com",
+       "Active",
+       "",
+       ""
+      ],
+      [
+       "The Clay Room",
+       "(Nina Ross left in September)",
+       "Active",
+       "",
+       "New contact: ask Grace"
+      ],
+      [
+       "Driftwood & Co.",
+       "hello@driftwoodco.example.com",
+       "Active",
+       "",
+       ""
+      ],
+      [
+       "Northside Home",
+       "ben@northsidehome.example.com",
+       "Active",
+       "",
+       ""
+      ],
+      [
+       "Little Harbor Gifts",
+       "ava@littleharbor.example.com",
+       "Closed",
+       "",
+       ""
+      ],
+      [
+       "Juniper Lane Goods",
+       "team@juniperlane.example.com",
+       "Pending",
+       "",
+       "Discount question with Grace"
+      ]
+     ],
+     "label": "Stockist Tracker"
+    },
+    "holiday": {
+     "kind": "sheet",
+     "name": "Holiday Items 2026",
+     "cols": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "rows": [
+      [
+       "Product",
+       "Wholesale",
+       "Retail",
+       "Status"
+      ],
+      [
+       "Snow Mug",
+       "$14",
+       "$28",
+       "Active"
+      ],
+      [
+       "Pine Candle",
+       "",
+       "$26",
+       "Active"
+      ],
+      [
+       "Holly Plate",
+       "$16",
+       "$34",
+       "Discontinued"
+      ],
+      [
+       "Star Ornaments (set of 3)",
+       "$9",
+       "$20",
+       "Active"
+      ],
+      [
+       "Frost Bowl",
+       "$19",
+       "$40",
+       "Active"
+      ],
+      [
+       "Cedar Tray",
+       "$22",
+       "$48",
+       "Active"
+      ]
+     ],
+     "label": "Holiday Items 2026"
+    },
+    "pricerow": {
+     "kind": "sheet",
+     "name": "Price List",
+     "cols": [
+      "A",
+      "B",
+      "C"
+     ],
+     "rows": [
+      [
+       "Product",
+       "Wholesale",
+       "Retail"
+      ],
+      [
+       "Pine Candle",
+       "$12",
+       "$26"
+      ]
+     ],
+     "label": "Price List, Pine Candle row"
+    },
+    "checklist": {
+     "kind": "doc",
+     "type": "DOC",
+     "name": "Holiday Pre-order Sheets",
+     "label": "Grace's checklist: Holiday Pre-order Sheets",
+     "lines": [
+      "1. Make a copy of the Pre-order Template and name it Shop – Holiday Pre-order – 2026.",
+      "2. Fill in the Active holiday items and their wholesale prices. Leave Quantity empty.",
+      "3. Put it in the shop's folder in Buyers.",
+      "4. Share it with the shop's contact on the tracker (can edit).",
+      "5. Tick Pre-order sheet for that shop on the Stockist Tracker."
+     ]
+    },
+    "lastweek": {
+     "kind": "chat",
+     "title": "Grace Tan",
+     "label": "Grace's message last week",
+     "messages": [
+      {
+       "from": "Grace Tan",
+       "time": "Last week",
+       "text": "Remember, Driftwood & Co. gets 10% off wholesale for the holidays. We agreed at the fair."
+      }
+     ]
+    },
+    "papermoon": {
+     "kind": "email",
+     "subject": "Holiday order",
+     "from": "Paper Moon Goods",
+     "from_email": "orders@papermoon.example.com",
+     "to": "ana@harborhill.co",
+     "date": "Tuesday",
+     "actions": [],
+     "label": "Email from Paper Moon Goods",
+     "body": [
+      "Hi Ana! Could you add 20 Snow Mugs to our sheet at last year's price ($12)? Grace said that would be fine when we met at the fair."
+     ]
+    },
+    "pmsheet": {
+     "kind": "sheet",
+     "name": "Paper Moon Goods – Holiday Pre-order – 2025",
+     "cols": [
+      "A",
+      "B",
+      "C"
+     ],
+     "rows": [
+      [
+       "Product",
+       "Wholesale",
+       "Quantity"
+      ],
+      [
+       "Cedar Tray",
+       "$22",
+       ""
+      ],
+      [
+       "Frost Bowl",
+       "$19",
+       ""
+      ],
+      [
+       "Holly Plate",
+       "$16",
+       ""
+      ],
+      [
+       "Pine Candle",
+       "$12",
+       ""
+      ],
+      [
+       "Snow Mug",
+       "$28",
+       ""
+      ],
+      [
+       "Star Ornaments (set of 3)",
+       "$9",
+       ""
+      ]
+     ],
+     "label": "Paper Moon Goods' finished pre-order sheet"
+    }
+   },
+   "taskcards": {
+    "holiday": {
+     "label": "Practice",
+     "title": "Your Task Card",
+     "note_heading": "My Task Card: Holiday pre-orders",
+     "intro_html": "<p>On Monday, Grace emails you:</p>{{mock:request}}<p>Read it to the end, then fill in your Task Card. You haven't opened the files yet. Short notes are fine, in English or Taglish. Your answers are saved in this browser.</p>",
+     "reveal_label": "Show the model Task Card",
+     "anyway_label": "Show me anyway",
+     "model_heading": "Model Task Card",
+     "check_intro": "Compare each part with the model. Mark each one. It's for you only.",
+     "fields": [
+      {
+       "key": "task",
+       "label": "Task",
+       "placeholder": "Everything Grace asked you to do",
+       "model": "Make a holiday pre-order sheet for each Active stockist from the Pre-order Template, put it in their folder, and share it with them",
+       "check": "Did you include all three: make the sheets, put them in the folders, share them?"
+      },
+      {
+       "key": "result",
+       "label": "Finished result",
+       "placeholder": "What will exist when you're done",
+       "model": "One sheet per Active stockist, with this year's holiday items, their wholesale prices and an empty Quantity column, in the shop's folder in Buyers, shared the usual way",
+       "check": "Did you say one sheet per <strong>Active</strong> stockist, with an <strong>empty</strong> Quantity column?",
+       "critical": true
+      },
+      {
+       "key": "sources",
+       "label": "Sources",
+       "placeholder": "Files or information you'll work from",
+       "model": "The Stockist Tracker (who's Active), the Holiday Items list, the Pre-order Template, and the usual way of sharing (Grace's checklist)",
+       "check": "Did you name the tracker and the Holiday Items list?"
+      },
+      {
+       "key": "deadline",
+       "label": "Deadline",
+       "placeholder": "In Philippine time, plus Grace's words",
+       "model": "Wednesday 9 AM Portland = <strong>Thursday 12 midnight</strong> your time. Finish by the end of your Wednesday",
+       "check": "Did you convert it: Wednesday 9 AM Portland is midnight Thursday for you?"
+      },
+      {
+       "key": "limits",
+       "label": "Limits",
+       "placeholder": "Every \"don't\", \"only\" and \"must\"",
+       "model": "Active stockists only. No discontinued items. Wholesale prices, not retail. Quantity left empty",
+       "check": "Did you include <strong>Active only</strong>, <strong>no discontinued items</strong> and <strong>wholesale prices</strong>?",
+       "critical": true
+      },
+      {
+       "key": "questions",
+       "label": "Open questions",
+       "placeholder": "What the messages don't tell you",
+       "model": "Who's Active? Which items are discontinued? What's \"the usual way\" of sharing? The files should answer most of these",
+       "check": "Did you note anything the email alone doesn't answer, like what \"the usual way\" is?"
+      }
+     ],
+     "closing": {
+      "critical_missed": "Finished result and Limits matter most here. Miss \"Active only\" and a closed shop gets a sheet. Miss \"no discontinued items\" and shops order something Grace can't send. Add what you missed.",
+      "other_missed": "You caught the parts that matter most. Check the others against the model before you open the files.",
+      "all_got": "That's a complete Task Card. Now open the files."
+     }
+    }
+   },
+   "activities": {
+    "l6b2": {
+     "label": "Activity",
+     "title": "What's Missing?",
+     "qlabel": "Open question",
+     "layout": "row",
+     "intro_html": "<p>Now the files. Here's what you can see:</p>{{mock:tracker}}{{mock:holiday}}{{mock:pricerow}}{{mock:checklist}}{{mock:lastweek}}<p>For each open question, who has the answer?</p>",
+     "items": [
+      {
+       "q": "Pine Candle's wholesale price",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 1,
+       "feedback": [
+        "It's blank on the Holiday Items list. But the Price List has it: $12.",
+        "The Holiday Items list leaves it blank, but the Price List has it: $12.",
+        "No need to ask Grace. The Price List has it: $12."
+       ]
+      },
+      {
+       "q": "Whether Driftwood & Co.'s sheet shows the 10% off",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 2,
+       "feedback": [
+        "You have two messages, and they pull different ways: \"their wholesale price\" and \"10% off wholesale\". Neither settles it.",
+        "No file says which one Grace wants on the sheet. Her two messages disagree.",
+        "Last week's \"10% off\" and this week's \"wholesale price\" pull different ways. Only Grace can say which goes on the sheet."
+       ]
+      },
+      {
+       "q": "Whether Juniper Lane Goods gets a sheet",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 0,
+       "feedback": [
+        "The tracker says Pending, and Grace asked for Active stockists only. So no sheet.",
+        "You already have it: the tracker says Pending, and the request says Active only.",
+        "Grace already answered this: Active stockists only. Juniper Lane is Pending."
+       ]
+      },
+      {
+       "q": "Who to share The Clay Room's sheet with",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 2,
+       "feedback": [
+        "The tracker has no contact for them. Nina Ross left, and the note says to ask Grace.",
+        "The tracker's note says it plainly: new contact, ask Grace. No file has the new address.",
+        "Nina Ross left, and the tracker says to ask Grace for the new contact. Only she knows."
+       ]
+      },
+      {
+       "q": "When \"Wednesday at 9 AM\" is in your time",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 0,
+       "feedback": [
+        "You can convert it yourself: Wednesday 9 AM in Portland is midnight Thursday for you. Finish by the end of your Wednesday.",
+        "There's nothing to look up. Portland is 15 hours behind, so Wednesday 9 AM there is midnight Thursday for you.",
+        "That's yours to work out: Wednesday 9 AM in Portland is midnight Thursday for you."
+       ]
+      }
+     ]
+    },
+    "l6b3": {
+     "label": "Activity",
+     "title": "Your Calls",
+     "qlabel": "Item",
+     "intro_html": "<p>On Tuesday, before you've heard back from Grace, this email arrives:</p>{{mock:papermoon}}<p>Make a call on each one.</p>",
+     "items": [
+      {
+       "q": "The whole job: can you start on the pre-order sheets now?",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 1,
+       "feedback": [
+        "You'd be guessing on Driftwood's prices and The Clay Room's contact. Those need Grace.",
+        "Most of the sheets don't depend on any answer. Start them, and ask about the rest.",
+        "Waiting for every answer holds up sheets that don't need one, and Grace's reply may only come overnight.",
+        "Nothing here is outside your job. These are questions about your own task."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 1,
+        "options": [
+         "Grace is emailing the stockists on Wednesday.",
+         "Most of the sheets don't depend on Grace's answers.",
+         "There are two open questions, so Grace has to answer first."
+        ],
+        "feedback": [
+         "The deadline matters, but it isn't what lets you start. What matters is which sheets depend on an answer.",
+         "Paper Moon and Northside Home can be done now, and most of Driftwood's and The Clay Room's sheets too.",
+         "The two questions touch Driftwood's prices and The Clay Room's sharing. The rest doesn't depend on them."
+        ]
+       }
+      },
+      {
+       "q": "Paper Moon Goods' email",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 3,
+       "feedback": [
+        "That's a lower price and an order filled in for them: money, and the request isn't from Grace. \"Grace said it's fine\" isn't something you can check.",
+        "There's no safe part of this to start. Even adding the 20 mugs at the normal price changes their order.",
+        "Nothing about your task is missing. Someone else is asking for a price change, and that's Grace's decision.",
+        "A lower price and a pre-filled order, and the request didn't come from Grace. Pass it to her, and make their sheet the usual way. In Lesson 5, Grace changed a limit herself. Here, someone says she agreed."
+       ]
+      },
+      {
+       "q": "Pine Candle's missing price",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 0,
+       "feedback": [
+        "It's in the Price List: $12. There's nothing to wait for.",
+        "There's nothing to ask. The Price List has it.",
+        "Asking would cost Grace time. The Price List has it.",
+        "A price you can look up isn't a decision. It's in the Price List."
+       ]
+      },
+      {
+       "q": "Driftwood & Co.'s prices",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 2,
+       "feedback": [
+        "You'd be choosing between two of Grace's messages: full wholesale or 10% off. That's hers to settle.",
+        "Picking one price now and asking later still means you chose the prices Driftwood sees. Leave them empty until Grace answers.",
+        "No price on Driftwood's sheet can go in until Grace says which: full wholesale or 10% off. Set up the rest of the sheet, and leave the prices empty.",
+        "It's about your own task, and one answer from Grace settles it."
+       ]
+      }
+     ]
+    },
+    "l6b4b": {
+     "label": "Activity",
+     "title": "Will It Fit?",
+     "qlabel": "Task",
+     "numbered": false,
+     "layout": "row",
+     "items": [
+      {
+       "q": "It's Monday, 3 PM your time. Four sheets at about 20 minutes each. Grace's answers may come overnight. The deadline is the end of your Wednesday.",
+       "options": [
+        "Fits",
+        "At risk: flag it now"
+       ],
+       "answer": 0,
+       "feedback": [
+        "About 80 minutes of work, with two and a half days to go, and her answers will likely arrive overnight. It fits.",
+        "About 80 minutes of work, and you have until the end of Wednesday. Even with Grace answering overnight, it fits."
+       ]
+      }
+     ]
+    },
+    "l6b4c": {
+     "label": "Activity",
+     "title": "Does the Checklist Fit?",
+     "qlabel": "Stockist",
+     "numbered": false,
+     "items": [
+      {
+       "q": "The Clay Room. Checklist step 4 says to share the sheet with the contact on the tracker. There isn't one: Nina Ross left in September.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 1,
+       "feedback": [
+        "Sharing it with an old or guessed address could send Grace's prices to the wrong person. Step 4 needs the new contact.",
+        "Steps 1 to 3 don't need a contact. Do them, ask Grace for the new contact, and leave steps 4 and 5 until she answers.",
+        "Most of the checklist doesn't need the contact. Steps 1 to 3 can go ahead while you ask.",
+        "It's a question about your own task, and Grace can answer it with one name."
+       ]
+      }
+     ]
+    }
+   },
+   "orders": {
+    "l6b4a": {
+     "label": "Activity",
+     "title": "Plan Driftwood's Sheet",
+     "intro_html": "<p>Here are the steps for Driftwood &amp; Co.'s sheet, from the first step to the tick on the tracker. Tap them in the order you'd do them. When all seven are placed, check your order.</p>",
+     "steps": [
+      {
+       "id": "A",
+       "text": "Send Grace your questions: Driftwood's discount, The Clay Room's contact, Paper Moon's request"
+      },
+      {
+       "id": "B",
+       "text": "Copy the Pre-order Template and name it <em>Driftwood &amp; Co. – Holiday Pre-order – 2026</em>"
+      },
+      {
+       "id": "C",
+       "text": "Fill in the Active holiday items, leaving prices and Quantity empty"
+      },
+      {
+       "id": "D",
+       "text": "Add the wholesale prices once Grace answers about the discount"
+      },
+      {
+       "id": "E",
+       "text": "Put it in Driftwood's folder in Buyers"
+      },
+      {
+       "id": "F",
+       "text": "Share it with hello@driftwoodco.example.com (can edit)"
+      },
+      {
+       "id": "G",
+       "text": "Tick <em>Pre-order sheet</em> for Driftwood on the tracker"
+      }
+     ],
+     "rules": [
+      {
+       "first": [
+        "A"
+       ],
+       "then": [
+        "B",
+        "C"
+       ],
+       "kind": "early",
+       "line": "<em>Send Grace your questions</em> goes first. Her answers may take a night to come back, so ask before you start, and work while you wait."
+      },
+      {
+       "first": [
+        "B"
+       ],
+       "then": [
+        "C"
+       ],
+       "kind": "needs",
+       "line": "<em>Fill in the items</em> needs the copied sheet first."
+      },
+      {
+       "first": [
+        "A",
+        "C"
+       ],
+       "then": [
+        "D"
+       ],
+       "kind": "needs",
+       "line": "<em>Add the wholesale prices</em> needs Grace's answer about the discount, and the items filled in."
+      },
+      {
+       "first": [
+        "B"
+       ],
+       "then": [
+        "E"
+       ],
+       "kind": "needs",
+       "line": "<em>Put it in Driftwood's folder</em> needs the sheet to exist first."
+      },
+      {
+       "first": [
+        "D",
+        "E"
+       ],
+       "then": [
+        "F"
+       ],
+       "kind": "needs",
+       "line": "<em>Share it with Driftwood</em> comes after the prices are in and the sheet is in their folder. Don't share a half-finished sheet."
+      },
+      {
+       "first": [
+        "F"
+       ],
+       "then": [
+        "G"
+       ],
+       "kind": "needs",
+       "line": "<em>Tick Pre-order sheet</em> comes last: tick it only once it's shared."
+      }
+     ],
+     "good": "That's a workable order. The question goes first, and Driftwood only sees the sheet once the prices are in."
+    }
+   },
+   "multis": {
+    "l6b5": {
+     "label": "Practice",
+     "title": "Done Check: Paper Moon Goods",
+     "note_title": "Done Check: Paper Moon Goods",
+     "mode": "fix",
+     "intro_html": "<p>Paper Moon Goods' sheet is finished:</p>{{mock:pmsheet}}<p class=\"act-context\">Shared with: orders@papermoon.example.com (can edit)</p><p class=\"act-context\">Stockist Tracker, Paper Moon Goods, Pre-order sheet: (blank)</p>",
+     "question": "Before you tell Grace the sheets are ready, which of these need fixing? Tick every one that needs fixing, and leave the rest.",
+     "items": [
+      {
+       "text": "Sheet name: Paper Moon Goods – Holiday Pre-order – 2025",
+       "key": true,
+       "reveal": "It's 2026. The checklist says Shop – Holiday Pre-order – 2026."
+      },
+      {
+       "text": "Holly Plate row",
+       "key": true,
+       "reveal": "Holly Plate is discontinued. Grace said to leave it out."
+      },
+      {
+       "text": "Pine Candle wholesale: $12",
+       "key": false,
+       "reveal": "That's the Price List price. The Holiday Items list had it blank."
+      },
+      {
+       "text": "Snow Mug price: $28",
+       "key": true,
+       "reveal": "$28 is Retail. Snow Mug's wholesale price is $14."
+      },
+      {
+       "text": "Quantity column: empty",
+       "key": false,
+       "reveal": "Grace asked for an empty Quantity column, for the shops to fill in."
+      },
+      {
+       "text": "Shared with orders@papermoon.example.com, can edit",
+       "key": false,
+       "reveal": "That's the tracker contact, and step 4 says can edit."
+      },
+      {
+       "text": "Stockist Tracker, Paper Moon's Pre-order sheet box: blank",
+       "key": true,
+       "reveal": "Step 5: tick it once the sheet is shared."
+      }
+     ]
+    }
+   },
+   "next_preview": [
+    "One more request to work through on your own. It's a diagnostic with no pass mark, and its feedback points you back to the lesson worth reviewing."
+   ],
+   "quick_check": {
+    "purpose": "A few questions that use the whole cycle.",
+    "questions": [
+     {
+      "id": "6.1",
+      "q": "Grace asks for a sheet for every Active stockist. One shop on the tracker is Pending. What do you do about that shop?",
+      "options": [
+       "Leave it out: the request says Active only",
+       "Make one anyway, just in case",
+       "Ask Grace before starting any sheet",
+       "Make one and mark it Pending"
+      ],
+      "answer": 0,
+      "explain": "The request and the tracker together settle it, so there's nothing to ask."
+     },
+     {
+      "id": "6.2",
+      "q": "One step needs Grace's answer, and her reply may come overnight. When do you ask?",
+      "options": [
+       "Before you start the rest, so the answer comes while you work",
+       "After everything else is done",
+       "Only if she asks how it's going",
+       "At the deadline"
+      ],
+      "answer": 0,
+      "explain": "Asking first means her answer is on its way while you do the parts that don't need it."
+     },
+     {
+      "id": "6.3",
+      "q": "In your Done Check, a column Grace asked to leave empty is empty. What do you do with it?",
+      "options": [
+       "Leave it: it matches the request",
+       "Fill it in to be helpful",
+       "Delete the column",
+       "Ask Grace if it's right"
+      ],
+      "answer": 0,
+      "explain": "Empty is what she asked for. Leave alone what's fine."
+     }
+    ]
+   }
   }
  ]
 }
