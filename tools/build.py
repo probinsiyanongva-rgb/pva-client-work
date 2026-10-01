@@ -35,11 +35,11 @@ from mocks import render_mock, pick_count  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "content"
 OUT = ROOT / "public"
-VERSION = "0.1 pilot"
+VERSION = "1.0"
 
 COURSE = "Understanding Client Work & Instructions"
 ACADEMY_URL = "https://probinsiyanongva.org/"
-PREV_COURSE = ("Communication & Professionalism", "https://probinsiyanongva.org/communication-professionalism/")
+PREV_COURSE = ("Communication & Professionalism", "https://pva-communication.probinsiyanongva.workers.dev/")
 NEXT_COURSE = ("PVA Academy", "https://probinsiyanongva.org/")  # Stage 4 has no course yet
 STAGE_TAG = "STAGE 3 · LEARN TO WORK"
 OPTIONAL = [

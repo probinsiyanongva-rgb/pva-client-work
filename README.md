@@ -1,8 +1,8 @@
-# PVA Academy — Understanding Client Work & Instructions (Part 5) · v0.1 pilot
+# PVA Academy — Understanding Client Work & Instructions (Part 5) · v1.0
 
 Stage 3 of the PVA Beginner VA Journey (Learn to Work), second course.
-**Pilot:** Lesson 1 and the course home are built. Lessons 2–6 and the Final Challenge
-show "coming soon" pages until they are written.
+All six lessons and the Final Challenge are released (v1.0). The previous course is
+Communication & Professionalism (`https://pva-communication.probinsiyanongva.workers.dev/`).
 
 No login. Progress is saved in the learner's browser only (`pva-client-work-progress`),
 with Export / Restore / Clear. Expected URL: `https://pva-client-work.probinsiyanongva.workers.dev/`
