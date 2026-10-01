@@ -284,6 +284,46 @@ def render_carry(cid, cfg):
             f'<tbody>{rows}</tbody></table></div></div>')
 
 
+def render_order(oid, cfg):
+    """{{order:ID}} -> put-the-steps-in-order activity (component from Computer & Laptop Basics).
+
+    Part 5 extension: cfg["rules"] makes it a *workable-order* activity. Each rule is
+    {"first": [ids], "then": [ids], "kind": "needs" | "early" | "priority", "line": html}:
+    every step in "first" must be placed before every step in "then". Any order that meets
+    all rules is accepted; feedback lists each unmet rule's line once, then one workable order
+    (the model order, i.e. the order of cfg["steps"]). Without rules it scores one exact order.
+    Reusable for the Final Challenge's ordering items."""
+    key = f"act:order-{oid}"
+    steps = cfg["steps"]
+    ids = [st["id"] for st in steps]
+    assert len(set(ids)) == len(ids), oid
+    rules = cfg.get("rules", [])
+    for r in rules:
+        assert r["kind"] in ("needs", "early", "priority"), (oid, r)
+        assert all(x in ids for x in r["first"] + r["then"]), (oid, r)
+        assert not set(r["first"]) & set(r["then"]), (oid, r)
+    # the model order itself must meet every rule
+    pos = {sid: i for i, sid in enumerate(ids)}
+    assert all(pos[a] < pos[b] for r in rules for a in r["first"] for b in r["then"]), (oid, "model order breaks a rule")
+    rules_js = json.dumps([{"first": r["first"], "then": r["then"], "kind": r["kind"], "line": r["line"]} for r in rules],
+                          ensure_ascii=False)
+    hidden = "".join(f'<span data-step="{i}" data-sid="{esc(st["id"])}">{st["text"]}</span>' for i, st in enumerate(steps, 1))
+    title = f'<h2>{esc(cfg["title"])}</h2>' if cfg.get("title") else ""
+    note = (f'<div hidden data-order-note="{esc(key)}" data-note-label="{esc(cfg["note_label"])}"></div>'
+            if cfg.get("note_label") else "")
+    return (f'<section class="activity order-activity" data-key="{esc(key)}"'
+            + (f" data-rules='{esc(rules_js)}'" if rules else "")
+            + f' data-good="{esc(cfg.get("good", ""))}">'
+            f'<div class="activity-title">{esc(cfg.get("label", "Activity"))}</div>{title}{cfg.get("intro_html", "")}'
+            f'<div hidden>{hidden}</div>{note}'
+            '<div class="order-label">Steps</div><ul class="order-pool"></ul>'
+            '<div class="order-label">Your order</div><ol class="order-answer"></ol>'
+            '<div class="hero-actions" style="margin:4px 0 8px"><button type="button" class="btn small-btn" data-order="check" disabled>Check my order</button>'
+            '<button type="button" class="btn subtle small-btn" data-order="undo" disabled>Undo last</button>'
+            '<button type="button" class="btn subtle small-btn" data-order="reset">Start again</button></div>'
+            '<div class="feedback" aria-live="polite"></div></section>')
+
+
 def fill_activities(content, l):
     # Order matters: activities and Task Cards may contain {{carry:ID}} / {{mock:ID}} tokens
     # in their intro HTML, so those are resolved after them.
@@ -292,6 +332,11 @@ def fill_activities(content, l):
         assert token in content, (l["num"], token)
         content = content.replace(token, render_activity(act_id, act))
     assert "{{activity:" not in content, l["num"]
+    for oid, cfg in (l.get("orders") or {}).items():
+        token = "{{order:" + oid + "}}"
+        assert token in content, (l["num"], token)
+        content = content.replace(token, render_order(oid, cfg))
+    assert "{{order:" not in content, l["num"]
     for tc_id, tc in (l.get("taskcards") or {}).items():
         token = "{{taskcard:" + tc_id + "}}"
         assert token in content, (l["num"], token)

@@ -195,7 +195,31 @@
   }
 
 
-  /* ---------- Put-the-steps-in-order activity (from Computer & Laptop Basics) ---------- */
+  /* ---------- Put-the-steps-in-order activity (from Computer & Laptop Basics) ----------
+     Part 5: with data-rules, any order that meets every rule is accepted ("workable order").
+     Rule kinds: needs (true prerequisite), early (starts waiting time), priority (between tasks).
+     Feedback lists each unmet rule once, then one workable order (the model order).
+     The checked result is restored after a reload. */
+  function orderResult(box, picked) {
+    var rules = JSON.parse(box.getAttribute('data-rules') || 'null');
+    var pos = {};
+    var sidOf = {};
+    $all('[data-step]', box).forEach(function (el) { sidOf[parseInt(el.getAttribute('data-step'), 10)] = el.getAttribute('data-sid'); });
+    picked.forEach(function (n, i) { pos[sidOf[n]] = i; });
+    if (!rules) {   // original behaviour: one exact order
+      var bad = picked.map(function (n, i) { return n !== i + 1; });
+      return { ok: bad.indexOf(true) === -1, bad: bad, unmet: [], rules: null };
+    }
+    var unmet = [], badSid = {};
+    rules.forEach(function (r) {
+      var broken = false;
+      r.first.forEach(function (a) { r.then.forEach(function (b) {
+        if (pos[a] > pos[b]) { broken = true; badSid[a] = true; badSid[b] = true; }
+      }); });
+      if (broken && unmet.indexOf(r.line) === -1) unmet.push(r.line);
+    });
+    return { ok: unmet.length === 0, bad: picked.map(function (n) { return !!badSid[sidOf[n]]; }), unmet: unmet, rules: rules };
+  }
   function wireOrderActivities() {
     $all('.order-activity').forEach(function (box) {
       var key = box.getAttribute('data-key');
@@ -207,7 +231,7 @@
       var picked = [];
       var saved = P.getDraft(LESSON_ID, key);
       if (typeof saved === 'string' && saved) picked = saved.split(',').map(Number).filter(function (n) { return steps.some(function (s) { return s.n === n; }); });
-      var checked = false;
+      var checked = false, result = null;
       function stepBy(n) { return steps.filter(function (s) { return s.n === n; })[0]; }
       function render() {
         pool.innerHTML = '';
@@ -218,7 +242,7 @@
           var li = document.createElement('li'); li.appendChild(b); pool.appendChild(li);
         });
         answer.innerHTML = picked.map(function (n, i) {
-          var cls = checked ? (n === i + 1 ? ' class="right"' : ' class="wrong"') : '';
+          var cls = checked && result ? (result.bad[i] ? ' class="wrong"' : (result.ok ? ' class="right"' : '')) : '';
           return '<li' + cls + '><span class="n">' + (i + 1) + '.</span><span>' + stepBy(n).text + '</span></li>';
         }).join('');
         checkBtn.disabled = checked || picked.length !== steps.length;
@@ -227,24 +251,40 @@
         pool.classList.toggle('hidden', full);
         if (poolLabel) poolLabel.classList.toggle('hidden', full);
       }
-      checkBtn.addEventListener('click', function () {
-        checked = true; render();
-        var right = picked.filter(function (n, i) { return n === i + 1; }).length;
-        var correct = steps.slice().sort(function (a, b) { return a.n - b.n; }).map(function (s) { return '<li>' + s.text + '</li>'; }).join('');
-        out.innerHTML = (right === steps.length ? '<strong>That matches the lesson.</strong> Every step is in a workable order.'
-          : '<strong>' + right + ' of ' + steps.length + ' steps are in the lesson’s order.</strong> Here is the order the lesson uses:') +
-          (right === steps.length ? '' : '<ol style="margin:.5em 0 0">' + correct + '</ol>');
-        out.className = 'feedback show ' + (right === steps.length ? 'good' : 'try');
-        P.setDraft(LESSON_ID, key + ':checked', right);
-      });
+      function showResult(save) {
+        checked = true;
+        result = orderResult(box, picked);
+        render();
+        var model = steps.slice().sort(function (a, b) { return a.n - b.n; }).map(function (s) { return '<li>' + s.text + '</li>'; }).join('');
+        if (result.rules) {
+          out.innerHTML = result.ok
+            ? '<strong>That matches the lesson.</strong> ' + esc(box.getAttribute('data-good') || '')
+            : '<strong>Not quite.</strong> Here\'s what to move:<ul class="order-unmet">' +
+              result.unmet.map(function (l) { return '<li>' + l + '</li>'; }).join('') +
+              '</ul><p class="order-model-label">One workable order:</p><ol style="margin:.3em 0 0">' + model + '</ol>';
+        } else {
+          var right = result.bad.filter(function (b) { return !b; }).length;
+          out.innerHTML = (result.ok ? '<strong>That matches the lesson.</strong> Every step is in a workable order.'
+            : '<strong>' + right + ' of ' + steps.length + ' steps are in the lesson’s order.</strong> Here is the order the lesson uses:') +
+            (result.ok ? '' : '<ol style="margin:.5em 0 0">' + model + '</ol>');
+        }
+        out.className = 'feedback show ' + (result.ok ? 'good' : 'try');
+        if (save) {
+          P.setDraft(LESSON_ID, key + ':checked', true);
+          P.setDraft(LESSON_ID, key + ':ok', result.ok);
+        }
+      }
+      checkBtn.addEventListener('click', function () { showResult(true); });
       if (undoBtn) undoBtn.addEventListener('click', function () {
         picked.pop(); P.setDraft(LESSON_ID, key, picked.join(',')); render();
       });
       resetBtn.addEventListener('click', function () {
-        picked = []; checked = false; out.className = 'feedback'; out.innerHTML = '';
+        picked = []; checked = false; result = null; out.className = 'feedback'; out.innerHTML = '';
         P.clearDrafts(LESSON_ID, key); render();
       });
-      render();
+      // restore a checked result after a reload
+      if (picked.length === steps.length && P.getDraft(LESSON_ID, key + ':checked')) showResult(false);
+      else render();
     });
   }
 
@@ -344,6 +384,18 @@
         lines.push('== ' + el.getAttribute('data-note-heading') + ' =='); lines.push(''); return;
       }
       var label = el.getAttribute('data-note-label');
+      if (el.hasAttribute('data-order-note')) {
+        // a checked order activity: the learner's order as a numbered list
+        var okey = el.getAttribute('data-order-note');
+        var box = el.closest('.order-activity');
+        var seq = P.getDraft(LESSON_ID, okey);
+        if (!P.getDraft(LESSON_ID, okey + ':checked') || typeof seq !== 'string' || !seq) return;
+        var txt = {};
+        $all('[data-step]', box).forEach(function (st) { txt[st.getAttribute('data-step')] = st.textContent; });
+        lines.push(label);
+        seq.split(',').forEach(function (n, i) { lines.push('  ' + (i + 1) + '. ' + txt[n]); });
+        lines.push(''); any = true; return;
+      }
       var key = el.getAttribute('data-key') || el.getAttribute('data-carry-key');
       var v = P.getDraft(from, key);
       if (optional && (typeof v !== 'string' || !v.trim())) return;

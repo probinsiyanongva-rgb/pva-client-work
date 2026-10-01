@@ -2985,7 +2985,641 @@
   },
   {
    "num": 4,
-   "title": "Planning the Work"
+   "title": "Planning the Work",
+   "carry": {
+    "l3move": {
+     "from_lesson": "lesson-3",
+     "key_prefix": "tc:nextmove:",
+     "title": "Your next move from Lesson 3",
+     "fallback_note": "You didn't save a next move in Lesson 3, so here's the model one.",
+     "note_heading": "My next move from Lesson 3",
+     "col": "List",
+     "value_col": "Next move",
+     "fields": [
+      {
+       "key": "start",
+       "label": "I'll start now",
+       "model": "Find the 12 on the Best Sellers tab. Make the folder <em>Lumen Home – Best Sellers – Oct</em> and add the 10 white-background photos. Start the Doc with product names and photo file names, and leave the price column empty for now"
+      },
+      {
+       "key": "ask",
+       "label": "I'll ask Grace",
+       "model": "Which column has the wholesale prices: she said D, but D is labelled Retail and E is Wholesale. What to do about the two best sellers with no white-background photo. While you're asking: what time on Sunday night she needs it"
+      },
+      {
+       "key": "notmine",
+       "label": "Not mine to decide",
+       "model": "Dana's request for the folder and the full Price List. Pass it to Grace. Don't send Dana anything"
+      }
+     ]
+    }
+   },
+   "mocks": {
+    "checklist": {
+     "kind": "doc",
+     "type": "DOC",
+     "name": "Adding a New Stockist",
+     "lines": [
+      "1. Add the shop to the Stockist Tracker: name, city, contact, email.",
+      "2. Make their folder in Buyers, named Shop – Stockist – Month.",
+      "3. Put the current Wholesale Price Sheet in their folder.",
+      "4. Add the folder link to their row in the tracker.",
+      "5. Set their Status to Ready for Grace."
+     ],
+     "label": "Grace's checklist: Adding a New Stockist"
+    },
+    "graceanswer": {
+     "kind": "chat",
+     "title": "Grace Tan",
+     "label": "Grace's chat message",
+     "messages": [
+      {
+       "from": "Grace Tan",
+       "time": "",
+       "text": "Warehouse only, not the shop. Put any damaged items in the Notes column, not in the count."
+      }
+     ]
+    },
+    "fridayask": {
+     "kind": "chat",
+     "title": "Grace Tan",
+     "label": "Grace's chat message",
+     "messages": [
+      {
+       "from": "Grace Tan",
+       "time": "",
+       "text": "Can you also update the prices in all 112 rows of the Products sheet today? The new list is attached."
+      }
+     ]
+    }
+   },
+   "orders": {
+    "l4b1": {
+     "label": "Try it first",
+     "note_label": "My order: Lumen Home",
+     "intro_html": "<p>Here's your next move from Lesson 3.</p>{{carry:l3move}}<p>These are the steps for the Lumen Home folder. Tap them in the order you'd do them. When all seven are placed, check your order.</p>",
+     "steps": [
+      {
+       "id": "A",
+       "text": "Send Grace your questions: the price column, the two missing photos, the Sunday time"
+      },
+      {
+       "id": "B",
+       "text": "Note the 12 best sellers from the Best Sellers tab"
+      },
+      {
+       "id": "C",
+       "text": "Make the folder <em>Lumen Home – Best Sellers – Oct</em>"
+      },
+      {
+       "id": "D",
+       "text": "Copy the 10 white-background photos into the folder"
+      },
+      {
+       "id": "E",
+       "text": "Start the Doc: product names and photo file names, price column empty"
+      },
+      {
+       "id": "F",
+       "text": "Add the wholesale prices once Grace confirms the column"
+      },
+      {
+       "id": "G",
+       "text": "Check everything against your Task Card"
+      }
+     ],
+     "rules": [
+      {
+       "first": [
+        "A"
+       ],
+       "then": [
+        "C",
+        "D",
+        "E"
+       ],
+       "kind": "early",
+       "line": "<em>Send Grace your questions</em> goes first. Her answer can take a whole night to come back, so ask before you start building, and build while you wait."
+      },
+      {
+       "first": [
+        "B"
+       ],
+       "then": [
+        "D"
+       ],
+       "kind": "needs",
+       "line": "<em>Copy the 10 photos</em> needs <em>Note the 12 best sellers</em> first: you need to know which 12."
+      },
+      {
+       "first": [
+        "C"
+       ],
+       "then": [
+        "D"
+       ],
+       "kind": "needs",
+       "line": "<em>Copy the 10 photos</em> needs <em>Make the folder</em> first."
+      },
+      {
+       "first": [
+        "B"
+       ],
+       "then": [
+        "E"
+       ],
+       "kind": "needs",
+       "line": "<em>Start the Doc</em> needs <em>Note the 12 best sellers</em> first: the Doc lists those 12."
+      },
+      {
+       "first": [
+        "A",
+        "E"
+       ],
+       "then": [
+        "F"
+       ],
+       "kind": "needs",
+       "line": "<em>Add the wholesale prices</em> needs Grace's answer and the Doc, so it comes after both."
+      },
+      {
+       "first": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+       ],
+       "then": [
+        "G"
+       ],
+       "kind": "needs",
+       "line": "<em>Check everything</em> comes last: there's nothing to check until the rest is done."
+      }
+     ],
+     "good": "That's a workable order. Asking Grace first means her answer is on its way while you build. Other orders work too, as long as each step comes after what it needs."
+    },
+    "l4b3": {
+     "label": "Activity",
+     "title": "Put It in Order",
+     "note_label": "My order: October stock count",
+     "intro_html": "<p>Back to the October stock count from Lesson 2. Grace has answered your questions:</p>{{mock:graceanswer}}<p>Mark's tally for October is in the Stock Counts folder. Put the steps in order.</p>",
+     "steps": [
+      {
+       "id": "A",
+       "text": "Make a copy of <em>Stock Count – September</em> and name it <em>Stock Count – October</em>"
+      },
+      {
+       "id": "B",
+       "text": "Clear September's quantities"
+      },
+      {
+       "id": "C",
+       "text": "Add rows for the three new mugs: Moss, Clay and Sky"
+      },
+      {
+       "id": "D",
+       "text": "Enter the October quantities from Mark's tally"
+      },
+      {
+       "id": "E",
+       "text": "Write any damaged items in the Notes column"
+      },
+      {
+       "id": "F",
+       "text": "Check the total against Mark's tally"
+      },
+      {
+       "id": "G",
+       "text": "Share it with Mark at mark@harborhill.co"
+      }
+     ],
+     "rules": [
+      {
+       "first": [
+        "A"
+       ],
+       "then": [
+        "B"
+       ],
+       "kind": "needs",
+       "line": "<em>Clear September's quantities</em> needs the October copy first. Otherwise you'd be clearing September's sheet."
+      },
+      {
+       "first": [
+        "A"
+       ],
+       "then": [
+        "C"
+       ],
+       "kind": "needs",
+       "line": "<em>Add rows for the new mugs</em> needs the October copy first."
+      },
+      {
+       "first": [
+        "A"
+       ],
+       "then": [
+        "E"
+       ],
+       "kind": "needs",
+       "line": "<em>Write any damaged items</em> needs the October copy first."
+      },
+      {
+       "first": [
+        "B"
+       ],
+       "then": [
+        "D"
+       ],
+       "kind": "needs",
+       "line": "<em>Enter the October quantities</em> needs September's numbers cleared first, or old and new numbers get mixed."
+      },
+      {
+       "first": [
+        "C"
+       ],
+       "then": [
+        "D"
+       ],
+       "kind": "needs",
+       "line": "<em>Enter the October quantities</em> needs the new mug rows first. Moss, Clay and Sky need rows before their numbers can go in."
+      },
+      {
+       "first": [
+        "D"
+       ],
+       "then": [
+        "F"
+       ],
+       "kind": "needs",
+       "line": "<em>Check the total</em> needs the quantities in first."
+      },
+      {
+       "first": [
+        "E",
+        "F"
+       ],
+       "then": [
+        "G"
+       ],
+       "kind": "needs",
+       "line": "<em>Share it with Mark</em> comes last: he should get the finished, checked count."
+      }
+     ],
+     "good": "That's a workable order. The new mug rows go in before the quantities, and Mark gets the count only after you've checked it."
+    },
+    "l4b7": {
+     "label": "Practice",
+     "title": "Plan Ana's Thursday",
+     "note_label": "My order: Thursday",
+     "intro_html": "<p>It's Thursday, 9 AM your time. You work until 6 PM. Here's what's on your list:</p><div class=\"table-wrap\"><table><thead><tr><th>Task</th><th>Rough time</th><th>Deadline</th></tr></thead><tbody><tr><td>Send Mark the October stock count</td><td>2 hours</td><td>Mark needs it by noon today to pack Friday's orders</td></tr><tr><td>Send replacement codes to two customers with chipped mugs</td><td>15 minutes</td><td>They emailed last night and are waiting</td></tr><tr><td>Lumen Home folder and Doc (the prices wait for Grace)</td><td>2 hours</td><td>Monday midday, your time</td></tr><tr><td>October newsletter list</td><td>1 hour</td><td>Next Tuesday</td></tr><tr><td>Rename the 14 new photos</td><td>1 hour</td><td>No deadline given</td></tr></tbody></table></div><p>Put the tasks in the order you'd do them.</p>",
+     "steps": [
+      {
+       "id": "S",
+       "text": "Send Mark the October stock count"
+      },
+      {
+       "id": "R",
+       "text": "Send replacement codes to two customers with chipped mugs"
+      },
+      {
+       "id": "L",
+       "text": "Lumen Home folder and Doc (the prices wait for Grace)"
+      },
+      {
+       "id": "N",
+       "text": "October newsletter list"
+      },
+      {
+       "id": "P",
+       "text": "Rename the 14 new photos"
+      }
+     ],
+     "rules": [
+      {
+       "first": [
+        "S"
+       ],
+       "then": [
+        "L",
+        "N",
+        "P"
+       ],
+       "kind": "priority",
+       "line": "<em>Send Mark the stock count</em> goes before the tasks with later deadlines: Mark needs it by noon to pack Friday's orders."
+      },
+      {
+       "first": [
+        "R"
+       ],
+       "then": [
+        "L",
+        "N",
+        "P"
+       ],
+       "kind": "priority",
+       "line": "<em>The replacement codes</em> go before the bigger tasks: they take 15 minutes, and two customers are waiting."
+      },
+      {
+       "first": [
+        "L"
+       ],
+       "then": [
+        "N"
+       ],
+       "kind": "priority",
+       "line": "<em>Lumen Home</em> goes before <em>the newsletter list</em>: Monday comes before next Tuesday."
+      },
+      {
+       "first": [
+        "N"
+       ],
+       "then": [
+        "P"
+       ],
+       "kind": "priority",
+       "line": "<em>The newsletter list</em> goes before <em>renaming the photos</em>: a deadline beats no deadline."
+      }
+     ],
+     "good": "That's a workable day. The stock count and the codes can go in either order: one has a noon deadline, the other takes 15 minutes and has customers waiting."
+    }
+   },
+   "activities": {
+    "l4b4": {
+     "label": "Activity",
+     "title": "Will It Fit?",
+     "qlabel": "Task",
+     "layout": "row",
+     "intro": "For each task, does it fit before the deadline?",
+     "items": [
+      {
+       "q": "Rename the 14 new photos: about 1 hour. It's Wednesday, 1 PM your time. It's due Thursday at 9 AM your time, and you have 3 free hours this afternoon.",
+       "options": [
+        "Fits",
+        "At risk: flag it now"
+       ],
+       "answer": 0,
+       "feedback": [
+        "About 1 hour of work, and 3 free hours this afternoon. It fits.",
+        "1 hour of work and 3 free hours. It fits, with time to spare."
+       ]
+      },
+      {
+       "q": "Update the prices in 112 product rows: about 6 hours. It's due tomorrow at 9 AM your time. It's 2 PM now, and you finish at 6 PM.",
+       "options": [
+        "Fits",
+        "At risk: flag it now"
+       ],
+       "answer": 1,
+       "feedback": [
+        "You have 4 hours left today, and the work needs about 6. Flag it now, not at 9 AM tomorrow.",
+        "About 6 hours of work, and 4 hours left today. Say so now, while Grace can still choose."
+       ]
+      },
+      {
+       "q": "Send Mark the October count: about 2 hours of work. It's due today at 6 PM your time. Mark's tally arrives \"tomorrow morning\".",
+       "options": [
+        "Fits",
+        "At risk: flag it now"
+       ],
+       "answer": 1,
+       "feedback": [
+        "It's only 2 hours of work, but you can't start until Mark's tally arrives tomorrow morning, after the deadline. Waiting counts.",
+        "The work is short, but it can't start until the tally comes, and that's after the deadline. Waiting counts."
+       ]
+      },
+      {
+       "q": "Grace writes in chat: \"Can you finish the newsletter list by end of day Tuesday?\" It takes about 3 hours. It's Tuesday, 10 AM your time.",
+       "options": [
+        "Fits",
+        "At risk: flag it now"
+       ],
+       "answer": 0,
+       "feedback": [
+        "End of Tuesday in Portland is about Wednesday 8 AM for you. You have the whole day.",
+        "It's Tuesday here, but Portland is 15 hours behind. End of Tuesday there is about Wednesday 8 AM for you, so you have the whole day."
+       ]
+      }
+     ]
+    },
+    "l4b5": {
+     "label": "Activity",
+     "title": "Follow the Checklist",
+     "qlabel": "Notes",
+     "intro_html": "<p>Grace keeps this checklist in the shared Drive:</p>{{mock:checklist}}<p>Ana added two new stockists this week. Here are her notes.</p>",
+     "items": [
+      {
+       "evidence_first": true,
+       "q": "Which step was skipped?",
+       "mocks": [
+        {
+         "kind": "doc",
+         "type": "DOC",
+         "name": "Ana's notes – Paper Moon Goods",
+         "lines": [
+          "Added Paper Moon Goods to the tracker.",
+          "Made folder Paper Moon Goods – Stockist – Oct.",
+          "Added the folder link to their row.",
+          "Set Status to Ready for Grace."
+         ],
+         "label": "Ana's notes – Paper Moon Goods"
+        }
+       ],
+       "options": [
+        "Step 1: Add the shop to the tracker",
+        "Step 2: Make their folder",
+        "Step 3: Put the price sheet in their folder",
+        "Step 4: Add the folder link to the tracker",
+        "Step 5: Set Status to Ready for Grace"
+       ],
+       "answer": 2,
+       "feedback": [
+        "Ana's notes say she did: \"Added Paper Moon Goods to the tracker.\"",
+        "That's in the notes: \"Made folder Paper Moon Goods – Stockist – Oct.\"",
+        "Nothing in the notes about the price sheet. Grace would open the folder, find no prices, and the status would already say Ready.",
+        "That's in the notes: \"Added the folder link to their row.\"",
+        "That's the last line of the notes. Look for a step with nothing next to it."
+       ]
+      },
+      {
+       "evidence_first": true,
+       "q": "What went wrong?",
+       "mocks": [
+        {
+         "kind": "doc",
+         "type": "DOC",
+         "name": "Ana's notes – The Clay Room",
+         "lines": [
+          "Added The Clay Room to the tracker.",
+          "Made folder The Clay Room – Stockist – Oct.",
+          "Added the folder link to their row.",
+          "Set Status to Ready for Grace.",
+          "Put the Wholesale Price Sheet in their folder."
+         ],
+         "label": "Ana's notes – The Clay Room"
+        }
+       ],
+       "options": [
+        "A step from the checklist was skipped.",
+        "Ready was set before the folder was ready.",
+        "The folder name doesn't follow the checklist.",
+        "Nothing went wrong; every step was done."
+       ],
+       "answer": 1,
+       "feedback": [
+        "All five steps are in the notes. Look at the order: the price sheet went in last.",
+        "Grace could have opened the folder in between and found no prices. The order in a checklist is often there for a reason.",
+        "The Clay Room – Stockist – Oct follows Shop – Stockist – Month. Look at the order of the steps instead.",
+        "Every step was done, but not in order. The status said Ready before the price sheet was in."
+       ]
+      }
+     ]
+    },
+    "l4b6": {
+     "label": "Activity",
+     "title": "Does the Checklist Still Fit?",
+     "qlabel": "Stockist",
+     "intro": "Four more stockists to add, using the same checklist. What's your call for each one?",
+     "items": [
+      {
+       "q": "<em>Little Harbor Gifts</em> is already in the Stockist Tracker from 2024, with Status <em>Closed</em>.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 2,
+       "feedback": [
+        "The checklist is for new shops. A second row would mean two records for one shop, and Grace may want the old one reopened.",
+        "Every step depends on whether you reopen the old row or add a new one. There's no part to start.",
+        "The checklist is for new shops. Reopen the old row or add a new one? Every later step depends on it, and only Grace can say.",
+        "It's a question about your own task, and Grace can settle it with one answer."
+       ]
+      },
+      {
+       "q": "<em>Juniper Lane Goods</em> emails asking for 20% off their first order before they'll sign up.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 3,
+       "feedback": [
+        "A discount is money, and nothing in the checklist lets you give one.",
+        "They haven't signed up yet, so there's nothing to set up. The discount is the real question, and it isn't yours to answer.",
+        "Nothing about your task is missing. Whether to give a discount is Grace's decision.",
+        "A discount is money, and the checklist doesn't give you that decision. Pass it to Grace."
+       ]
+      },
+      {
+       "q": "<em>Driftwood &amp; Co.</em> The \"&amp;\" makes the folder name <em>Driftwood &amp; Co. – Stockist – Oct</em>.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 0,
+       "feedback": [
+        "The checklist still covers it. A different name isn't a different situation.",
+        "There's nothing to ask. The naming rule works for this name too.",
+        "Asking would cost Grace time. The checklist already says how to name the folder.",
+        "It's a folder name, and the checklist tells you how. Nothing here is outside your job."
+       ]
+      },
+      {
+       "q": "<em>Northside Home</em> is in Vancouver, Canada. The Wholesale Price Sheet is in US dollars, and nothing in the checklist mentions Canada.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 1,
+       "feedback": [
+        "You'd be guessing whether a US-dollar price sheet is right for a Canadian shop. That part needs Grace.",
+        "Steps 1, 2 and 4 don't depend on the prices. Do them, and ask about the price sheet before step 3.",
+        "Most of the checklist doesn't depend on the price sheet. Those steps can go ahead while you ask.",
+        "It's a question about your own task, and Grace can answer it."
+       ]
+      }
+     ]
+    },
+    "l4b7b": {
+     "label": "Activity",
+     "title": "Friday Doesn't Fit",
+     "qlabel": "Your call",
+     "numbered": false,
+     "intro_html": "<p>Friday is already full: about 6 hours of planned work, including the Lumen Home folder due Monday. At 10 AM your time, Grace writes:</p>{{mock:fridayask}}<p>That's about 4 more hours, in an 8-hour day.</p>",
+     "items": [
+      {
+       "q": "What's your call?",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 1,
+       "feedback": [
+        "That's about 10 hours of work in an 8-hour day. Something won't get done, and Grace won't know which.",
+        "Keep going on today's work, and tell Grace now that it won't all fit. Ask which comes first. Early is when she can still choose.",
+        "This isn't a stop-and-wait situation. You can keep working while you ask Grace which comes first.",
+        "It's Grace's own request, and her priorities. She can answer which comes first."
+       ]
+      }
+     ]
+    }
+   },
+   "next_preview": [
+    "The work is done. Is it right?",
+    "Lesson 5 is about checking your work against the request before you call it done, and making changes without breaking what was already right."
+   ],
+   "quick_check": {
+    "purpose": "A few questions to check the planning from this lesson.",
+    "questions": [
+     {
+      "id": "4.1",
+      "q": "You need to send Mark the stock count, but the quantities come from his tally, which arrives at 3 PM. What can you do before 3 PM?",
+      "options": [
+       "Set up the October sheet and add the new mug rows",
+       "Nothing; wait for the tally",
+       "Send Mark the empty sheet now",
+       "Copy September's quantities for now"
+      ],
+      "answer": 0,
+      "explain": "Setting up the sheet doesn't need the tally. The quantities do. Do the rest now, and fill in the numbers at 3 PM."
+     },
+     {
+      "id": "4.2",
+      "q": "A task will take about 4 hours. It's due at 9 AM tomorrow your time, and you have 2 hours left today. What's the best move?",
+      "options": [
+       "Flag it now, while there's still time to choose",
+       "Work faster and hope it fits",
+       "Do half and explain at the deadline",
+       "Start early tomorrow without saying anything"
+      ],
+      "answer": 0,
+      "explain": "Four hours of work and two hours left means it won't fit. Saying so now gives Grace time to choose."
+     },
+     {
+      "id": "4.3",
+      "q": "The checklist says to put the price sheet in the stockist's folder, but this stockist will only sell one product that has no price yet. What now?",
+      "options": [
+       "Treat it as something the checklist doesn't cover, and ask Grace",
+       "Add the full price sheet anyway",
+       "Skip the step and don't mention it",
+       "Add a new step to the checklist yourself"
+      ],
+      "answer": 0,
+      "explain": "The checklist doesn't cover a product with no price. That's a gap only Grace can fill."
+     }
+    ]
+   }
   },
   {
    "num": 5,

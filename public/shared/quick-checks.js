@@ -122,5 +122,46 @@ window.CW_QUICK_CHECKS = {
     "explain": "Deleting is hard to undo, and \"clean up\" doesn't clearly say delete. The other three change nothing for anyone."
    }
   ]
+ },
+ "lesson-4": {
+  "purpose": "A few questions to check the planning from this lesson.",
+  "questions": [
+   {
+    "id": "4.1",
+    "q": "You need to send Mark the stock count, but the quantities come from his tally, which arrives at 3 PM. What can you do before 3 PM?",
+    "options": [
+     "Set up the October sheet and add the new mug rows",
+     "Nothing; wait for the tally",
+     "Send Mark the empty sheet now",
+     "Copy September's quantities for now"
+    ],
+    "answer": 0,
+    "explain": "Setting up the sheet doesn't need the tally. The quantities do. Do the rest now, and fill in the numbers at 3 PM."
+   },
+   {
+    "id": "4.2",
+    "q": "A task will take about 4 hours. It's due at 9 AM tomorrow your time, and you have 2 hours left today. What's the best move?",
+    "options": [
+     "Flag it now, while there's still time to choose",
+     "Work faster and hope it fits",
+     "Do half and explain at the deadline",
+     "Start early tomorrow without saying anything"
+    ],
+    "answer": 0,
+    "explain": "Four hours of work and two hours left means it won't fit. Saying so now gives Grace time to choose."
+   },
+   {
+    "id": "4.3",
+    "q": "The checklist says to put the price sheet in the stockist's folder, but this stockist will only sell one product that has no price yet. What now?",
+    "options": [
+     "Treat it as something the checklist doesn't cover, and ask Grace",
+     "Add the full price sheet anyway",
+     "Skip the step and don't mention it",
+     "Add a new step to the checklist yourself"
+    ],
+    "answer": 0,
+    "explain": "The checklist doesn't cover a product with no price. That's a gap only Grace can fill."
+   }
+  ]
  }
 };
