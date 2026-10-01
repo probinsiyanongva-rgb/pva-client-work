@@ -164,7 +164,8 @@ def render_activity(act_id, act):
             assert not fb, (act_id, i, "per-option feedback is not supported on pickable mocks")
             above, opts_html = "", render_mock(mock, pick_name=key)
         else:
-            above = render_mock(mock) if mock else ""
+            above = it.get("lead", "")                            # optional line before the evidence
+            above += render_mock(mock) if mock else ""
             above += "".join(render_mock(mm) for mm in it.get("mocks", []))
             if fb:
                 assert len(fb) == len(it["options"]), (act_id, i, "one feedback per option")
@@ -324,6 +325,41 @@ def render_order(oid, cfg):
             '<div class="feedback" aria-live="polite"></div></section>')
 
 
+MULTI_TEXT = {
+    "fix": {"yes": "Needs fixing", "no": "Fine as it is"},
+    "touch": {"yes": "Affected", "no": "Not affected"},
+}
+
+
+def render_multi(mid, cfg):
+    """{{multi:ID}} -> "select all that apply" (Part 5 Lesson 5; reused by the Final Challenge).
+
+    Items are statements of what's there; item["key"] True = needs fixing / is affected.
+    After Check every item shows its true state and reveal line. Lesson result matches only
+    when every keyed item is ticked and nothing else; found - extra (min 0) is also computed
+    for the Final Challenge. Ticks and the checked state are saved and restored."""
+    key = f"act:multi-{mid}"
+    mode = cfg.get("mode", "fix")
+    assert mode in MULTI_TEXT, mid
+    assert any(it["key"] for it in cfg["items"]) and not all(it["key"] for it in cfg["items"]), mid
+    items = "".join(
+        f'<label class="choice multi-item" data-k="{1 if it["key"] else 0}">'
+        f'<input type="checkbox" value="{i}"><span class="multi-text">{it["text"]}</span>'
+        f'<span class="multi-state" aria-live="polite"></span>'
+        f'<span class="multi-reveal" data-reveal="{esc(it["reveal"])}"></span></label>'
+        for i, it in enumerate(cfg["items"]))
+    title = f'<h2>{esc(cfg["title"])}</h2>' if cfg.get("title") else ""
+    return (f'<section class="activity multi-activity" data-key="{esc(key)}" data-mode="{mode}" '
+            f'data-yes="{esc(MULTI_TEXT[mode]["yes"])}" data-no="{esc(MULTI_TEXT[mode]["no"])}" '
+            f'data-note-title="{esc(cfg["note_title"])}">'
+            f'<div class="activity-title">{esc(cfg.get("label", "Activity"))}</div>{title}{cfg.get("intro_html", "")}'
+            f'<p class="act-q multi-q">{cfg["question"]}</p>'
+            f'<div class="choice-group multi-items">{items}</div>'
+            '<div class="hero-actions" style="margin:6px 0 8px"><button type="button" class="btn small-btn" data-multi="check" disabled>Check</button>'
+            '<button type="button" class="btn subtle small-btn hidden" data-multi="again">Try again</button></div>'
+            '<div class="feedback" aria-live="polite"></div></section>')
+
+
 def fill_activities(content, l):
     # Order matters: activities and Task Cards may contain {{carry:ID}} / {{mock:ID}} tokens
     # in their intro HTML, so those are resolved after them.
@@ -332,6 +368,11 @@ def fill_activities(content, l):
         assert token in content, (l["num"], token)
         content = content.replace(token, render_activity(act_id, act))
     assert "{{activity:" not in content, l["num"]
+    for mid, cfg in (l.get("multis") or {}).items():
+        token = "{{multi:" + mid + "}}"
+        assert token in content, (l["num"], token)
+        content = content.replace(token, render_multi(mid, cfg))
+    assert "{{multi:" not in content, l["num"]
     for oid, cfg in (l.get("orders") or {}).items():
         token = "{{order:" + oid + "}}"
         assert token in content, (l["num"], token)

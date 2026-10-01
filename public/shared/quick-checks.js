@@ -163,5 +163,46 @@ window.CW_QUICK_CHECKS = {
     "explain": "The checklist doesn't cover a product with no price. That's a gap only Grace can fill."
    }
   ]
+ },
+ "lesson-5": {
+  "purpose": "A few questions to check the habits from this lesson.",
+  "questions": [
+   {
+    "id": "5.1",
+    "q": "You've finished a sheet for Grace. What do you check it against?",
+    "options": [
+     "Your Task Card: what she asked for and what she answered",
+     "Your memory of what she wanted",
+     "Whether it looks neat",
+     "The last sheet like it you made"
+    ],
+    "answer": 0,
+    "explain": "The Task Card holds what Grace asked for and what she answered. That's what \"done\" is measured against."
+   },
+   {
+    "id": "5.2",
+    "q": "Grace asks you to change a product's name in the Price List. What else might that change touch?",
+    "options": [
+     "Anywhere else that name appears, like the Doc and the photo file names",
+     "Nothing; it's one cell",
+     "The whole Price List needs redoing",
+     "Only that row's prices"
+    ],
+    "answer": 0,
+    "explain": "A name can appear in more than one place. Find each one before you call the change done."
+   },
+   {
+    "id": "5.3",
+    "q": "You've made Grace's changes. What do you re-check?",
+    "options": [
+     "What you changed, what it touched, and what was already right",
+     "Only the line you changed",
+     "Everything from scratch, every time",
+     "Nothing, if you were careful"
+    ],
+    "answer": 0,
+    "explain": "A change can break something nearby. Check what you changed, what it touched, and what was right before."
+   }
+  ]
  }
 };

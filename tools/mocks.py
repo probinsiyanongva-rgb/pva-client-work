@@ -49,6 +49,15 @@ def _att(files):
 FT = {"DOC": "doc", "SHEET": "sheet", "PDF": "pdf", "FOLDER": "folder", "DOCX": "docx", "XLSX": "xlsx", "IMAGE": "img"}
 
 
+def _doctable(rows):
+    """Optional table inside a Doc mock (Part 5 Lesson 5): first row is the header."""
+    if not rows:
+        return ""
+    head = "".join(f"<th>{esc(c)}</th>" for c in rows[0])
+    body = "".join("<tr>" + "".join(f"<td>{esc(v)}</td>" for v in r) + "</tr>" for r in rows[1:])
+    return f'<div class="m-doctable"><table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>'
+
+
 def render_mock(m, pick_name=None):
     kind = m["kind"]
     who = m.get("who", "Ana Cruz")
@@ -165,7 +174,8 @@ def render_mock(m, pick_name=None):
         inner = (f'<div class="mock-doc"><div class="m-docname"><span class="ft ft-{FT.get(m.get("type", "DOC"), "doc")}">'
                  f'{esc(m.get("type", "DOC"))}</span>{esc(m["name"])}{badge}<span class="m-status">{esc(m.get("status", ""))}</span></div>'
                  f'<div class="m-menu" aria-hidden="true">{menu}</div>'
-                 + "".join(f'<p class="m-docline">{esc(x)}</p>' for x in m.get("lines", [])) + '</div>')
+                 + "".join(f'<p class="m-docline">{esc(x)}</p>' for x in m.get("lines", []))
+                 + _doctable(m.get("table")) + '</div>')
     elif kind == "sheet":
         cols = m["cols"]
         head = '<tr><th></th>' + "".join(f"<th>{esc(c)}</th>" for c in cols) + "</tr>"

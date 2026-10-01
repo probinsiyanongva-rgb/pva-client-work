@@ -288,6 +288,87 @@
     });
   }
 
+  /* ---------- "Select all that apply" (Part 5 Lesson 5; reused by the Final Challenge) ----------
+     Items are statements of what's there; data-k="1" = needs fixing / is affected.
+     After Check, every item shows its true state and reveal line, ticked or not.
+     Lessons: matches only when all keyed items are ticked and nothing else.
+     Final Challenge: score = found - extra (minimum 0), out of the number keyed. */
+  function multiScore(keys, picked) {
+    var n = 0, found = 0, extra = 0;
+    keys.forEach(function (k, i) {
+      var p = picked.indexOf(i) !== -1;
+      if (k) { n++; if (p) found++; } else if (p) extra++;
+    });
+    return { n: n, found: found, extra: extra, score: Math.max(0, found - extra), match: found === n && extra === 0 };
+  }
+  window.CWMulti = { score: multiScore };
+  function multiSummary(mode, r) {
+    if (r.match) return mode === 'touch'
+      ? 'You found all ' + r.n + ' parts it touches, and left the rest alone.'
+      : 'You found all ' + r.n + ', and left the rest alone.';
+    var t = mode === 'touch'
+      ? 'You found ' + r.found + ' of ' + r.n + ' parts it touches.'
+      : 'You found ' + r.found + ' of ' + r.n + ' things to fix.';
+    if (r.extra > 0) t += mode === 'touch'
+      ? ' You also picked ' + r.extra + ' that it doesn\u2019t touch.'
+      : ' You also picked ' + r.extra + (r.extra === 1 ? ' that was fine as it is.' : ' that were fine as they are.');
+    return t;
+  }
+  function multiResult(box) {
+    var key = box.getAttribute('data-key');
+    if (!P.getDraft(LESSON_ID, key + ':checked')) return null;
+    var saved = P.getDraft(LESSON_ID, key);
+    var picked = typeof saved === 'string' && saved ? saved.split(',').map(Number) : [];
+    var keys = $all('.multi-item', box).map(function (l) { return l.getAttribute('data-k') === '1'; });
+    return multiScore(keys, picked);
+  }
+  function wireMulti() {
+    $all('.multi-activity').forEach(function (box) {
+      var key = box.getAttribute('data-key'), mode = box.getAttribute('data-mode');
+      var labels = $all('.multi-item', box), out = $('.feedback', box);
+      var checkBtn = $('[data-multi="check"]', box), againBtn = $('[data-multi="again"]', box);
+      function picked() { return labels.map(function (l, i) { return $('input', l).checked ? i : -1; }).filter(function (i) { return i >= 0; }); }
+      function sync() { checkBtn.disabled = !picked().length || P.getDraft(LESSON_ID, key + ':checked') === true; }
+      function show() {
+        var p = picked();
+        var keys = labels.map(function (l) { return l.getAttribute('data-k') === '1'; });
+        var r = multiScore(keys, p);
+        labels.forEach(function (l, i) {
+          var k = keys[i], t = p.indexOf(i) !== -1;
+          $('input', l).disabled = true;
+          l.classList.add('locked');
+          l.classList.toggle('correct', k === t);
+          l.classList.toggle('wrong', k !== t);
+          l.classList.toggle('is-key', k);
+          var st = $('.multi-state', l);
+          st.textContent = k ? box.getAttribute('data-yes') : box.getAttribute('data-no');
+          var rv = $('.multi-reveal', l);
+          rv.textContent = rv.getAttribute('data-reveal');
+        });
+        out.innerHTML = (r.match ? '<strong>That matches the lesson.</strong> ' : '<strong>Not quite.</strong> ') + esc(multiSummary(mode, r));
+        out.className = 'feedback show ' + (r.match ? 'good' : 'try');
+        checkBtn.disabled = true; againBtn.classList.remove('hidden');
+      }
+      function reset() {
+        labels.forEach(function (l) {
+          var inp = $('input', l); inp.checked = false; inp.disabled = false;
+          l.classList.remove('locked', 'correct', 'wrong', 'is-key');
+          $('.multi-state', l).textContent = ''; $('.multi-reveal', l).textContent = '';
+        });
+        out.className = 'feedback'; out.innerHTML = '';
+        againBtn.classList.add('hidden'); sync();
+      }
+      var saved = P.getDraft(LESSON_ID, key);
+      if (typeof saved === 'string' && saved) saved.split(',').map(Number).forEach(function (i) { if (labels[i]) $('input', labels[i]).checked = true; });
+      labels.forEach(function (l) {
+        $('input', l).addEventListener('change', function () { P.setDraft(LESSON_ID, key, picked().join(',')); sync(); });
+      });
+      checkBtn.addEventListener('click', function () { P.setDraft(LESSON_ID, key + ':checked', true); show(); });
+      againBtn.addEventListener('click', function () { P.clearDrafts(LESSON_ID, key); reset(); });
+      if (P.getDraft(LESSON_ID, key + ':checked') === true) show(); else sync();
+    });
+  }
+
   /* ---------- "What did you catch?" notice (Part 5) ----------
      A .notice section: its feedback line (.notice-fb) appears once any box is ticked. */
   function wireNotices() {
@@ -405,6 +486,18 @@
       if (!out) out = '(not answered)'; else any = true;
       lines.push(label); lines.push('  ' + out.replace(/\n/g, '\n  ')); lines.push('');
     });
+    var multis = $all('.multi-activity');
+    if (multis.length) {
+      lines.push('== My checks =='); lines.push('');
+      multis.forEach(function (box) {
+        var r = multiResult(box), touch = box.getAttribute('data-mode') === 'touch';
+        lines.push(box.getAttribute('data-note-title'));
+        lines.push('  ' + (r ? 'Found ' + r.found + ' of ' + r.n + (touch ? ' affected parts.' : ' things to fix.') + ' Extra picks: ' + r.extra + '.'
+                             : 'Not checked yet'));
+        lines.push('');
+        if (r) any = true;
+      });
+    }
     var appendix = document.getElementById('notesAppendix');
     if (appendix) { lines.push(appendix.textContent.replace(/^\n+|\s+$/g, '')); lines.push(''); }
     lines.push('Saved in this browser only. Keep this file if you want a copy of your answers.');
@@ -413,7 +506,7 @@
   function wireNotes() {
     var btn = $('#notesBtn');
     if (!btn) return;
-    if (!$all('[data-note-label]').length) { btn.classList.add('hidden'); return; }
+    if (!$all('[data-note-label], .multi-activity').length) { btn.classList.add('hidden'); return; }
     btn.addEventListener('click', function () {
       var n = buildNotes();
       var blob = new Blob([n.text], { type: 'text/plain;charset=utf-8' });
@@ -439,6 +532,7 @@
   renderChrome();
   wireActivities();
   wireOrderActivities();
+  wireMulti();
   wireNotices();
   wireTaskCards();
   wireCarry();

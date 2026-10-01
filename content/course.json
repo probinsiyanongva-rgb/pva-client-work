@@ -3623,7 +3623,881 @@
   },
   {
    "num": 5,
-   "title": "Checking Your Work and Handling Revisions"
+   "title": "Checking Your Work and Handling Revisions",
+   "mocks": {
+    "answers": {
+     "kind": "chat",
+     "title": "Grace Tan",
+     "label": "Grace's chat message",
+     "messages": [
+      {
+       "from": "Grace Tan",
+       "time": "Friday, 7:40 PM (Portland)",
+       "text": "Column E, sorry about that! For the two without white-background photos, use the lifestyle ones for now. I'll send it Sunday at 6 PM my time."
+      }
+     ]
+    },
+    "b1folder": {
+     "kind": "drive",
+     "active": "Shared with me",
+     "path": "Lumen Home – Best Sellers – Sep",
+     "label": "Ana's finished folder, 12 images",
+     "rows": [
+      {
+       "type": "IMAGE",
+       "name": "clay-mug_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "dune-platter_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "fern-vase_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "harbor-vase_lifestyle.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "linen-throw_lifestyle.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "moss-mug_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "pebble-bowl_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "reed-vase_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "salt-cup_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "sand-bowl_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "sky-mug_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "tide-plate_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      }
+     ]
+    },
+    "b1doc": {
+     "kind": "doc",
+     "type": "DOC",
+     "name": "Lumen Home – Best Sellers – Oct",
+     "label": "Ana's finished Doc: 11 rows",
+     "table": [
+      [
+       "Product",
+       "Photo file",
+       "Wholesale price"
+      ],
+      [
+       "Clay Mug",
+       "clay-mug_white.jpg",
+       "$14"
+      ],
+      [
+       "Dune Platter",
+       "dune-platter_white.jpg",
+       "$26"
+      ],
+      [
+       "Fern Vase",
+       "fern-vase_white.jpg",
+       "$22"
+      ],
+      [
+       "Harbor Vase",
+       "harbor-vase_white.jpg",
+       "$52"
+      ],
+      [
+       "Linen Throw",
+       "linen-throw_lifestyle.jpg",
+       "$34"
+      ],
+      [
+       "Moss Mug",
+       "moss-mug_white.jpg",
+       "$24"
+      ],
+      [
+       "Reed Vase",
+       "reed-vase_white.jpg",
+       "$27"
+      ],
+      [
+       "Salt Cup",
+       "salt-cup_white.jpg",
+       "$8"
+      ],
+      [
+       "Sand Bowl",
+       "sand-bowl_white.jpg",
+       "$19"
+      ],
+      [
+       "Sky Mug",
+       "sky-mug_white.jpg",
+       "$14"
+      ],
+      [
+       "Tide Plate",
+       "tide-plate_white.jpg",
+       "$16"
+      ]
+     ]
+    },
+    "bestsellers": {
+     "kind": "sheet",
+     "name": "Sales by Product – Sep 2026 · Best Sellers",
+     "cols": [
+      "A",
+      "B"
+     ],
+     "rows": [
+      [
+       "Rank",
+       "Product"
+      ],
+      [
+       "1",
+       "Moss Mug"
+      ],
+      [
+       "2",
+       "Sand Bowl"
+      ],
+      [
+       "3",
+       "Harbor Vase"
+      ],
+      [
+       "4",
+       "Clay Mug"
+      ],
+      [
+       "5",
+       "Tide Plate"
+      ],
+      [
+       "6",
+       "Linen Throw"
+      ],
+      [
+       "7",
+       "Sky Mug"
+      ],
+      [
+       "8",
+       "Fern Vase"
+      ],
+      [
+       "9",
+       "Pebble Bowl"
+      ],
+      [
+       "10",
+       "Reed Vase"
+      ],
+      [
+       "11",
+       "Dune Platter"
+      ],
+      [
+       "12",
+       "Salt Cup"
+      ]
+     ],
+     "label": "Best Sellers tab, 12 products"
+    },
+    "pricelist": {
+     "kind": "sheet",
+     "name": "Price List",
+     "cols": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+     ],
+     "rows": [
+      [
+       "Product",
+       "Size",
+       "Cost",
+       "Retail",
+       "Wholesale"
+      ],
+      [
+       "Moss Mug",
+       "350 ml",
+       "$9",
+       "$24",
+       "$14"
+      ],
+      [
+       "Sand Bowl",
+       "Medium",
+       "$12",
+       "$32",
+       "$19"
+      ],
+      [
+       "Harbor Vase",
+       "Large",
+       "$30",
+       "$85",
+       "$52"
+      ]
+     ],
+     "label": "Price List, rows shown"
+    },
+    "tally": {
+     "kind": "sheet",
+     "name": "Mark's tally – October",
+     "cols": [
+      "A",
+      "B",
+      "C"
+     ],
+     "rows": [
+      [
+       "Item",
+       "Good",
+       "Damaged"
+      ],
+      [
+       "Sand Mug",
+       "44",
+       "0"
+      ],
+      [
+       "Tide Plate",
+       "30",
+       "2"
+      ],
+      [
+       "Fern Vase",
+       "12",
+       "0"
+      ],
+      [
+       "Moss Mug",
+       "20",
+       "0"
+      ],
+      [
+       "Clay Mug",
+       "16",
+       "0"
+      ],
+      [
+       "Sky Mug",
+       "18",
+       "0"
+      ]
+     ],
+     "label": "Mark's tally for October"
+    },
+    "anasheet": {
+     "kind": "sheet",
+     "name": "Copy of Stock Count – September",
+     "cols": [
+      "A",
+      "B",
+      "C"
+     ],
+     "rows": [
+      [
+       "Item",
+       "Warehouse qty",
+       "Notes"
+      ],
+      [
+       "Sand Mug",
+       "44",
+       ""
+      ],
+      [
+       "Tide Plate",
+       "32",
+       "2 chipped"
+      ],
+      [
+       "Fern Vase",
+       "12",
+       ""
+      ],
+      [
+       "Moss Mug",
+       "20",
+       ""
+      ],
+      [
+       "Clay Mug",
+       "16",
+       ""
+      ],
+      [
+       "Clay Mug",
+       "16",
+       ""
+      ],
+      [
+       "Sky Mug",
+       "18",
+       ""
+      ]
+     ],
+     "label": "Ana's finished stock count sheet"
+    },
+    "monday": {
+     "kind": "chat",
+     "title": "Grace Tan",
+     "label": "Grace's chat message",
+     "messages": [
+      {
+       "from": "Grace Tan",
+       "time": "Monday",
+       "text": "Dana loved it! Two changes before I send the next round: add a Retail price column next to Wholesale, and swap the Linen Throw for the Driftwood Tray. It has a white-background photo now."
+      }
+     ]
+    },
+    "b7doc": {
+     "kind": "doc",
+     "type": "DOC",
+     "name": "Lumen Home – Best Sellers – Oct",
+     "label": "Ana's revised Doc: 12 rows with Retail",
+     "table": [
+      [
+       "Product",
+       "Photo file",
+       "Wholesale",
+       "Retail"
+      ],
+      [
+       "Clay Mug",
+       "clay-mug_white.jpg",
+       "$14",
+       "$24"
+      ],
+      [
+       "Driftwood Tray",
+       "driftwood-tray_white.jpg",
+       "$28",
+       "$46"
+      ],
+      [
+       "Dune Platter",
+       "dune-platter_white.jpg",
+       "$26",
+       ""
+      ],
+      [
+       "Fern Vase",
+       "fern-vase_white.jpg",
+       "$22",
+       "$58"
+      ],
+      [
+       "Harbor Vase",
+       "harbor-vase_lifestyle.jpg",
+       "$52",
+       "$85"
+      ],
+      [
+       "Moss Mug",
+       "moss-mug_white.jpg",
+       "$24",
+       "$24"
+      ],
+      [
+       "Pebble Bowl",
+       "pebble-bowl_white.jpg",
+       "$18",
+       "$42"
+      ],
+      [
+       "Reed Vase",
+       "reed-vase_white.jpg",
+       "$27",
+       "$68"
+      ],
+      [
+       "Salt Cup",
+       "salt-cup_white.jpg",
+       "$8",
+       "$18"
+      ],
+      [
+       "Sand Bowl",
+       "sand-bowl_white.jpg",
+       "$19",
+       "$32"
+      ],
+      [
+       "Sky Mug",
+       "sky-mug_white.jpg",
+       "$14",
+       "$24"
+      ],
+      [
+       "Tide Plate",
+       "tide-plate_white.jpg",
+       "$16",
+       "$38"
+      ]
+     ]
+    },
+    "b7folder": {
+     "kind": "drive",
+     "active": "Shared with me",
+     "path": "Lumen Home – Best Sellers – Oct",
+     "label": "The folder after the changes, 13 images",
+     "rows": [
+      {
+       "type": "IMAGE",
+       "name": "clay-mug_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "driftwood-tray_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "dune-platter_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "fern-vase_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "harbor-vase_lifestyle.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "linen-throw_lifestyle.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "moss-mug_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "pebble-bowl_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "reed-vase_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "salt-cup_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "sand-bowl_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "sky-mug_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      },
+      {
+       "type": "IMAGE",
+       "name": "tide-plate_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Oct"
+      }
+     ]
+    }
+   },
+   "multis": {
+    "l5b1": {
+     "label": "Try it first",
+     "note_title": "Is It Done?",
+     "mode": "fix",
+     "intro_html": "<p>Grace's answers came in on Saturday morning, your time:</p>{{mock:answers}}<p>Here's the Task Card, updated with Grace's answers:</p><div class=\"table-wrap\"><table><thead><tr><th>Part</th><th>Task Card</th></tr></thead><tbody><tr><td>Task</td><td>A folder with photos of the 12 best sellers, and a Doc listing each one's product name, photo file name and wholesale price</td></tr><tr><td>Finished result</td><td>One folder, <em>Lumen Home – Best Sellers – Oct</em>, with 12 photos. One Doc with the same name, listing the same 12 products</td></tr><tr><td>Sources</td><td>The Best Sellers tab. White-background photos, with lifestyle photos for Harbor Vase and Linen Throw (Grace's answer). Price List <strong>column E</strong>, Wholesale (Grace's answer)</td></tr><tr><td>Deadline</td><td>Sunday 6 PM Portland = <strong>Monday 9 AM</strong> your time</td></tr><tr><td>Limits</td><td>White-background photos except the two Grace approved. Wholesale prices only. Don't send it to the buyer; Grace will</td></tr><tr><td>Open questions</td><td>All answered (Grace's message above)</td></tr></tbody></table></div><p>Ana has finished the folder and the Doc:</p>{{mock:b1folder}}{{mock:b1doc}}<p>And the sources:</p>{{mock:bestsellers}}{{mock:pricelist}}",
+     "question": "Before you tell Grace it's done, which of these need fixing? Tick every one that needs fixing, and leave the rest.",
+     "items": [
+      {
+       "text": "Folder name: Lumen Home – Best Sellers – Sep",
+       "key": true,
+       "reveal": "It's October. The Task Card says – Oct, and the Doc already uses Oct."
+      },
+      {
+       "text": "Number of products in the Doc: 11",
+       "key": true,
+       "reveal": "The Best Sellers tab has 12. Pebble Bowl is missing."
+      },
+      {
+       "text": "Photos in the folder: 12, two of them lifestyle",
+       "key": false,
+       "reveal": "Grace said to use lifestyle photos for Harbor Vase and Linen Throw."
+      },
+      {
+       "text": "Moss Mug price in the Doc: $24",
+       "key": true,
+       "reveal": "$24 is the Retail price. Wholesale, in column E, is $14."
+      },
+      {
+       "text": "Harbor Vase photo file in the Doc: harbor-vase_white.jpg",
+       "key": true,
+       "reveal": "There's no white-background photo for Harbor Vase. The file in the folder is harbor-vase_lifestyle.jpg."
+      },
+      {
+       "text": "Order of products in the Doc: A to Z",
+       "key": false,
+       "reveal": "Nobody asked for a particular order."
+      },
+      {
+       "text": "Doc name: Lumen Home – Best Sellers – Oct",
+       "key": false,
+       "reveal": "It matches the Task Card."
+      }
+     ]
+    },
+    "l5b3": {
+     "label": "Activity",
+     "title": "Find the Errors",
+     "note_title": "Find the Errors",
+     "mode": "fix",
+     "intro_html": "<p>The October stock count is finished, and Ana is about to share it with Mark. Grace's instructions were: warehouse only, and damaged items go in the Notes column, not in the count.</p>{{mock:tally}}{{mock:anasheet}}",
+     "question": "Before you share it with Mark, which of these need fixing? Tick every one that needs fixing, and leave the rest.",
+     "items": [
+      {
+       "text": "File name: Copy of Stock Count – September",
+       "key": true,
+       "reveal": "The copy was never renamed. It should be Stock Count – October."
+      },
+      {
+       "text": "Sand Mug: 44",
+       "key": false,
+       "reveal": "It matches the tally."
+      },
+      {
+       "text": "Tide Plate: 32, Notes \"2 chipped\"",
+       "key": true,
+       "reveal": "The tally has 30 good and 2 damaged. Damaged items go in Notes, not in the count, so the quantity is 30."
+      },
+      {
+       "text": "Fern Vase: 12",
+       "key": false,
+       "reveal": "It matches the tally."
+      },
+      {
+       "text": "Moss Mug: 20",
+       "key": false,
+       "reveal": "It matches the tally."
+      },
+      {
+       "text": "Clay Mug: rows 6 and 7, 16 each",
+       "key": true,
+       "reveal": "Clay Mug is in twice. Mark would count 32."
+      },
+      {
+       "text": "Sky Mug: 18",
+       "key": false,
+       "reveal": "It matches the tally."
+      }
+     ]
+    },
+    "l5b5": {
+     "label": "Activity",
+     "title": "What Does This Change Touch?",
+     "note_title": "What Does This Change Touch?",
+     "mode": "touch",
+     "intro_html": "<p>On Monday, Grace writes:</p>{{mock:monday}}",
+     "question": "Which parts of the Lumen work does this change? Tick every part it touches, and leave the rest.",
+     "items": [
+      {
+       "text": "The Doc's columns: a Retail column for all 12 rows",
+       "key": true,
+       "reveal": "A new column means a Retail price for every product."
+      },
+      {
+       "text": "The folder name",
+       "key": false,
+       "reveal": "Nothing in the change touches the name."
+      },
+      {
+       "text": "The Linen Throw row in the Doc",
+       "key": true,
+       "reveal": "It becomes the Driftwood Tray: a new name, photo file and prices."
+      },
+      {
+       "text": "The wholesale prices already in the Doc",
+       "key": false,
+       "reveal": "They stay as they are. Take care not to change them while you add Retail."
+      },
+      {
+       "text": "The photos in the folder",
+       "key": true,
+       "reveal": "linen-throw_lifestyle.jpg comes out, and driftwood-tray_white.jpg goes in."
+      },
+      {
+       "text": "The number of products",
+       "key": false,
+       "reveal": "One swapped for one: still 12."
+      },
+      {
+       "text": "The Doc name",
+       "key": false,
+       "reveal": "It stays Lumen Home – Best Sellers – Oct."
+      }
+     ]
+    },
+    "l5b7": {
+     "label": "Practice",
+     "title": "Revise and Re-check",
+     "note_title": "Revise and Re-check",
+     "mode": "fix",
+     "intro_html": "<p>Ana has made Grace's two changes. Here's the revised Doc and the folder:</p>{{mock:b7doc}}{{mock:b7folder}}",
+     "question": "Before you tell Grace the changes are done, which of these need fixing? Tick every one that needs fixing, and leave the rest.",
+     "items": [
+      {
+       "text": "Driftwood Tray row: name, driftwood-tray_white.jpg, both prices",
+       "key": false,
+       "reveal": "The swap is in the Doc."
+      },
+      {
+       "text": "Dune Platter Retail price: (blank)",
+       "key": true,
+       "reveal": "Every row needs a Retail price now."
+      },
+      {
+       "text": "Folder: 13 photos, including linen-throw_lifestyle.jpg",
+       "key": true,
+       "reveal": "The Linen Throw is out of the list, so its photo comes out of the folder. There should be 12."
+      },
+      {
+       "text": "Number of products in the Doc: 12",
+       "key": false,
+       "reveal": "One swapped for one."
+      },
+      {
+       "text": "Moss Mug Wholesale: $24",
+       "key": true,
+       "reveal": "It was $14 before the change. $24 is Retail. Adding the Retail column broke something that was right."
+      },
+      {
+       "text": "Folder name: Lumen Home – Best Sellers – Oct",
+       "key": false,
+       "reveal": "It was fixed earlier, and the change doesn't touch it."
+      },
+      {
+       "text": "Linen Throw row: removed",
+       "key": false,
+       "reveal": "That's the swap."
+      }
+     ]
+    }
+   },
+   "activities": {
+    "l5b6": {
+     "label": "Activity",
+     "title": "Before You Change Anything",
+     "qlabel": "Question",
+     "intro": "Three quick ones before Ana makes Grace's changes.",
+     "items": [
+      {
+       "evidence_first": true,
+       "mocks": [
+        {
+         "kind": "drive",
+         "active": "Shared with me",
+         "path": "Lumen Home – Best Sellers – Oct",
+         "label": "Two Docs in Drive",
+         "rows": [
+          {
+           "type": "DOC",
+           "name": "Lumen Home – Best Sellers – Oct",
+           "owner": "Grace Tan",
+           "date": "Sunday"
+          },
+          {
+           "type": "DOC",
+           "name": "Copy of Lumen Home – Best Sellers – Oct",
+           "owner": "You",
+           "date": "Friday"
+          }
+         ]
+        }
+       ],
+       "context": "You also have <em>Lumen Home – Best Sellers – Oct.docx</em> in your laptop's Downloads, from Saturday. Grace edited the Doc in the folder on Sunday.",
+       "q": "Where do you make Grace's changes?",
+       "options": [
+        "The copy you made on Friday, so the original stays safe",
+        "The Doc in the Lumen folder that Grace edited Sunday",
+        "The .docx in your Downloads, so you can work offline",
+        "A new Doc, so you can start clean"
+       ],
+       "answer": 1,
+       "feedback": [
+        "It's older than Grace's Sunday edits. Changing it would leave her edits out.",
+        "That's the version Grace is working from, with her latest edits.",
+        "It's a Saturday copy outside Grace's Drive, without her Sunday edits.",
+        "You'd be rebuilding work that's already right, and Grace would end up with two Docs."
+       ]
+      },
+      {
+       "q": "Which of these from Grace is a new task, not a change to the Lumen work?",
+       "options": [
+        "\"Can you put the Driftwood Tray first in the list?\"",
+        "\"Please round the wholesale prices to whole dollars.\"",
+        "\"Can you also make a folder for Bayside Gifts?\"",
+        "\"Use the newer Moss Mug photo instead.\""
+       ],
+       "answer": 2,
+       "feedback": [
+        "That changes the Lumen Doc, so it's a revision.",
+        "That changes the Lumen Doc, so it's a revision.",
+        "Different buyer, different folder. It's a new task, with its own Task Card and deadline.",
+        "That changes the Lumen folder, so it's a revision."
+       ]
+      },
+      {
+       "evidence_first": true,
+       "lead": "<p class=\"act-context\">Your Task Card says: \"Don't send it to the buyer; Grace will.\" On Monday, Grace writes:</p>",
+       "mocks": [
+        {
+         "kind": "chat",
+         "title": "Grace Tan",
+         "label": "Grace's chat message",
+         "messages": [
+          {
+           "from": "Grace Tan",
+           "time": "Monday",
+           "text": "I'm flying today. Can you share the folder with Dana directly? dana@lumenhome.com, view only."
+          }
+         ]
+        }
+       ],
+       "q": "What's your call?",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 0,
+       "feedback": [
+        "Grace set this limit, and she's the one changing it. She named the person, the address and the access. Update your Task Card, then share it exactly that way: that address, view only.",
+        "There's nothing left to ask. She gave the person, the address and the access.",
+        "Her message already answers who, which address and what access.",
+        "In Lesson 3, Dana asked, and that wasn't your decision. This time Grace, who decides, is asking, and she's said exactly what to share and with whom."
+       ]
+      }
+     ]
+    }
+   },
+   "next_preview": [
+    "You've read a request, sorted what's missing, made the calls, planned the work and checked it.",
+    "Lesson 6 puts it all together: one new request from Grace, from the first message to the Done Check."
+   ],
+   "quick_check": {
+    "purpose": "A few questions to check the habits from this lesson.",
+    "questions": [
+     {
+      "id": "5.1",
+      "q": "You've finished a sheet for Grace. What do you check it against?",
+      "options": [
+       "Your Task Card: what she asked for and what she answered",
+       "Your memory of what she wanted",
+       "Whether it looks neat",
+       "The last sheet like it you made"
+      ],
+      "answer": 0,
+      "explain": "The Task Card holds what Grace asked for and what she answered. That's what \"done\" is measured against."
+     },
+     {
+      "id": "5.2",
+      "q": "Grace asks you to change a product's name in the Price List. What else might that change touch?",
+      "options": [
+       "Anywhere else that name appears, like the Doc and the photo file names",
+       "Nothing; it's one cell",
+       "The whole Price List needs redoing",
+       "Only that row's prices"
+      ],
+      "answer": 0,
+      "explain": "A name can appear in more than one place. Find each one before you call the change done."
+     },
+     {
+      "id": "5.3",
+      "q": "You've made Grace's changes. What do you re-check?",
+      "options": [
+       "What you changed, what it touched, and what was already right",
+       "Only the line you changed",
+       "Everything from scratch, every time",
+       "Nothing, if you were careful"
+      ],
+      "answer": 0,
+      "explain": "A change can break something nearby. Check what you changed, what it touched, and what was right before."
+     }
+    ]
+   }
   },
   {
    "num": 6,
