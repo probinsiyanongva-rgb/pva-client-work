@@ -1,0 +1,545 @@
+{
+ "outcomes": [
+  "read a client request and write down the task, the finished result, the sources, the deadline in your time, the limits and the open questions",
+  "tell which gaps you can fill yourself and which only the client can answer",
+  "decide whether to go ahead, ask first, or pass a decision to the client",
+  "plan the work in a sensible order and follow a client's checklist or process",
+  "check your work against the request before you say it's done, and handle revisions without breaking what was right"
+ ],
+ "fit_check": [
+  {
+   "text": "When a client sends a request, I can list everything they asked for, including the limits and the deadline in my time.",
+   "lesson": 1
+  },
+  {
+   "text": "I can tell which missing details I can find myself and which only the client can answer.",
+   "lesson": 2
+  },
+  {
+   "text": "I know when to go ahead, when to ask first, and when a decision isn't mine to make.",
+   "lesson": 3
+  },
+  {
+   "text": "I can break a task into steps and follow a client's checklist or process.",
+   "lesson": 4
+  },
+  {
+   "text": "Before I say a task is done, I check it against what was asked.",
+   "lesson": 5
+  }
+ ],
+ "lessons": [
+  {
+   "num": 1,
+   "title": "Reading a Client Request",
+   "mocks": {
+    "anchor": {
+     "kind": "email",
+     "subject": "Trade fair contacts",
+     "from": "Grace Tan",
+     "from_email": "grace@harborhill.co",
+     "to": "ana@harborhill.co",
+     "date": "Monday",
+     "actions": [],
+     "label": "Email from Grace Tan: Trade fair contacts",
+     "body": [
+      "Hi Ana! Hope your week's off to a good start. We just got back from the spring trade fair and it was so busy. We met a lot of new stockists (stores that sell our pieces), and I'd like to follow up with them before they forget us. Could you put their contacts into our Stockist Tracker sheet? The business cards are scanned in the \"Trade Fair Cards\" folder in Drive, 23 cards. Add each one as a new row with name, shop, city, email and phone. Some cards have no email; just leave that blank, don't go searching for it. Please don't change the existing rows, Mark uses them for deliveries. Tag the new ones somehow so I can tell they're from the fair. I need it before my call with our distributor on Thursday at 10 AM my time. Thanks!"
+     ]
+    },
+    "thread": {
+     "kind": "chat",
+     "title": "Grace Tan",
+     "label": "Chat thread: three messages from Grace Tan",
+     "messages": [
+      {
+       "from": "Grace Tan",
+       "time": "2:10 PM (Portland)",
+       "text": "Ana, a wholesale buyer from Lumen Home wants to see our best sellers. Can you put together a folder with photos of our 12 best-selling products?"
+      },
+      {
+       "from": "Grace Tan",
+       "time": "2:12 PM (Portland)",
+       "text": "Use the white-background photos only, the lifestyle ones aren't ready. Also make a short list in a Doc: product name, photo file name, and wholesale price. The wholesale prices are in column D of the Price List, not the retail ones."
+      },
+      {
+       "from": "Grace Tan",
+       "time": "2:15 PM (Portland)",
+       "text": "She flies into LA on Monday, so I'd like to send it to her Sunday night my time. Don't send it to her yourself, I'll do that."
+      }
+     ]
+    }
+   },
+   "activities": {
+    "l1a4": {
+     "label": "Activity",
+     "title": "Do or Background?",
+     "layout": "row",
+     "qlabel": "Sentence",
+     "intro": "Grace sent this chat. For each sentence, choose <strong>Do</strong> if it asks you to do something (including \"don't\" and \"only\"), or <strong>Background</strong> if it only gives news, a reason, or a greeting.",
+     "items": [
+      {
+       "q": "\"Hi Ana, quick one before the weekend.\"",
+       "options": [
+        "Do",
+        "Background"
+       ],
+       "answer": 1,
+       "good": "A greeting. Nothing to do yet.",
+       "try": "This is only a greeting. Nothing is asked."
+      },
+      {
+       "q": "\"Our holiday orders doubled last year, so we're preparing earlier this time.\"",
+       "options": [
+        "Do",
+        "Background"
+       ],
+       "answer": 1,
+       "good": "It explains why, but doesn't ask for anything.",
+       "try": "It sounds urgent, but it only explains why Grace is preparing early. No task is in this sentence."
+      },
+      {
+       "q": "\"Could you make a copy of last year's Holiday Orders sheet and name it Holiday Orders 2026?\"",
+       "options": [
+        "Do",
+        "Background"
+       ],
+       "answer": 0,
+       "good": "A request, even though it's written as a question.",
+       "try": "\"Could you…?\" is a polite way to ask for work. This is the main task."
+      },
+      {
+       "q": "\"Last year the sheet got confusing because people typed dates in different ways.\"",
+       "options": [
+        "Do",
+        "Background"
+       ],
+       "answer": 1,
+       "good": "It's the reason for the next sentence.",
+       "try": "This describes a past problem. The instruction about it comes in the next sentence."
+      },
+      {
+       "q": "\"So in the new one, please use one date format only: YYYY-MM-DD.\"",
+       "options": [
+        "Do",
+        "Background"
+       ],
+       "answer": 0,
+       "good": "\"Please use one date format only\" is an instruction, and a limit.",
+       "try": "It follows a reason, but \"please use… only\" asks you to do something. It's a limit for your Task Card."
+      },
+      {
+       "q": "\"Joy might ask you about it; she's new and still learning our system.\"",
+       "options": [
+        "Do",
+        "Background"
+       ],
+       "answer": 1,
+       "good": "Useful to know, but nothing is asked of you.",
+       "try": "It sounds like you might need to act, but Grace doesn't ask for anything here."
+      },
+      {
+       "q": "\"Don't delete anything from last year's sheet; we still need it for taxes.\"",
+       "options": [
+        "Do",
+        "Background"
+       ],
+       "answer": 0,
+       "good": "\"Don't delete anything\" is a limit. The tax part is the reason.",
+       "try": "\"Don't delete anything\" is something you must follow, so it counts as Do. The reason is attached, but the limit is the instruction."
+      },
+      {
+       "q": "\"Thanks so much, you've been a big help this month!\"",
+       "options": [
+        "Do",
+        "Background"
+       ],
+       "answer": 1,
+       "good": "A kind closing. Nothing to do.",
+       "try": "This is a thank-you. Nothing is asked."
+      }
+     ]
+    },
+    "l1a5": {
+     "label": "Activity",
+     "title": "Which Result Matches?",
+     "intro": "The task tells you what to do. The finished result is what should exist at the end. Choose the result that matches each request.",
+     "items": [
+      {
+       "mocks": [
+        {
+         "kind": "sheet",
+         "name": "Result A · Supplier Contacts",
+         "cols": [
+          "A",
+          "B",
+          "C"
+         ],
+         "rows": [
+          [
+           "Name",
+           "Email",
+           "Phone"
+          ],
+          [
+           "Bayabas Print",
+           "hello@bayabasprint.ph",
+           "0917 555 0101"
+          ],
+          [
+           "Luntian Packaging",
+           "sales@luntianpackaging.ph",
+           "0917 555 0102"
+          ],
+          [
+           "Sari Boxes",
+           "orders@sariboxes.ph",
+           "0917 555 0103"
+          ],
+          [
+           "Tala Paper Co. (new)",
+           "hello@talapaper.ph",
+           "0917 555 0106"
+          ],
+          [
+           "Alon Glassworks (new)",
+           "hi@alonglass.ph",
+           "0917 555 0104"
+          ],
+          [
+           "Kawayan Crates (new)",
+           "sales@kawayancrates.ph",
+           "0917 555 0105"
+          ]
+         ],
+         "label": "Result A: Supplier Contacts sheet"
+        },
+        {
+         "kind": "sheet",
+         "name": "Result B · Supplier Contacts",
+         "cols": [
+          "A",
+          "B",
+          "C"
+         ],
+         "rows": [
+          [
+           "Name",
+           "Email",
+           "Phone"
+          ],
+          [
+           "Alon Glassworks (new)",
+           "hi@alonglass.ph",
+           "0917 555 0104"
+          ],
+          [
+           "Bayabas Print",
+           "hello@bayabasprint.ph",
+           "0917 555 0101"
+          ],
+          [
+           "Kawayan Crates (new)",
+           "sales@kawayancrates.ph",
+           "0917 555 0105"
+          ],
+          [
+           "Luntian Packaging",
+           "sales@luntianpackaging.ph",
+           "0917 555 0102"
+          ],
+          [
+           "Sari Boxes",
+           "orders@sariboxes.ph",
+           "0917 555 0103"
+          ],
+          [
+           "Tala Paper Co. (new)",
+           "hello@talapaper.ph",
+           "0917 555 0106"
+          ]
+         ],
+         "label": "Result B: Supplier Contacts sheet"
+        },
+        {
+         "kind": "sheet",
+         "name": "Result C · Supplier Contacts",
+         "cols": [
+          "A",
+          "B",
+          "C"
+         ],
+         "rows": [
+          [
+           "Name",
+           "Email",
+           "Phone"
+          ],
+          [
+           "Alon Glassworks (new)",
+           "hi@alonglass.ph",
+           ""
+          ],
+          [
+           "Bayabas Print",
+           "hello@bayabasprint.ph",
+           "0917 555 0101"
+          ],
+          [
+           "Kawayan Crates (new)",
+           "sales@kawayancrates.ph",
+           ""
+          ],
+          [
+           "Luntian Packaging",
+           "sales@luntianpackaging.ph",
+           "0917 555 0102"
+          ],
+          [
+           "Sari Boxes",
+           "orders@sariboxes.ph",
+           "0917 555 0103"
+          ],
+          [
+           "Tala Paper Co. (new)",
+           "hello@talapaper.ph",
+           ""
+          ]
+         ],
+         "label": "Result C: Supplier Contacts sheet"
+        }
+       ],
+       "q": "Grace: \"Add the three new suppliers to the Supplier Contacts sheet with name, email and phone. Keep the list in A–Z order by name.\"",
+       "options": [
+        "Result A",
+        "Result B",
+        "Result C"
+       ],
+       "answer": 1,
+       "feedback": [
+        "All three are there with every field, but they're at the bottom. Grace asked for A–Z order, and that's part of the finished result.",
+        "Everything Grace asked: all three suppliers, all three fields, and A–Z order.",
+        "The order is right, but the phone numbers are missing for the new suppliers. Grace asked for name, email and phone."
+       ]
+      },
+      {
+       "q": "Grace: \"Save the signed Luntian contract as a PDF in the Contracts folder, named Luntian-Contract-2026.\"",
+       "options": [
+        "Luntian-Contract-2026.docx, in Contracts",
+        "Luntian Contract 2026 FINAL.pdf, in Suppliers",
+        "contract-signed.pdf, in Contracts",
+        "Luntian-Contract-2026.pdf, in Contracts"
+       ],
+       "answer": 3,
+       "feedback": [
+        "Right name and folder, but it's a Word file. Grace asked for a PDF.",
+        "A PDF, but the name isn't the one Grace gave, and it's in the Suppliers folder instead of Contracts.",
+        "Right type and folder, but not the name Grace asked for. She may search for \"Luntian-Contract-2026\" later.",
+        "Right type, right name, right folder. That's the finished result."
+       ]
+      }
+     ]
+    },
+    "l1a5b": {
+     "label": "Activity",
+     "title": "Convert the Deadline",
+     "intro": "All of these are from Grace in Portland, in October.",
+     "items": [
+      {
+       "q": "Grace: \"I need it by Thursday 10 AM my time.\" When is that in the Philippines?",
+       "options": [
+        "Thursday 10 AM",
+        "Wednesday 7 PM",
+        "Friday 1 AM",
+        "Friday 10 AM"
+       ],
+       "answer": 2,
+       "feedback": [
+        "That's Grace's time, not yours. Add 15 hours: Friday 1 AM in the Philippines.",
+        "That subtracts the 15 hours. Portland is behind the Philippines, so you add: Friday 1 AM.",
+        "Thursday 10 AM + 15 hours = Friday 1 AM. Plan to finish Thursday evening your time.",
+        "The day moves forward, and the hour changes too: 10 AM + 15 hours = 1 AM Friday."
+       ]
+      },
+      {
+       "q": "It's 9 PM on Tuesday in the Philippines when Grace writes: \"Can you send it by tomorrow morning?\" When is that for you?",
+       "options": [
+        "Late Wednesday night to early Thursday, Philippine time",
+        "Wednesday morning, Philippine time",
+        "Tuesday night, Philippine time",
+        "Thursday morning, Philippine time"
+       ],
+       "answer": 0,
+       "feedback": [
+        "When Grace writes, it's 6 AM Tuesday in Portland, so her \"tomorrow morning\" is Wednesday morning there. 9 AM Wednesday in Portland is 12 AM Thursday for you.",
+        "That's your tomorrow. Grace means her tomorrow: Wednesday morning in Portland, which is around midnight Wednesday night for you.",
+        "It's 6 AM Tuesday for Grace when she writes, so \"tomorrow\" is Wednesday there. You have until about midnight Wednesday night your time.",
+        "That's a few hours too late. Wednesday morning in Portland is late Wednesday night to early Thursday for you."
+       ]
+      },
+      {
+       "q": "Grace: \"EOD Friday, please.\" No time is given. What do you write under Deadline?",
+       "options": [
+        "Friday 11:59 PM, Philippine time, since EOD means end of day",
+        "About Saturday 8 AM Philippine time (5 PM Friday hers), and add \"exact EOD time?\" to Open questions",
+        "Friday 5 PM, Philippine time, since that's a normal end of workday",
+        "Any time on Friday, since no hour was given, so there's nothing to note"
+       ],
+       "answer": 1,
+       "feedback": [
+        "EOD usually means the end of the client's workday, not yours. If it's 5 PM Friday in Portland, that's Saturday 8 AM for you. And because \"EOD\" isn't an exact time, note it as an open question.",
+        "EOD usually means around 5 PM her time, which is Saturday 8 AM for you. Since she didn't say an exact time, you also note it as an open question.",
+        "That's the end of your workday, not Grace's. Her 5 PM Friday is Saturday 8 AM for you, and the exact time should go under Open questions.",
+        "A missing hour is something to note, not ignore. Write down your best reading (about Saturday 8 AM your time) and add the exact time to Open questions."
+       ]
+      },
+      {
+       "q": "Grace: \"I need it before my call with the distributor on Monday.\" What do you write under Deadline?",
+       "options": [
+        "Monday 11:59 PM Portland time, the last minute of Monday",
+        "Monday end of day, Philippine time",
+        "No deadline, because Grace didn't give an exact time",
+        "Before a Monday call at an unknown time. Note it, and add \"What time is the call?\" to Open questions"
+       ],
+       "answer": 3,
+       "feedback": [
+        "The call happens during Monday, and the work is needed before it. The end of Monday is too late.",
+        "Monday evening for you is still early Monday in Portland, but you don't know when the call is. Note the missing call time.",
+        "There is a deadline: before the Monday call. You just don't know the time yet. Write the deadline down, and add the call time to Open questions.",
+        "The deadline is real, and its exact time is missing. Both belong on the Task Card."
+       ]
+      }
+     ]
+    }
+   },
+   "taskcards": {
+    "lumen": {
+     "label": "Practice",
+     "title": "Your Task Card",
+     "note_heading": "My Task Card: Lumen Home photos",
+     "intro_html": "<p>Now a new request, with no labels. It's a Friday afternoon in October in Portland. Grace sends three chat messages:</p>{{mock:thread}}<p class=\"small\"><em>Wholesale price: the lower price for stores that buy many pieces to resell.</em></p><p>Fill in your Task Card. Short notes are fine, in English or Taglish. Your answers are saved in this browser.</p>",
+     "reveal_label": "Show the model Task Card",
+     "anyway_label": "Show me anyway",
+     "model_heading": "Model Task Card",
+     "check_intro": "Compare each part with the model. Mark each one. It's for you only.",
+     "fields": [
+      {
+       "key": "task",
+       "label": "Task",
+       "placeholder": "Everything Grace asked you to do",
+       "model": "Make a folder with photos of the 12 best-selling products, <strong>and</strong> a Doc listing each one's product name, photo file name and wholesale price",
+       "check": "Did you include <strong>both</strong> the folder and the Doc?"
+      },
+      {
+       "key": "result",
+       "label": "Finished result",
+       "placeholder": "What will exist when you're done",
+       "model": "One folder with 12 white-background product photos, plus one Doc with a 3-column list for the same 12 products, ready for Grace to send",
+       "check": "Did you say 12, white-background, and what goes in the Doc?"
+      },
+      {
+       "key": "sources",
+       "label": "Sources",
+       "placeholder": "Files or information you'll work from",
+       "model": "The white-background product photos; the Price List, column D (wholesale); information on which products are the best sellers",
+       "check": "Did you name <strong>column D</strong> of the Price List, not just \"the price list\"?"
+      },
+      {
+       "key": "deadline",
+       "label": "Deadline",
+       "placeholder": "In Philippine time, plus Grace's words",
+       "critical": true,
+       "model": "Sunday night Portland time = about <strong>Monday midday in the Philippines</strong> (for example, Sunday 9 PM there = Monday 12 PM here). \"Night\" isn't an exact time",
+       "check": "Did you convert it to Philippine time, and note that \"night\" isn't exact?"
+      },
+      {
+       "key": "limits",
+       "label": "Limits",
+       "placeholder": "Every \"don't\", \"only\" and \"must\"",
+       "critical": true,
+       "model": "White-background photos only. Wholesale prices only (column D, not retail). <strong>Don't send it to the buyer</strong>; Grace will",
+       "check": "Did you get all three, including <strong>don't send it</strong>?"
+      },
+      {
+       "key": "questions",
+       "label": "Open questions",
+       "placeholder": "What the messages don't tell you",
+       "model": "Which 12 are the best sellers, and where does that information come from? What time on Sunday night? (Smaller: what to name the folder and the Doc?)",
+       "check": "Did you include <strong>which 12 are the best sellers</strong>?"
+      }
+     ],
+     "closing": {
+      "critical_missed": "These two cause the most trouble in real work. A missed limit can mean sending something Grace said not to send. A deadline read in the wrong time zone can mean finishing a day late. Read the three messages once more, looking only for times and for \"don't\", \"only\" and \"not\". Then update your card.",
+      "other_missed": "You caught the deadline and the limits, which are the hardest parts. Check the part you missed against the model. Often it's the second task in a later message, or a detail like \"column D\".",
+      "all_got": "That's a complete Task Card. You'll use this same card in the next lesson."
+     },
+     "after_html": "<p>In Lessons 2 and 3 you'll decide what to do about your open questions. If one does need to go to Grace, the wording comes from Communication &amp; Professionalism, Lesson 3.</p>"
+    }
+   },
+   "next_preview": [
+    "Your Task Card has open questions. Some you can answer yourself, and some only the client can answer.",
+    "Lesson 2 starts with the Task Card you just made and sorts its open questions: the ones you already have an answer for, the ones you can find, and the ones that need Grace."
+   ],
+   "quick_check": {
+    "purpose": "A few questions to check the reading habits from this lesson.",
+    "questions": [
+     {
+      "id": "1.1",
+      "q": "Grace writes: \"The last VA was slow, so I'm hoping this goes faster. Please rename the files by date.\" Which part is the instruction?",
+      "options": [
+       "\"Please rename the files by date.\"",
+       "\"The last VA was slow.\"",
+       "\"I'm hoping this goes faster.\"",
+       "All of it"
+      ],
+      "answer": 0,
+      "explain": "Only the last sentence asks for work. The first two are background: how Grace feels and why."
+     },
+     {
+      "id": "1.2",
+      "q": "Where on the Task Card does \"Don't change the existing rows\" belong?",
+      "options": [
+       "Limits",
+       "Task",
+       "Finished result",
+       "Open questions"
+      ],
+      "answer": 0,
+      "explain": "It's a \"don't\", something you must follow while you work. That's a limit."
+     },
+     {
+      "id": "1.3",
+      "q": "A client in New York is 12 hours behind the Philippines in October. They ask for \"Wednesday 9 AM my time\". When is that for you?",
+      "options": [
+       "Wednesday 9 PM",
+       "Wednesday 9 AM",
+       "Tuesday 9 PM",
+       "Thursday 9 AM"
+      ],
+      "answer": 0,
+      "explain": "Add 12 hours: Wednesday 9 AM there is Wednesday 9 PM in the Philippines."
+     }
+    ]
+   }
+  },
+  {
+   "num": 2,
+   "title": "What's Missing, and Who Knows It"
+  },
+  {
+   "num": 3,
+   "title": "Proceed, Clarify or Escalate"
+  },
+  {
+   "num": 4,
+   "title": "Planning the Work"
+  },
+  {
+   "num": 5,
+   "title": "Checking Your Work and Handling Revisions"
+  },
+  {
+   "num": 6,
+   "title": "Putting It Together"
+  }
+ ]
+}
