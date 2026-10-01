@@ -11,6 +11,7 @@
   var BACKUP_FORMAT = 'pva-client-work-progress-backup';
   var BACKUP_VERSION = 1;
   var COURSE_NAME = 'PVA Academy — Understanding Client Work & Instructions';
+  // Set both from the locked Final Challenge blueprint before building it (not final yet).
   var READY_MARK = 9; // of 12: shown as a result tier only, never a gate
   var TOTAL_QUESTIONS = 12;
 

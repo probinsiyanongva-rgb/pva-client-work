@@ -49,7 +49,7 @@ OPTIONAL = [
      "Practice rows, columns, cells and simple spreadsheet tasks."),
 ]
 FINAL_LABEL = "Final Challenge"
-FINAL_SUB = "12 questions · Diagnostic, no pass mark"
+FINAL_SUB = "Diagnostic, no pass mark"  # add the question count once the Final Challenge blueprint is locked
 
 esc = lambda s: html.escape(s, quote=True)
 DATA = json.loads((CONTENT / "course.json").read_text(encoding="utf-8"))
@@ -121,11 +121,11 @@ def lesson_rows(prefix):
     rows = "".join(
         f'<li><a class="lesson-row" data-lesson="lesson-{l["num"]}"{"" if is_built(l["num"]) else " data-soon"} href="{prefix}lesson-{l["num"]}/"><span class="lesson-num">{l["num"]}</span>'
         f'<span class="row-text"><span class="row-title">{esc(l["title"])}</span><span class="row-sub">Lesson {l["num"]} of {TOTAL}</span></span>'
-        f'<span class="stamp" data-stamp>Not started</span></a></li>' for l in LESSONS)
+        f'<span class="stamp" data-stamp>{"Not started" if is_built(l["num"]) else "Coming soon"}</span></a></li>' for l in LESSONS)
     final_ready = FINAL_SRC.exists() or (OUT / "shared" / "challenge-data.js").exists()
     rows += (f'<li><a class="lesson-row final" data-lesson="final-challenge"{"" if final_ready else " data-soon"} href="{prefix}final-challenge/"><span class="lesson-num">✓</span>'
              f'<span class="row-text"><span class="row-title">{FINAL_LABEL}</span><span class="row-sub">{FINAL_SUB}</span></span>'
-             '<span class="stamp" data-stamp>Not started</span></a></li>')
+             f'<span class="stamp" data-stamp>{"Not started" if final_ready else "Coming soon"}</span></a></li>')
     return rows
 
 
@@ -382,7 +382,7 @@ def build_final():
         assert 0 <= q["answer"] < len(q["options"]) == 4, n
         qs.append({"n": n, "html": q["q"], "options": [esc(o) for o in q["options"]],
                    "k": fnv(f"{SALT}|{n}|{q['answer']}"), "review": q["review"]})
-    assert len(qs) == 12
+    assert qs, "Final Challenge has no questions"  # count is set by the locked blueprint
     write(data_js, "/* Final Challenge questions. Answers are hashed, not stored as letters. */\n"
           "window.CW_CHALLENGE = " + json.dumps(qs, ensure_ascii=False, indent=1) + ";\nwindow.CW_SALT = " + json.dumps(SALT) + ";\n")
 
@@ -394,14 +394,14 @@ def build_final():
 {STORAGE_BANNER}
 <nav class="lesson-nav" id="lessonNav" aria-label="Course lessons"></nav>
 <section class="card" id="assessIntro">
-<div class="section-label">{FINAL_LABEL}</div><div class="folder-tab">12 questions · Multiple choice</div>
+<div class="section-label">{FINAL_LABEL}</div><div class="folder-tab">{len(qs)} questions</div>
 <h1 style="font:700 clamp(1.7rem,4vw,2.3rem)/1.15 Fraunces,Georgia,serif;color:var(--green);margin:0 0 10px">{esc(COURSE)} — {FINAL_LABEL}</h1>
-<p>Twelve short situations, each asking what you would do in your Google account, Gmail, Drive, Docs, Sheets or a sharing screen. They cover all 7 lessons.</p>
+{src["intro_html"]}
 <div class="key-idea"><strong>How it works</strong><ul style="margin:.4em 0 0">
 <li>One question at a time. Your answers are saved in this browser as you go.</li>
 <li><strong>There is no pass mark.</strong> This challenge is diagnostic: your score shows what's solid and which lessons are worth another look.</li>
 <li>After you submit, you'll see your score and a link to the lesson behind any answer that didn't match. You can take it again as many times as you like.</li>
-<li>{esc(COURSE)} is complete when all 7 lessons are marked complete and you've submitted this challenge once.</li>
+<li>{esc(COURSE)} is complete when all {TOTAL} lessons are marked complete and you've submitted this challenge once.</li>
 </ul></div>
 <div id="gate" class="callout hidden"></div>
 <div class="hero-actions"><button class="btn" type="button" id="startBtn">Start the challenge</button></div>
