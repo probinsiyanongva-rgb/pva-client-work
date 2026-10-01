@@ -523,7 +523,967 @@
   },
   {
    "num": 2,
-   "title": "What's Missing, and Who Knows It"
+   "title": "What's Missing, and Who Knows It",
+   "carry": {
+    "l1card": {
+     "from_lesson": "lesson-1",
+     "key_prefix": "tc:lumen:",
+     "title": "Your Task Card from Lesson 1",
+     "fallback_note": "You didn't save a Task Card in Lesson 1, so here's the model one.",
+     "note_heading": "My Task Card from Lesson 1",
+     "col": "Part",
+     "value_col": "Task Card",
+     "fields": [
+      {
+       "key": "task",
+       "label": "Task",
+       "model": "Make a folder with photos of the 12 best-selling products, <strong>and</strong> a Doc listing each one's product name, photo file name and wholesale price"
+      },
+      {
+       "key": "result",
+       "label": "Finished result",
+       "model": "One folder with 12 white-background product photos, plus one Doc with a 3-column list for the same 12 products, ready for Grace to send"
+      },
+      {
+       "key": "sources",
+       "label": "Sources",
+       "model": "The white-background product photos; the Price List, column D (wholesale); information on which products are the best sellers"
+      },
+      {
+       "key": "deadline",
+       "label": "Deadline",
+       "model": "Sunday night Portland time = about <strong>Monday midday in the Philippines</strong> (for example, Sunday 9 PM there = Monday 12 PM here). \"Night\" isn't an exact time"
+      },
+      {
+       "key": "limits",
+       "label": "Limits",
+       "model": "White-background photos only. Wholesale prices only (column D, not retail). <strong>Don't send it to the buyer</strong>; Grace will"
+      },
+      {
+       "key": "questions",
+       "label": "Open questions",
+       "model": "Which 12 are the best sellers, and where does that information come from? What time on Sunday night? (Smaller: what to name the folder and the Doc?)"
+      }
+     ]
+    }
+   },
+   "mocks": {
+    "shared": {
+     "kind": "drive",
+     "active": "Shared with me",
+     "path": "Harbor & Hill – Shared",
+     "label": "Grace's shared folder, Harbor & Hill – Shared",
+     "caption": "Sales by Product – Sep 2026 has two tabs: All Products and Best Sellers.",
+     "rows": [
+      {
+       "type": "SHEET",
+       "name": "Price List",
+       "owner": "Grace Tan",
+       "date": "Sep 28"
+      },
+      {
+       "type": "SHEET",
+       "name": "Sales by Product – Sep 2026",
+       "owner": "Grace Tan",
+       "date": "Oct 1"
+      },
+      {
+       "type": "FOLDER",
+       "name": "Product Photos – White Background",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "FOLDER",
+       "name": "Product Photos – Lifestyle",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "FOLDER",
+       "name": "Buyers",
+       "owner": "Grace Tan",
+       "date": "Sep 25"
+      }
+     ]
+    },
+    "lastthu": {
+     "kind": "chat",
+     "title": "Grace Tan",
+     "label": "Message from Grace last Thursday",
+     "messages": [
+      {
+       "from": "Grace Tan",
+       "time": "Last Thursday",
+       "text": "For buyer folders, use Buyer – Purpose – Month, so for example Bayside Gifts – Catalog – Sep."
+      }
+     ]
+    },
+    "photos10": {
+     "kind": "drive",
+     "active": "Shared with me",
+     "path": "Product Photos – White Background",
+     "label": "Product Photos – White Background folder with 10 photos",
+     "rows": [
+      {
+       "type": "IMAGE",
+       "name": "moss-mug_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "IMAGE",
+       "name": "clay-mug_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "IMAGE",
+       "name": "sky-mug_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "IMAGE",
+       "name": "sand-bowl_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "IMAGE",
+       "name": "tide-plate_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "IMAGE",
+       "name": "fern-vase_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "IMAGE",
+       "name": "dune-platter_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "IMAGE",
+       "name": "salt-cup_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "IMAGE",
+       "name": "pebble-bowl_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      },
+      {
+       "type": "IMAGE",
+       "name": "reed-vase_white.jpg",
+       "owner": "Grace Tan",
+       "date": "Sep 20"
+      }
+     ]
+    },
+    "pricehead": {
+     "kind": "sheet",
+     "name": "Price List",
+     "cols": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+     ],
+     "label": "Price List sheet with columns A to E",
+     "rows": [
+      [
+       "Product",
+       "Size",
+       "Cost",
+       "Retail",
+       "Wholesale"
+      ],
+      [
+       "Moss Mug",
+       "350 ml",
+       "₱180",
+       "₱450",
+       "₱300"
+      ],
+      [
+       "Sand Bowl",
+       "Medium",
+       "₱240",
+       "₱620",
+       "₱410"
+      ]
+     ]
+    }
+   },
+   "activities": {
+    "l2b1": {
+     "label": "Try it first",
+     "qlabel": "Open question",
+     "layout": "row",
+     "intro_html": "<p>Here's the Task Card you made for Grace's Lumen Home request.</p>{{carry:l1card}}<p>You also have this now. Grace's shared folder:</p>{{mock:shared}}<p>And a message from Grace in the same chat last Thursday:</p>{{mock:lastthu}}<p>For each open question on your card, who has the answer?</p>",
+     "items": [
+      {
+       "q": "Which 12 products are the best sellers?",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 1,
+       "feedback": [
+        "Grace didn't list them in her messages. But the Best Sellers tab in Sales by Product – Sep 2026 does, so you can find it yourself.",
+        "The Best Sellers tab in Sales by Product – Sep 2026 lists them. No need to ask Grace.",
+        "Grace knows, but so does her sales sheet: the Best Sellers tab in Sales by Product – Sep 2026. Asking her would cost her time for something you can look up."
+       ]
+      },
+      {
+       "q": "What time on Sunday night does Grace need it?",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 2,
+       "feedback": [
+        "You have \"Sunday night\", but not a time. Nothing in the messages or files says when she plans to send it.",
+        "None of the files or messages say when Grace plans to send it to the buyer. Only she knows.",
+        "Nothing you can see says what time. That's Grace's plan, so it's hers to answer."
+       ]
+      },
+      {
+       "q": "What should the folder and the Doc be called?",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 0,
+       "feedback": [
+        "Grace told you last week: Buyer – Purpose – Month. So: Lumen Home – Best Sellers – Oct.",
+        "You don't need to look anywhere. It's in the chat already: \"Buyer – Purpose – Month\", from last Thursday.",
+        "Grace already answered it last week: \"Buyer – Purpose – Month\". Re-reading the chat finds it."
+       ]
+      }
+     ]
+    },
+    "l2b3": {
+     "label": "Activity",
+     "title": "Sort the Gaps",
+     "qlabel": "Gap",
+     "layout": "row",
+     "intro": "A new request from Grace. Read it, look at what you can see, then sort each gap.",
+     "mocks": [
+      {
+       "kind": "email",
+       "subject": "October stock count",
+       "from": "Grace Tan",
+       "from_email": "grace@harborhill.co",
+       "to": "ana@harborhill.co",
+       "date": "Tuesday",
+       "actions": [],
+       "label": "Email from Grace Tan: October stock count",
+       "body": [
+        "Hi Ana! Please send the October stock count to Mark at the warehouse by Wednesday. Use the same template as last month, and include the three new mugs (Moss, Clay and Sky). Thanks!"
+       ]
+      },
+      {
+       "kind": "drive",
+       "active": "Shared with me",
+       "path": "Stock Counts",
+       "label": "Stock Counts folder",
+       "rows": [
+        {
+         "type": "SHEET",
+         "name": "Stock Count – September",
+         "owner": "Grace Tan",
+         "date": "Sep 30"
+        },
+        {
+         "type": "SHEET",
+         "name": "Stock Count – August",
+         "owner": "Grace Tan",
+         "date": "Aug 31"
+        }
+       ]
+      },
+      {
+       "kind": "sheet",
+       "name": "Stock Count – September",
+       "cols": [
+        "A",
+        "B",
+        "C"
+       ],
+       "label": "Stock Count – September, first rows",
+       "rows": [
+        [
+         "Item",
+         "Warehouse qty",
+         "Notes"
+        ],
+        [
+         "Sand Mug",
+         "48",
+         ""
+        ],
+        [
+         "Tide Plate",
+         "30",
+         ""
+        ],
+        [
+         "Fern Vase",
+         "12",
+         ""
+        ]
+       ]
+      },
+      {
+       "kind": "sheet",
+       "name": "Team Contacts",
+       "cols": [
+        "A",
+        "B",
+        "C"
+       ],
+       "label": "Team Contacts sheet",
+       "rows": [
+        [
+         "Name",
+         "Role",
+         "Email"
+        ],
+        [
+         "Mark Lim",
+         "Warehouse",
+         "mark@harborhill.co"
+        ]
+       ]
+      },
+      {
+       "kind": "chat",
+       "title": "Grace Tan",
+       "label": "Message from Grace on Monday",
+       "messages": [
+        {
+         "from": "Grace Tan",
+         "time": "Monday",
+         "text": "The new Portland shop opened last week!"
+        }
+       ]
+      }
+     ],
+     "items": [
+      {
+       "q": "Which items are \"the new mugs\"?",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 0,
+       "feedback": [
+        "They're named in the email: Moss, Clay and Sky.",
+        "No need to look anywhere. Grace named them in the email: Moss, Clay and Sky.",
+        "Grace already answered this in the email: Moss, Clay and Sky."
+       ]
+      },
+      {
+       "q": "Should the count include stock at the new Portland shop, or only the warehouse?",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 2,
+       "feedback": [
+        "The email doesn't say. September's template only has a warehouse column, and the shop opened after that.",
+        "September's count was before the shop opened, so it can't tell you. No file decides this. It's Grace's choice.",
+        "September's count only had the warehouse, and the shop is new. Nothing you can see decides it, so it's Grace's call."
+       ]
+      },
+      {
+       "q": "Where's last month's template?",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 1,
+       "feedback": [
+        "Grace didn't attach it. But it's one click away in the Stock Counts folder: Stock Count – September.",
+        "It's in the Stock Counts folder: Stock Count – September.",
+        "You can find it without asking: Stock Count – September, in the Stock Counts folder."
+       ]
+      },
+      {
+       "q": "Should damaged items be counted as stock?",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 2,
+       "feedback": [
+        "The email doesn't mention damaged items, and neither does the template.",
+        "Look at the template again: Item, Warehouse qty, Notes. There's no rule for damaged items anywhere you can see.",
+        "The template has no rule about damaged items, and the email doesn't say. That's Grace's decision."
+       ]
+      },
+      {
+       "q": "What's Mark's email address?",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 1,
+       "feedback": [
+        "It isn't in Grace's email. But it's in the Team Contacts sheet.",
+        "It's in the Team Contacts sheet: mark@harborhill.co.",
+        "No need to ask Grace. It's in the Team Contacts sheet."
+       ]
+      },
+      {
+       "q": "When is \"by Wednesday\" in your time?",
+       "options": [
+        "I already have it",
+        "I can find it myself",
+        "Only Grace can answer"
+       ],
+       "answer": 0,
+       "feedback": [
+        "You can work this out yourself, as in Lesson 1: Wednesday in Portland runs into Thursday for you. Grace didn't give an exact time, though, so that part goes on your list for her.",
+        "There's nothing to look up. You can convert it yourself, as in Lesson 1. Only the exact time is missing, and that part is for Grace.",
+        "Converting \"Wednesday\" to your time is something you can do yourself, as in Lesson 1. Only the exact time is missing, and that part is for Grace."
+       ]
+      }
+     ]
+    },
+    "l2b4": {
+     "label": "Activity",
+     "title": "Unfamiliar or Unclear?",
+     "qlabel": "Situation",
+     "layout": "row",
+     "intro": "Each pair looks alike. Look for the one detail that makes them different.",
+     "items": [
+      {
+       "q": "Grace: \"Export last month's orders as a CSV.\" You've never heard of a CSV.",
+       "options": [
+        "Unfamiliar: I can learn it or look it up",
+        "Unclear: the instruction doesn't say"
+       ],
+       "answer": 0,
+       "feedback": [
+        "Everything about the task is stated. CSV is a file type you can look up in a minute.",
+        "Grace said which orders and which format. You just don't know the format yet, and that's something you can look up."
+       ]
+      },
+      {
+       "q": "Grace: \"Export the orders for the accountant.\" She doesn't say which months, and there are two years of orders.",
+       "options": [
+        "Unfamiliar: I can learn it or look it up",
+        "Unclear: the instruction doesn't say"
+       ],
+       "answer": 1,
+       "feedback": [
+        "You know how to export, but not which orders. Two years or one month is a choice someone has to make, and it isn't you.",
+        "Which orders? Grace hasn't said, and no file decides it."
+       ]
+      },
+      {
+       "divider_before": true,
+       "q": "Grace: \"Use our brand colours for the flyer.\" Recent posts use two different greens, and there's no brand guide anywhere in the shared Drive.",
+       "options": [
+        "Unfamiliar: I can learn it or look it up",
+        "Unclear: the instruction doesn't say"
+       ],
+       "answer": 1,
+       "feedback": [
+        "You could look around, but the files disagree and nothing written down settles it.",
+        "Two greens and no guide. Nothing settles which one is the brand colour."
+       ]
+      },
+      {
+       "q": "Grace: \"Use our brand colours for the flyer.\" There's a Brand Guide Doc in the shared Drive.",
+       "options": [
+        "Unfamiliar: I can learn it or look it up",
+        "Unclear: the instruction doesn't say"
+       ],
+       "answer": 0,
+       "feedback": [
+        "Same request as before, but this time the colours are written down in the Brand Guide.",
+        "Same request as the one before, but this time there's a Brand Guide. You don't know the colours yet; you can look them up."
+       ]
+      },
+      {
+       "divider_before": true,
+       "q": "Grace: \"Request a courier pickup for Friday.\" The shop and the warehouse are at different addresses, and Grace doesn't say which.",
+       "options": [
+        "Unfamiliar: I can learn it or look it up",
+        "Unclear: the instruction doesn't say"
+       ],
+       "answer": 1,
+       "feedback": [
+        "Knowing how to request a pickup doesn't help if you don't know where from. The address is missing.",
+        "Pick up from where? The request doesn't say, and both addresses are possible."
+       ]
+      },
+      {
+       "q": "Grace: \"Request a courier pickup from the warehouse for Friday.\" You've never requested one, but the courier's website has a pickup request page.",
+       "options": [
+        "Unfamiliar: I can learn it or look it up",
+        "Unclear: the instruction doesn't say"
+       ],
+       "answer": 0,
+       "feedback": [
+        "Where and when are both stated. You just haven't done it before, and the courier's page shows how.",
+        "This time Grace said where: the warehouse. Everything else is learnable from the courier's page."
+       ]
+      }
+     ]
+    },
+    "l2b5": {
+     "label": "Activity",
+     "title": "Find the Mismatch",
+     "qlabel": "Mismatch",
+     "intro": "Sometimes the instruction and the files don't agree, or two instructions say different things. For each one, choose what's actually wrong.",
+     "items": [
+      {
+       "evidence_first": true,
+       "q": "What doesn't match?",
+       "mocks": [
+        {
+         "kind": "email",
+         "subject": "Trade fair contacts",
+         "from": "Grace Tan",
+         "from_email": "grace@harborhill.co",
+         "to": "ana@harborhill.co",
+         "date": "Monday",
+         "actions": [],
+         "label": "Part of Grace's email from Lesson 1",
+         "body": [
+          "The business cards are scanned in the \"Trade Fair Cards\" folder in Drive, 23 cards."
+         ]
+        },
+        {
+         "kind": "drive",
+         "active": "Shared with me",
+         "path": "Trade Fair Cards",
+         "label": "Trade Fair Cards folder with 21 files",
+         "rows": [
+          {
+           "type": "IMAGE",
+           "name": "card-01.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-02.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-03.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-04.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-05.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-06.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-07.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-08.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-09.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-10.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-11.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-12.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-13.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-14.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-15.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-16.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-17.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-18.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-19.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-20.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          },
+          {
+           "type": "IMAGE",
+           "name": "card-21.jpg",
+           "owner": "Grace Tan",
+           "date": "Sep 29"
+          }
+         ]
+        }
+       ],
+       "options": [
+        "Some cards have no email address.",
+        "The folder has 21 scans, but Grace said 23 cards.",
+        "The folder is in Grace's Drive, not yours.",
+        "The scans are images, not a spreadsheet."
+       ],
+       "answer": 1,
+       "feedback": [
+        "True, and Grace already said what to do about that. The mismatch is the count: she said 23 cards, and the folder has 21.",
+        "Grace's number and the folder disagree. Write it down with both sources. You'll decide what to do about it in Lesson 3.",
+        "That's normal for a client's files. The mismatch is the count: 23 in the email, 21 in the folder.",
+        "That's expected for scanned business cards. The mismatch is the count: 23 in the email, 21 in the folder."
+       ]
+      },
+      {
+       "evidence_first": true,
+       "q": "What doesn't match?",
+       "mocks": [
+        {
+         "kind": "chat",
+         "title": "Grace Tan",
+         "label": "Grace's chat message",
+         "messages": [
+          {
+           "from": "Grace Tan",
+           "time": "Friday",
+           "text": "The wholesale prices are in column D of the Price List, not the retail ones."
+          }
+         ]
+        },
+        {
+         "kind": "sheet",
+         "name": "Price List",
+         "cols": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+         ],
+         "label": "Price List sheet with columns A to E",
+         "rows": [
+          [
+           "Product",
+           "Size",
+           "Cost",
+           "Retail",
+           "Wholesale"
+          ],
+          [
+           "Moss Mug",
+           "350 ml",
+           "₱180",
+           "₱450",
+           "₱300"
+          ],
+          [
+           "Sand Bowl",
+           "Medium",
+           "₱240",
+           "₱620",
+           "₱410"
+          ]
+         ]
+        }
+       ],
+       "options": [
+        "Some prices are higher than others.",
+        "The sheet has five columns instead of four.",
+        "The sheet was last changed on September 28.",
+        "Column D is labelled Retail. Wholesale is in column E."
+       ],
+       "answer": 3,
+       "feedback": [
+        "That's normal: products cost different amounts. Look at the column headers.",
+        "The number of columns isn't the issue. Look at what column D is called.",
+        "The date isn't the problem. Look at column D's header: it says Retail.",
+        "Grace said \"column D\" for wholesale, but the sheet says D is Retail. Note both sources."
+       ]
+      },
+      {
+       "evidence_first": true,
+       "q": "What doesn't match?",
+       "mocks": [
+        {
+         "kind": "doc",
+         "type": "DOC",
+         "name": "File Naming",
+         "lines": [
+          "Date first: 2026-10-05_product-name"
+         ],
+         "label": "File Naming note"
+        },
+        {
+         "kind": "chat",
+         "title": "Grace Tan",
+         "label": "Grace's chat message on Wednesday",
+         "messages": [
+          {
+           "from": "Grace Tan",
+           "time": "Wednesday",
+           "text": "For the new photos, put the product name first, like we used to."
+          }
+         ]
+        }
+       ],
+       "options": [
+        "Grace's new message and the File Naming note give different name orders.",
+        "The File Naming note uses dashes in the date.",
+        "Grace's message doesn't say how many photos there are.",
+        "The File Naming note is a Doc, not a Sheet."
+       ],
+       "answer": 0,
+       "feedback": [
+        "One says date first, the other says product name first. Note both, and which is newer.",
+        "Dashes are just the format. The two instructions disagree about what comes first.",
+        "That might be a gap, but it isn't the mismatch. The note says date first; Grace now says product name first.",
+        "The file type doesn't matter. The note and the message give different name orders."
+       ]
+      },
+      {
+       "evidence_first": true,
+       "q": "What doesn't match?",
+       "mocks": [
+        {
+         "kind": "email",
+         "subject": "Price list",
+         "from": "Grace Tan",
+         "from_email": "grace@harborhill.co",
+         "to": "ana@harborhill.co",
+         "date": "Friday",
+         "actions": [],
+         "att": [
+          "Price List (1)"
+         ],
+         "label": "Grace's email with a linked file",
+         "body": [
+          "Here's the price list"
+         ]
+        },
+        {
+         "kind": "drive",
+         "search": "Price List",
+         "active": "Shared with me",
+         "path": "Search results",
+         "label": "Drive search results for Price List",
+         "rows": [
+          {
+           "type": "SHEET",
+           "name": "Price List (1)",
+           "owner": "hh.files.2024@gmail.com",
+           "date": "Mar 12, 2024"
+          },
+          {
+           "type": "SHEET",
+           "name": "Price List",
+           "owner": "Grace Tan",
+           "date": "Sep 28"
+          }
+         ]
+        }
+       ],
+       "options": [
+        "The linked file has \"(1)\" in its name.",
+        "The email didn't say which columns to use.",
+        "The linked file isn't Grace's Price List: it has a different owner and is over two years old.",
+        "The file is a Sheet, not a PDF."
+       ],
+       "answer": 2,
+       "feedback": [
+        "That's one clue, but not the whole problem. Look at who owns it and when it was last changed.",
+        "That might be a gap, but it isn't the mismatch. Look at the linked file's owner and date.",
+        "Grace's Price List is owned by her and was updated on September 28. The linked one is from another account, in 2024.",
+        "The file type isn't the issue. Look at the owner and the date."
+       ]
+      }
+     ]
+    }
+   },
+   "taskcards": {
+    "lumensort": {
+     "label": "Practice",
+     "title": "Sort Your Open Questions",
+     "note_heading": "My sorted list: Lumen Home",
+     "intro_html": "<p>Back to the Lumen Home request. You've now opened the files, and found two things:</p>{{mock:photos10}}{{mock:pricehead}}<ul><li>The white-background folder has photos for <strong>10</strong> of the 12 best sellers. The other two only have lifestyle photos.</li><li>In the Price List, column D is <strong>Retail</strong> and column E is <strong>Wholesale</strong>.</li></ul><p>Sort everything you still need to know into four lists. Short notes are fine, in English or Taglish. Your answers are saved in this browser.</p>",
+     "reveal_label": "Show the model list",
+     "anyway_label": "Show me anyway",
+     "model_heading": "Model list",
+     "model_col": "List",
+     "check_intro": "Compare each list with the model. Mark each one. It's for you only.",
+     "fields": [
+      {
+       "key": "have",
+       "label": "I already have it",
+       "placeholder": "What you already know, and where it came from",
+       "model": "Folder and Doc names: <em>Lumen Home – Best Sellers – Oct</em> (Grace's message last Thursday). Deadline: Sunday night Portland = about Monday midday for you (Lesson 1)",
+       "check": "Did you include the folder name, and where it came from?"
+      },
+      {
+       "key": "find",
+       "label": "I can find it myself",
+       "placeholder": "What you'll look up, and where",
+       "model": "Which 12 are the best sellers: the Best Sellers tab in <em>Sales by Product – Sep 2026</em>",
+       "check": "Did you put \"which 12\" here, with the Best Sellers tab?"
+      },
+      {
+       "key": "grace",
+       "label": "Only Grace can answer",
+       "placeholder": "What only Grace can decide or tell you",
+       "critical": true,
+       "model": "What time on Sunday night she needs it. What to do about the two best sellers without white-background photos: use a lifestyle photo, leave them out, or wait for new photos?",
+       "check": "Did you include <strong>both</strong> the Sunday time <strong>and</strong> what to do about the two missing photos?"
+      },
+      {
+       "key": "mismatch",
+       "label": "Mismatches I found",
+       "placeholder": "What doesn't match, and the two sources",
+       "critical": true,
+       "model": "Grace said wholesale prices are in column D, but in the Price List column D is Retail and column E is Wholesale. Grace asked for 12 white-background photos; only 10 exist",
+       "check": "Did you include <strong>both</strong> the column D/E problem <strong>and</strong> the 10-of-12 photos?"
+      }
+     ],
+     "closing": {
+      "critical_missed": "These two lists matter most. A missed mismatch can mean putting retail prices in a wholesale list. A missed question can mean deciding something that was Grace's to decide. Notice that the missing photos belong in both lists: the fact (only 10 of 12) is a mismatch, and what to do about it is Grace's call. Add what you missed.",
+      "other_missed": "You caught the mismatches and the questions for Grace, which are the hardest parts. Check the first two lists against the model. Often it's a name Grace already gave you, or a file you could open.",
+      "all_got": "That's a complete list. In the next lesson, you'll decide what to do about each item under Only Grace can answer and Mismatches I found."
+     },
+     "after_html": "<p>In Lesson 3 you'll decide what to do about each question and mismatch. If something does need to go to Grace, the wording comes from Communication &amp; Professionalism, Lesson 3.</p>"
+    }
+   },
+   "next_preview": [
+    "You now have a list of what only Grace can answer, and the mismatches you found. Some of them block the work. Some don't.",
+    "Lesson 3 is about deciding, for each one, whether you can go ahead, go ahead while asking, ask first, or pass it to someone else to decide."
+   ],
+   "quick_check": {
+    "purpose": "A few questions to check the sorting from this lesson.",
+    "questions": [
+     {
+      "id": "2.1",
+      "q": "Grace asks you to \"use the same layout as the September report\". The September report is in the shared Drive. Who has the answer to \"what layout?\"",
+      "options": [
+       "You can find it yourself",
+       "You already have it",
+       "Only Grace can answer",
+       "Nobody, since it's a mismatch"
+      ],
+      "answer": 0,
+      "explain": "The September report is in the shared Drive. Open it and you'll see the layout."
+     },
+     {
+      "id": "2.2",
+      "q": "Grace's request mentions \"SKU\". You don't know what that means, but everything else is clear. What kind of gap is it?",
+      "options": [
+       "Unfamiliar: you can look it up",
+       "Unclear: the instruction doesn't say",
+       "A mismatch between two instructions",
+       "A question only Grace can answer"
+      ],
+      "answer": 0,
+      "explain": "Nothing is missing from the instruction. SKU is a common term you can look up."
+     },
+     {
+      "id": "2.3",
+      "q": "Grace writes \"Thursday, October 16\". In 2026, October 16 is a Friday. What is this?",
+      "options": [
+       "A mismatch: the day and the date disagree",
+       "A typo you can safely change to Thursday the 15th",
+       "Nothing to note, since the date is what counts",
+       "A question only the accountant can answer"
+      ],
+      "answer": 0,
+      "explain": "The day and the date point to different days. Write it down as a mismatch; deciding what to do comes in Lesson 3."
+     }
+    ]
+   }
   },
   {
    "num": 3,

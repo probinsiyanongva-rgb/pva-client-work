@@ -164,7 +164,8 @@ def render_mock(m, pick_name=None):
         menu = "".join(f"<span>{x}</span>" for x in ["File", "Edit", "View", "Insert", "Format", "Tools"])
         inner = (f'<div class="mock-doc"><div class="m-docname"><span class="ft ft-{FT.get(m.get("type", "DOC"), "doc")}">'
                  f'{esc(m.get("type", "DOC"))}</span>{esc(m["name"])}{badge}<span class="m-status">{esc(m.get("status", ""))}</span></div>'
-                 f'<div class="m-menu" aria-hidden="true">{menu}</div></div>')
+                 f'<div class="m-menu" aria-hidden="true">{menu}</div>'
+                 + "".join(f'<p class="m-docline">{esc(x)}</p>' for x in m.get("lines", [])) + '</div>')
     elif kind == "sheet":
         cols = m["cols"]
         head = '<tr><th></th>' + "".join(f"<th>{esc(c)}</th>" for c in cols) + "</tr>"

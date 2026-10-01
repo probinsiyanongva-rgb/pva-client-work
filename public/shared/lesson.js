@@ -180,6 +180,8 @@
       }
       ta.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(save, 500); });
       ta.addEventListener('blur', save);
+      // flush a pending save if the learner leaves the page within the debounce window
+      window.addEventListener('pagehide', function () { if (timer) save(); });
     });
   }
 
@@ -295,15 +297,47 @@
     });
   }
 
+  /* ---------- carried-forward panel (Part 5) ----------
+     Shows fields the learner saved in an earlier lesson (read-only). If none were saved,
+     shows the fallback note and the model values instead. */
+  function carryHasData(panel) {
+    if (!panel) return false;
+    var from = panel.getAttribute('data-carry-from');
+    return $all('[data-carry-key]', panel).some(function (td) {
+      var v = P.getDraft(from, td.getAttribute('data-carry-key'));
+      return typeof v === 'string' && v.trim().length > 0;
+    });
+  }
+  function wireCarry() {
+    $all('.carry').forEach(function (panel) {
+      var from = panel.getAttribute('data-carry-from');
+      var saved = carryHasData(panel);
+      $('.carry-fallback', panel).classList.toggle('hidden', saved);
+      $all('[data-carry-key]', panel).forEach(function (td) {
+        var v = P.getDraft(from, td.getAttribute('data-carry-key'));
+        var out = $('.carry-value', td), model = $('.carry-model', td);
+        if (saved) { out.textContent = (typeof v === 'string' && v.trim()) ? v : '(left blank)'; model.hidden = true; }
+        else { out.textContent = ''; model.hidden = false; }
+      });
+    });
+  }
+
   /* ---------- notes download ---------- */
   function buildNotes() {
     var lines = ['PVA Academy — Understanding Client Work & Instructions', 'Lesson ' + lesson.num + ': ' + lesson.title, 'My notes · ' + new Date().toLocaleString(), ''];
     var any = false;
     $all('[data-note-label],[data-note-heading]').forEach(function (el) {
-      if (el.hasAttribute('data-note-heading')) { lines.push('== ' + el.getAttribute('data-note-heading') + ' =='); lines.push(''); return; }
+      var from = el.getAttribute('data-note-from') || LESSON_ID;
+      var optional = el.hasAttribute('data-note-optional');
+      if (el.hasAttribute('data-note-heading')) {
+        // optional headings (e.g. a carried-forward card) only appear when that lesson saved something
+        if (optional && !carryHasData(el.closest('.carry'))) return;
+        lines.push('== ' + el.getAttribute('data-note-heading') + ' =='); lines.push(''); return;
+      }
       var label = el.getAttribute('data-note-label');
-      var key = el.getAttribute('data-key');
-      var v = P.getDraft(LESSON_ID, key);
+      var key = el.getAttribute('data-key') || el.getAttribute('data-carry-key');
+      var v = P.getDraft(from, key);
+      if (optional && (typeof v !== 'string' || !v.trim())) return;
       var out = '';
       if (el.classList.contains('pick')) { if (v === true) out = 'Selected'; else return; }
       else if (typeof v === 'string') out = v.trim();
@@ -346,6 +380,7 @@
   wireOrderActivities();
   wireNotices();
   wireTaskCards();
+  wireCarry();
   renderQuickCheck();
   wireCompletion();
   wireNotes();

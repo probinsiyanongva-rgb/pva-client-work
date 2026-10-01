@@ -41,7 +41,7 @@
       var next = P.nextLesson();
       // Part 5 pilot: lessons marked data-soon on the course map aren't built yet
       var soonRow = next && document.querySelector('.lesson-row[data-lesson="' + next.id + '"][data-soon]');
-      if (soonRow && !P.courseComplete()) { btn.textContent = 'Review Lesson 1'; btn.href = ROOT + 'lesson-1/'; next = 'soon'; }
+      if (soonRow && !P.courseComplete()) { btn.textContent = 'Review the lessons'; btn.href = ROOT + 'lesson-1/'; next = 'soon'; }
       var anyStarted = P.LESSONS.some(function (l) { return P.status(l.id) !== 'none'; });
       if (P.courseComplete()) { btn.textContent = 'Review the lessons'; btn.href = ROOT + 'lesson-1/'; }
       else if (next === 'soon') { /* set above */ }

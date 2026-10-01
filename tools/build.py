@@ -174,17 +174,22 @@ def render_activity(act_id, act):
             assert 0 <= it["answer"] < len(it["options"]), (act_id, i)
             opts_html = f'<div class="{"choice-row" if row else "choice-group"}" role="radiogroup">{opts}</div>'
         q = f'<div class="act-q"><span class="q-num">{esc(qlabel)} {i}</span><br><p>{it["q"]}</p></div>'
-        # with a pickable mock the question comes first (it says what to find); otherwise the mock sets the scene
         # pickable mock or several comparison mocks: the question comes first (it says what to look for);
-        # a single scene-setting mock comes before the question
-        body = q + above + opts_html if (mock and mock.get("pick")) or it.get("mocks") else above + q + opts_html
+        # a single scene-setting mock, or "evidence_first", puts the mocks before the question
+        q_first = ((mock and mock.get("pick")) or it.get("mocks")) and not it.get("evidence_first")
+        body = q + above + opts_html if q_first else above + q + opts_html
+        if it.get("divider_before"):
+            items.append('<hr class="pair-divider">')
         good = it.get("good", "")
         items.append(
             f'<div class="act-item act-graded{" act-row" if row else ""}" data-key="{esc(key)}" data-correct="{it["answer"]}" '
             f'data-good="{esc(good)}" data-try="{esc(it.get("try", good))}">'
             f'{body}<div class="feedback" aria-live="polite"></div></div>')
     intro = f'<p>{act["intro"]}</p>' if act.get("intro") else ""
-    return (f'<section class="activity"><div class="activity-title">{esc(act.get("label", "Activity"))}</div><h2>{esc(act["title"])}</h2>{intro}'
+    intro += act.get("intro_html", "")                          # may contain {{mock:ID}} / {{carry:ID}}
+    intro += "".join(render_mock(mm) for mm in act.get("mocks", []))
+    title = f'<h2>{esc(act["title"])}</h2>' if act.get("title") else ""
+    return (f'<section class="activity"><div class="activity-title">{esc(act.get("label", "Activity"))}</div>{title}{intro}'
             + "".join(items) +
             '<div class="hero-actions" style="margin:4px 0 12px"><button type="button" class="btn subtle small-btn" '
             'data-reset-activity>Reset this activity</button></div></section>')
@@ -220,7 +225,7 @@ def render_taskcard(tc_id, tc):
     critical = [f["key"] for f in fields if f.get("critical")]
     out.append(f'<div class="tc-model hidden" data-tc-model>'
                f'<div class="section-label">{esc(tc.get("model_heading", "Model"))}</div>'
-               f'<div class="table-wrap"><table><thead><tr><th>Part</th><th>Model</th></tr></thead><tbody>{rows}</tbody></table></div>'
+               f'<div class="table-wrap"><table><thead><tr><th>{esc(tc.get("model_col", "Part"))}</th><th>Model</th></tr></thead><tbody>{rows}</tbody></table></div>'
                f'<div class="tc-check"><h3 style="margin-top:6px">Self-check</h3><p>{tc["check_intro"]}</p>{checks}</div>'
                f'<div class="feedback tc-closing" aria-live="polite" data-tc-closing '
                f'data-critical="{esc(",".join(critical))}" '
@@ -234,23 +239,46 @@ def render_taskcard(tc_id, tc):
     return "".join(out)
 
 
+def render_carry(cid, cfg):
+    """{{carry:ID}} -> read-only panel showing a Task Card (or list) the learner saved in an
+    earlier lesson. Filled in the browser from that lesson's saved drafts; if nothing was
+    saved, shows the fallback note and the model. Reusable (Lesson 2 shows Lesson 1's card,
+    Lesson 3 will show Lesson 2's list). Included in the notes download when saved."""
+    rows = "".join(
+        f'<tr><td>{esc(f["label"])}</td><td data-carry-key="{esc(cfg["key_prefix"] + f["key"])}" '
+        f'data-note-label="{esc(f["label"])}" data-note-from="{esc(cfg["from_lesson"])}" data-note-optional>'
+        f'<span class="carry-model" hidden>{f["model"]}</span><span class="carry-value"></span></td></tr>' for f in cfg["fields"])
+    return (f'<div class="carry" data-carry-from="{esc(cfg["from_lesson"])}">'
+            f'<div class="section-label">{esc(cfg["title"])}</div>'
+            f'<p class="carry-fallback small hidden">{esc(cfg["fallback_note"])}</p>'
+            f'<div hidden data-note-heading="{esc(cfg["note_heading"])}" data-note-from="{esc(cfg["from_lesson"])}" data-note-optional></div>'
+            f'<div class="table-wrap"><table><thead><tr><th>{esc(cfg.get("col", "Part"))}</th><th>{esc(cfg.get("value_col", "Yours"))}</th></tr></thead>'
+            f'<tbody>{rows}</tbody></table></div></div>')
+
+
 def fill_activities(content, l):
-    # Task Cards first: their intro may contain {{mock:ID}} tokens (e.g. a chat thread)
-    for tc_id, tc in (l.get("taskcards") or {}).items():
-        token = "{{taskcard:" + tc_id + "}}"
-        assert token in content, (l["num"], token)
-        content = content.replace(token, render_taskcard(tc_id, tc))
-    assert "{{taskcard:" not in content, l["num"]
-    for mock_id, mock in (l.get("mocks") or {}).items():
-        token = "{{mock:" + mock_id + "}}"
-        assert token in content, (l["num"], token)
-        content = content.replace(token, render_mock(mock))
-    assert "{{mock:" not in content, l["num"]
+    # Order matters: activities and Task Cards may contain {{carry:ID}} / {{mock:ID}} tokens
+    # in their intro HTML, so those are resolved after them.
     for act_id, act in (l.get("activities") or {}).items():
         token = "{{activity:" + act_id + "}}"
         assert token in content, (l["num"], token)
         content = content.replace(token, render_activity(act_id, act))
     assert "{{activity:" not in content, l["num"]
+    for tc_id, tc in (l.get("taskcards") or {}).items():
+        token = "{{taskcard:" + tc_id + "}}"
+        assert token in content, (l["num"], token)
+        content = content.replace(token, render_taskcard(tc_id, tc))
+    assert "{{taskcard:" not in content, l["num"]
+    for cid, cfg in (l.get("carry") or {}).items():
+        token = "{{carry:" + cid + "}}"
+        assert token in content, (l["num"], token)
+        content = content.replace(token, render_carry(cid, cfg))
+    assert "{{carry:" not in content, l["num"]
+    for mock_id, mock in (l.get("mocks") or {}).items():
+        token = "{{mock:" + mock_id + "}}"
+        assert token in content, (l["num"], token)
+        content = content.replace(token, render_mock(mock))
+    assert "{{mock:" not in content, l["num"]
     # keep a key combination (Ctrl + C) on one line
     # (two keys only: longer combinations may wrap on narrow phones)
     return re.sub(r"(<kbd>[^<]*</kbd>\s*\+\s*<kbd>[^<]*</kbd>)(?!\s*\+)", r'<span class="keys">\1</span>', content)
