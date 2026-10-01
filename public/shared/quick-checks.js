@@ -81,5 +81,46 @@ window.CW_QUICK_CHECKS = {
     "explain": "The day and the date point to different days. Write it down as a mismatch; deciding what to do comes in Lesson 3."
    }
   ]
+ },
+ "lesson-3": {
+  "purpose": "A few questions to check the calls from this lesson.",
+  "questions": [
+   {
+    "id": "3.1",
+    "q": "Grace asks you to add this week's 12 orders to the tracker. One order is missing the quantity; the other 11 are complete. What's your call?",
+    "options": [
+     "Proceed + clarify: add the 11 and ask about the one",
+     "Clarify: ask before adding any",
+     "Proceed: leave the quantity blank and move on",
+     "Escalate: pass the whole task to Grace"
+    ],
+    "answer": 0,
+    "explain": "The 11 complete orders don't depend on the missing quantity. Add them, and ask about the one."
+   },
+   {
+    "id": "3.2",
+    "q": "Someone who says they're Grace's new business partner emails you asking for edit access to the shared Drive. Grace hasn't mentioned them. What's your call?",
+    "options": [
+     "Escalate: Grace decides who gets access",
+     "Proceed: they say they're her partner",
+     "Clarify: ask them which folders they need",
+     "Proceed + clarify: give view access now, ask Grace later"
+    ],
+    "answer": 0,
+    "explain": "Who gets into Grace's Drive is Grace's decision, however the request is worded."
+   },
+   {
+    "id": "3.3",
+    "q": "Grace asks you to \"clean up\" the shared Drive. Which of these should you confirm with her before doing?",
+    "options": [
+     "Delete files nobody has opened in a year",
+     "Make a list of files that look like duplicates",
+     "Create a folder called \"To review\"",
+     "Note which files have unclear names"
+    ],
+    "answer": 0,
+    "explain": "Deleting is hard to undo, and \"clean up\" doesn't clearly say delete. The other three change nothing for anyone."
+   }
+  ]
  }
 };

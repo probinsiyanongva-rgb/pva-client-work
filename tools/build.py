@@ -152,6 +152,7 @@ def render_activity(act_id, act):
     items = []
     row = act.get("layout") == "row"
     qlabel = act.get("qlabel", "Question")
+    numbered = act.get("numbered", True)
     for i, it in enumerate(act["items"], 1):
         key = f"act:{act_id}-{i}"
         mock = it.get("mock")
@@ -173,18 +174,44 @@ def render_activity(act_id, act):
                 for j, o in enumerate(it["options"]))
             assert 0 <= it["answer"] < len(it["options"]), (act_id, i)
             opts_html = f'<div class="{"choice-row" if row else "choice-group"}" role="radiogroup">{opts}</div>'
-        q = f'<div class="act-q"><span class="q-num">{esc(qlabel)} {i}</span><br><p>{it["q"]}</p></div>'
+        then = it.get("then")
+        num = f'{esc(qlabel)} {i}' if numbered else esc(qlabel)
+        if then:
+            num += ' · Step 1'
+        q = f'<div class="act-q"><span class="q-num">{num}</span><br><p>{it["q"]}</p></div>'
         # pickable mock or several comparison mocks: the question comes first (it says what to look for);
         # a single scene-setting mock, or "evidence_first", puts the mocks before the question
         q_first = ((mock and mock.get("pick")) or it.get("mocks")) and not it.get("evidence_first")
+        above += f'<p class="act-context">{it["context"]}</p>' if it.get("context") else ""
         body = q + above + opts_html if q_first else above + q + opts_html
         if it.get("divider_before"):
             items.append('<hr class="pair-divider">')
+        if it.get("before_html"):                                # e.g. a note shared by a pair of items
+            items.append(it["before_html"])
         good = it.get("good", "")
         items.append(
-            f'<div class="act-item act-graded{" act-row" if row else ""}" data-key="{esc(key)}" data-correct="{it["answer"]}" '
+            f'<div class="act-item act-graded{" act-row" if row else ""}{" act-step1" if then else ""}" data-key="{esc(key)}" data-correct="{it["answer"]}" '
             f'data-good="{esc(good)}" data-try="{esc(it.get("try", good))}">'
             f'{body}<div class="feedback" aria-live="polite"></div></div>')
+        if then:
+            # Two-step item (Part 5): step 2 ("What decided it?") stays hidden until step 1 is
+            # answered, so its options can't hint at the step-1 answer. Both steps are scored and
+            # saved. Reusable for Final Challenge two-step decision items.
+            tfb = then.get("feedback")
+            if tfb:
+                assert len(tfb) == len(then["options"]), (act_id, i, "step 2: one feedback per option")
+            assert 0 <= then["answer"] < len(then["options"]), (act_id, i, "step 2")
+            k2 = key + "-why"
+            topts = "".join(
+                f'<label class="choice"{(" data-fb=" + chr(34) + esc(tfb[j]) + chr(34)) if tfb else ""}>'
+                f'<input type="radio" name="{esc(k2)}" value="{j}"><span>{o}</span></label>'
+                for j, o in enumerate(then["options"]))
+            items.append(
+                f'<div class="act-item act-graded act-step2 hidden" data-key="{esc(k2)}" data-after="{esc(key)}" '
+                f'data-correct="{then["answer"]}" data-good="" data-try="">'
+                f'<div class="act-q"><span class="q-num">{num.replace("Step 1", "Step 2")}</span><br><p>{then["q"]}</p></div>'
+                f'<div class="choice-group" role="radiogroup">{topts}</div>'
+                f'<div class="feedback" aria-live="polite"></div></div>')
     intro = f'<p>{act["intro"]}</p>' if act.get("intro") else ""
     intro += act.get("intro_html", "")                          # may contain {{mock:ID}} / {{carry:ID}}
     intro += "".join(render_mock(mm) for mm in act.get("mocks", []))
@@ -202,7 +229,8 @@ def render_taskcard(tc_id, tc):
     fields = tc["fields"]
     note_title = tc.get("note_heading", "My Task Card")
     out = [f'<section class="taskcard" data-taskcard="{esc(tc_id)}">',
-           f'<div class="activity-title">{esc(tc.get("label", "Practice"))}</div><h2>{esc(tc["title"])}</h2>',
+           (f'<div class="activity-title">{esc(tc.get("label", "Practice"))}</div>' if tc.get("label", "Practice") else ""),
+           (f'<h2>{esc(tc["title"])}</h2>' if tc.get("title") else ""),   # empty: the card continues the activity above it
            tc.get("intro_html", ""),
            f'<div hidden data-note-heading="{esc(note_title)}"></div>']
     for f in fields:

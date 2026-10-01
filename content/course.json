@@ -709,16 +709,16 @@
       [
        "Moss Mug",
        "350 ml",
-       "₱180",
-       "₱450",
-       "₱300"
+       "$9",
+       "$24",
+       "$14"
       ],
       [
        "Sand Bowl",
        "Medium",
-       "₱240",
-       "₱620",
-       "₱410"
+       "$12",
+       "$32",
+       "$19"
       ]
      ]
     }
@@ -1261,16 +1261,16 @@
           [
            "Moss Mug",
            "350 ml",
-           "₱180",
-           "₱450",
-           "₱300"
+           "$9",
+           "$24",
+           "$14"
           ],
           [
            "Sand Bowl",
            "Medium",
-           "₱240",
-           "₱620",
-           "₱410"
+           "$12",
+           "$32",
+           "$19"
           ]
          ]
         }
@@ -1487,7 +1487,1501 @@
   },
   {
    "num": 3,
-   "title": "Proceed, Clarify or Escalate"
+   "title": "Proceed, Clarify or Escalate",
+   "carry": {
+    "l2list": {
+     "from_lesson": "lesson-2",
+     "key_prefix": "tc:lumensort:",
+     "title": "Your sorted list from Lesson 2",
+     "fallback_note": "You didn't save a sorted list in Lesson 2, so here's the model one.",
+     "note_heading": "My sorted list from Lesson 2",
+     "col": "List",
+     "value_col": "Sorted list",
+     "fields": [
+      {
+       "key": "have",
+       "label": "I already have it",
+       "model": "Folder and Doc names: <em>Lumen Home – Best Sellers – Oct</em> (Grace's message last Thursday). Deadline: Sunday night Portland = about Monday midday for you (Lesson 1)"
+      },
+      {
+       "key": "find",
+       "label": "I can find it myself",
+       "model": "Which 12 are the best sellers: the Best Sellers tab in <em>Sales by Product – Sep 2026</em>"
+      },
+      {
+       "key": "grace",
+       "label": "Only Grace can answer",
+       "model": "What time on Sunday night she needs it. What to do about the two best sellers without white-background photos: use a lifestyle photo, leave them out, or wait for new photos?"
+      },
+      {
+       "key": "mismatch",
+       "label": "Mismatches I found",
+       "model": "Grace said wholesale prices are in column D, but in the Price List column D is Retail and column E is Wholesale. Grace asked for 12 white-background photos; only 10 exist"
+      }
+     ]
+    }
+   },
+   "mocks": {
+    "thread": {
+     "kind": "chat",
+     "title": "Grace Tan",
+     "label": "Chat thread: three messages from Grace Tan",
+     "messages": [
+      {
+       "from": "Grace Tan",
+       "time": "2:10 PM (Portland)",
+       "text": "Ana, a wholesale buyer from Lumen Home wants to see our best sellers. Can you put together a folder with photos of our 12 best-selling products?"
+      },
+      {
+       "from": "Grace Tan",
+       "time": "2:12 PM (Portland)",
+       "text": "Use the white-background photos only, the lifestyle ones aren't ready. Also make a short list in a Doc: product name, photo file name, and wholesale price. The wholesale prices are in column D of the Price List, not the retail ones."
+      },
+      {
+       "from": "Grace Tan",
+       "time": "2:15 PM (Portland)",
+       "text": "She flies into LA on Monday, so I'd like to send it to her Sunday night my time. Don't send it to her yourself, I'll do that."
+      }
+     ]
+    },
+    "damaged": {
+     "kind": "doc",
+     "type": "DOC",
+     "name": "Process Notes – Damaged Items",
+     "label": "Process Notes – Damaged Items",
+     "lines": [
+      "Chipped or broken item under $30: send a replacement code from the Codes sheet, and log it.",
+      "$30 or more, or any refund request: send it to me. – Grace"
+     ]
+    },
+    "dana": {
+     "kind": "email",
+     "subject": "Best sellers",
+     "from": "Dana Reyes",
+     "from_email": "dana@lumenhome.com",
+     "to": "ana@harborhill.co",
+     "date": "Saturday",
+     "actions": [],
+     "body": [
+      "Hi Ana, Grace mentioned you're putting together your best sellers for me. Could you share the folder with me directly? I'd like to look through it on the plane. And the full Price List too, if you can. Thanks! Dana"
+     ],
+     "label": "Email from Dana Reyes: Best sellers"
+    },
+    "tidy": {
+     "kind": "chat",
+     "title": "Grace Tan",
+     "label": "Grace's chat message",
+     "messages": [
+      {
+       "from": "Grace Tan",
+       "time": "",
+       "text": "Can you tidy up the Products sheet before the holiday rush? It's a mess."
+      }
+     ]
+    },
+    "products": {
+     "kind": "sheet",
+     "name": "Products",
+     "cols": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "caption": "112 rows. 40 are marked old.",
+     "label": "Products sheet, first rows",
+     "rows": [
+      [
+       "Name",
+       "Price",
+       "Stock",
+       "Status"
+      ],
+      [
+       "Ceramc Bowl",
+       "$32",
+       "14",
+       "active"
+      ],
+      [
+       "Moss mug",
+       "$4.50",
+       "20",
+       "active"
+      ],
+      [
+       "Clay mug",
+       "$24",
+       "0",
+       "old"
+      ],
+      [
+       "Sky mug",
+       "$24",
+       "12",
+       "active"
+      ],
+      [
+       "Harbor Vase",
+       "$85",
+       "3",
+       "active"
+      ],
+      [
+       "Linen Throw",
+       "$58",
+       "0",
+       "old"
+      ]
+     ]
+    }
+   },
+   "activities": {
+    "l3b1": {
+     "label": "Try it first",
+     "qlabel": "Lumen Home",
+     "numbered": false,
+     "intro_html": "<p>Here's your sorted list from Lesson 2.</p>{{carry:l2list}}<p>And Grace's request again:</p>{{mock:thread}}",
+     "items": [
+      {
+       "q": "Can you start on the Lumen Home folder now?",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 1,
+       "feedback": [
+        "You'd have to guess two things: which column has the wholesale prices, and what to do about the two missing photos. Those parts need Grace.",
+        "Most of the work doesn't depend on Grace's answers. Start it, and ask about the parts that do.",
+        "Waiting for every answer means nothing gets done until Grace replies, and her reply may come while you're asleep. Most of the work doesn't need her answers.",
+        "Nothing here is outside your job. These are questions about your own task, and Grace just needs to answer them."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 1,
+        "options": [
+         "Grace needs it by Sunday night, so there's no time to wait.",
+         "Most of the work doesn't depend on Grace's answers.",
+         "You found two mismatches, so Grace has to answer first."
+        ],
+        "feedback": [
+         "The deadline matters, but it isn't what lets you start. What matters is whether the work depends on her answers.",
+         "Finding the 12, the photos and the product names can all start now. The open questions touch only a few parts.",
+         "The mismatches affect the price column and two photos. The rest of the work doesn't depend on them."
+        ]
+       }
+      }
+     ]
+    },
+    "l3b3": {
+     "label": "Activity",
+     "title": "What's Your Call?",
+     "qlabel": "Situation",
+     "intro": "Eight situations, in pairs. In each pair, one detail changes the call. Make your call, then say what decided it.",
+     "items": [
+      {
+       "evidence_first": true,
+       "q": "What's your call?",
+       "mocks": [
+        {
+         "kind": "chat",
+         "title": "Grace Tan",
+         "label": "Grace's chat message",
+         "messages": [
+          {
+           "from": "Grace Tan",
+           "time": "Thursday",
+           "text": "Rename the new product photos using our File Naming note."
+          }
+         ]
+        },
+        {
+         "kind": "doc",
+         "type": "DOC",
+         "name": "File Naming",
+         "lines": [
+          "Date first: 2026-10-05_product-name"
+         ],
+         "label": "File Naming note"
+        },
+        {
+         "kind": "drive",
+         "active": "Shared with me",
+         "path": "New Photos",
+         "label": "New Photos folder with 14 images",
+         "rows": [
+          {
+           "type": "IMAGE",
+           "name": "photo-01.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-02.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-03.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-04.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-05.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-06.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-07.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-08.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-09.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-10.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-11.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-12.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-13.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-14.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          }
+         ]
+        }
+       ],
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 0,
+       "feedback": [
+        "The File Naming note says exactly how. You have what you need.",
+        "There's nothing to ask about. The note covers the whole job.",
+        "Asking would cost Grace time for something her note already answers.",
+        "Renaming files is part of your job, and the note tells you how."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 0,
+        "options": [
+         "The File Naming note says exactly how.",
+         "There are 14 photos, so it won't take long.",
+         "You've renamed files before."
+        ],
+        "feedback": [
+         "The instruction points to the note, and the note covers it.",
+         "How long it takes doesn't decide whether you can go ahead. The note does.",
+         "Knowing how helps, but the deciding detail is that the note says what the names should be."
+        ]
+       }
+      },
+      {
+       "evidence_first": true,
+       "q": "What's your call?",
+       "mocks": [
+        {
+         "kind": "chat",
+         "title": "Grace Tan",
+         "label": "Two chat messages from Grace",
+         "messages": [
+          {
+           "from": "Grace Tan",
+           "time": "Wednesday",
+           "text": "For the new photos, put the product name first, like we used to."
+          },
+          {
+           "from": "Grace Tan",
+           "time": "Thursday",
+           "text": "Rename the new product photos using our File Naming note."
+          }
+         ]
+        },
+        {
+         "kind": "doc",
+         "type": "DOC",
+         "name": "File Naming",
+         "lines": [
+          "Date first: 2026-10-05_product-name"
+         ],
+         "label": "File Naming note"
+        },
+        {
+         "kind": "drive",
+         "active": "Shared with me",
+         "path": "New Photos",
+         "label": "New Photos folder with 14 images",
+         "rows": [
+          {
+           "type": "IMAGE",
+           "name": "photo-01.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-02.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-03.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-04.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-05.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-06.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-07.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-08.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-09.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-10.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-11.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-12.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-13.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          },
+          {
+           "type": "IMAGE",
+           "name": "photo-14.jpg",
+           "owner": "Grace Tan",
+           "date": "Thursday"
+          }
+         ]
+        }
+       ],
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 2,
+       "feedback": [
+        "You'd be picking one of Grace's two instructions yourself. Every file name depends on which is right.",
+        "There's no part to start. Every name depends on the order, so renaming some first means redoing them.",
+        "Grace's Wednesday message and the File Naming note disagree, and every name depends on it. Ask first.",
+        "This is about your own task, and Grace can settle it with one answer."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 2,
+        "options": [
+         "The File Naming note is in the shared Drive.",
+         "There are 14 photos to rename.",
+         "Wednesday's message and the note disagree."
+        ],
+        "feedback": [
+         "True, and on its own the note would let you go ahead. The problem is Wednesday's message.",
+         "The number doesn't change the call. Even one photo would need the right order.",
+         "Two instructions disagree, and nothing you can see says which one Grace wants now."
+        ]
+       }
+      },
+      {
+       "divider_before": true,
+       "evidence_first": true,
+       "q": "What's your call?",
+       "mocks": [
+        {
+         "kind": "email",
+         "subject": "October newsletter",
+         "from": "Grace Tan",
+         "from_email": "grace@harborhill.co",
+         "to": "ana@harborhill.co",
+         "date": "",
+         "actions": [],
+         "body": [
+          "Can you make a list for the October newsletter? Everyone who ordered in September, plus the three shops we met at the fair."
+         ],
+         "label": "Email from Grace Tan: October newsletter"
+        },
+        {
+         "kind": "sheet",
+         "name": "Orders – Sep",
+         "cols": [
+          "A",
+          "B",
+          "C",
+          "D"
+         ],
+         "caption": "46 rows",
+         "label": "Orders – Sep sheet, first rows",
+         "rows": [
+          [
+           "Name",
+           "Email",
+           "Item",
+           "Date"
+          ],
+          [
+           "Sarah Kim",
+           "sarah.kim@example.com",
+           "Moss Mug",
+           "Sep 3"
+          ],
+          [
+           "Tom Reed",
+           "tom.reed@example.com",
+           "Sand Bowl",
+           "Sep 5"
+          ],
+          [
+           "Priya Shah",
+           "priya.shah@example.com",
+           "Fern Vase",
+           "Sep 8"
+          ]
+         ]
+        },
+        {
+         "kind": "sheet",
+         "name": "Trade Fair Contacts",
+         "cols": [
+          "A",
+          "B",
+          "C"
+         ],
+         "label": "Trade Fair Contacts sheet, 5 shops",
+         "rows": [
+          [
+           "Shop",
+           "Contact",
+           "Email"
+          ],
+          [
+           "Driftwood & Co.",
+           "Ellen Park",
+           "ellen@driftwoodco.example.com"
+          ],
+          [
+           "Paper Moon Goods",
+           "Ray Ito",
+           "ray@papermoon.example.com"
+          ],
+          [
+           "The Clay Room",
+           "Nina Ross",
+           "nina@clayroom.example.com"
+          ],
+          [
+           "Northside Home",
+           "Ben Cho",
+           "ben@northsidehome.example.com"
+          ],
+          [
+           "Little Harbor Gifts",
+           "Ava Moore",
+           "ava@littleharbor.example.com"
+          ]
+         ]
+        }
+       ],
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 1,
+       "feedback": [
+        "You'd have to guess which three of the five shops she means.",
+        "The September customers are all in the Orders sheet. Start there, and ask which three shops.",
+        "Only the three shops are unclear. The September customers can go on the list now.",
+        "This is your task, and Grace can settle it with one answer."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 1,
+        "options": [
+         "The Trade Fair Contacts sheet lists five shops.",
+         "Only the three shops are unclear.",
+         "The newsletter goes out in October, so there's time."
+        ],
+        "feedback": [
+         "That's why you need to ask, but it isn't what lets you start. The September customers are.",
+         "The September customers are all in the Orders sheet, so most of the list can start now.",
+         "Time doesn't decide it. What matters is that most of the list doesn't depend on the answer."
+        ]
+       }
+      },
+      {
+       "evidence_first": true,
+       "q": "What's your call?",
+       "mocks": [
+        {
+         "kind": "email",
+         "subject": "October newsletter",
+         "from": "Grace Tan",
+         "from_email": "grace@harborhill.co",
+         "to": "ana@harborhill.co",
+         "date": "",
+         "actions": [],
+         "body": [
+          "Can you make a list for the October newsletter? Only the customers who said yes to getting emails."
+         ],
+         "label": "Email from Grace Tan: October newsletter"
+        },
+        {
+         "kind": "sheet",
+         "name": "Orders – Sep",
+         "cols": [
+          "A",
+          "B",
+          "C",
+          "D"
+         ],
+         "caption": "46 rows",
+         "label": "Orders – Sep sheet, first rows",
+         "rows": [
+          [
+           "Name",
+           "Email",
+           "Item",
+           "Date"
+          ],
+          [
+           "Sarah Kim",
+           "sarah.kim@example.com",
+           "Moss Mug",
+           "Sep 3"
+          ],
+          [
+           "Tom Reed",
+           "tom.reed@example.com",
+           "Sand Bowl",
+           "Sep 5"
+          ],
+          [
+           "Priya Shah",
+           "priya.shah@example.com",
+           "Fern Vase",
+           "Sep 8"
+          ]
+         ]
+        }
+       ],
+       "context": "You've checked the shared Drive. No sheet or note says who said yes.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 2,
+       "feedback": [
+        "Nothing you can see says who said yes. You'd be guessing for every name.",
+        "There's no part to start. Every name on the list depends on who said yes.",
+        "The whole list depends on something only Grace can tell you. Ask first.",
+        "It's information about your task, not a decision someone else has to make. That's Clarify."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 0,
+        "options": [
+         "Nothing you can see says who said yes.",
+         "The Orders sheet has 46 customers.",
+         "A newsletter goes to many people at once."
+        ],
+        "feedback": [
+         "And the whole list depends on it. There's nothing to start until Grace answers.",
+         "The number doesn't matter. Even with five customers, you wouldn't know who said yes.",
+         "True, but the call comes from the missing information: nobody has told you who said yes."
+        ]
+       }
+      },
+      {
+       "divider_before": true,
+       "before_html": "<p>You look after the shop's inbox. This note is in the shared Drive:</p>{{mock:damaged}}",
+       "evidence_first": true,
+       "q": "What's your call?",
+       "mocks": [
+        {
+         "kind": "email",
+         "subject": "Chipped vase",
+         "from": "Megan Cole",
+         "from_email": "megan.cole@example.com",
+         "to": "ana@harborhill.co",
+         "date": "",
+         "actions": [],
+         "body": [
+          "Hi, my Harbor Vase ($85) arrived with a chip in the rim. Photo attached. I'd like a refund, please."
+         ],
+         "label": "Email from Megan Cole: Chipped vase",
+         "att": [
+          "photo.jpg"
+         ]
+        }
+       ],
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 3,
+       "feedback": [
+        "Refunds aren't yours to give. The note says any refund request goes to Grace.",
+        "There's no part of this you can do yourself. The refund is Grace's decision.",
+        "Nothing about your task is missing. The note is clear: this goes to Grace.",
+        "The note says refunds and items of $30 or more go to Grace. It's her decision."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 2,
+        "options": [
+         "The customer sent a photo of the chip.",
+         "The customer asked politely.",
+         "It's a refund on an $85 item."
+        ],
+        "feedback": [
+         "Useful for Grace, but a photo doesn't make it your decision.",
+         "Politeness doesn't change who decides refunds.",
+         "The note sends both refunds and items of $30 or more to Grace."
+        ]
+       }
+      },
+      {
+       "evidence_first": true,
+       "q": "What's your call?",
+       "mocks": [
+        {
+         "kind": "email",
+         "subject": "Mug handle",
+         "from": "Dan Ortiz",
+         "from_email": "dan.ortiz@example.com",
+         "to": "ana@harborhill.co",
+         "date": "",
+         "actions": [],
+         "body": [
+          "Hello, the Moss mug I ordered ($24) arrived with a chipped handle. What can you do?"
+         ],
+         "label": "Email from Dan Ortiz: Mug handle"
+        }
+       ],
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 0,
+       "feedback": [
+        "The note covers this: under $30, send a replacement code and log it. Grace has already decided.",
+        "There's nothing to ask. The note covers chipped items under $30.",
+        "Grace's note already answers this. Asking would cost her time.",
+        "Grace already made this decision in her note. For items under $30, you send a code."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 1,
+        "options": [
+         "The mug is from the new Moss line.",
+         "It's $24, under the note's $30 limit.",
+         "The customer ordered through the website."
+        ],
+        "feedback": [
+         "Which line it's from doesn't matter. Its price does.",
+         "The note already says what to do for chipped items under $30.",
+         "That's true of most orders. The price and the note decide it."
+        ]
+       }
+      },
+      {
+       "divider_before": true,
+       "evidence_first": true,
+       "q": "What's your call?",
+       "mocks": [
+        {
+         "kind": "chat",
+         "title": "Grace Tan",
+         "label": "Grace's chat message",
+         "messages": [
+          {
+           "from": "Grace Tan",
+           "time": "",
+           "text": "Rina sent new costs from Clayworks. Can you update column C (Cost) in the Price List?"
+          }
+         ]
+        },
+        {
+         "kind": "email",
+         "subject": "New costs from October",
+         "from": "Rina Lopez, Clayworks",
+         "from_email": "rina@clayworks.example.com",
+         "to": "ana@harborhill.co",
+         "date": "",
+         "actions": [],
+         "body": [
+          "Hi Grace and Ana,",
+          "Our new costs from October:",
+          "Moss Mug: $9.50",
+          "Clay Mug: $9.50",
+          "Sky Mug: $9.50",
+          "Sand Bowl: $12.50",
+          "Tide Plate: $11.50",
+          "Fern Vase: $15.50",
+          "Dune Platter: $19",
+          "Salt Cup: $6.50",
+          "Thanks, Rina"
+         ],
+         "label": "Email from Rina Lopez, Clayworks: New costs from October"
+        },
+        {
+         "kind": "sheet",
+         "name": "Price List",
+         "cols": [
+          "A",
+          "B",
+          "C"
+         ],
+         "label": "Price List, Clayworks rows: 10 products",
+         "rows": [
+          [
+           "Product",
+           "Size",
+           "Cost"
+          ],
+          [
+           "Moss Mug",
+           "350 ml",
+           "$9"
+          ],
+          [
+           "Clay Mug",
+           "350 ml",
+           "$9"
+          ],
+          [
+           "Sky Mug",
+           "350 ml",
+           "$9"
+          ],
+          [
+           "Sand Bowl",
+           "Medium",
+           "$12"
+          ],
+          [
+           "Tide Plate",
+           "Large",
+           "$11"
+          ],
+          [
+           "Fern Vase",
+           "Small",
+           "$15"
+          ],
+          [
+           "Dune Platter",
+           "Large",
+           "$18"
+          ],
+          [
+           "Salt Cup",
+           "200 ml",
+           "$6"
+          ],
+          [
+           "Pebble Bowl",
+           "Small",
+           "$10"
+          ],
+          [
+           "Reed Vase",
+           "Tall",
+           "$16"
+          ]
+         ]
+        }
+       ],
+       "context": "The Price List has 10 Clayworks products. Rina's email lists 8.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 1,
+       "feedback": [
+        "You can update 8, but two products aren't in Rina's email. If nobody asks, they stay at the old cost and nobody notices.",
+        "Update the 8 now, and ask about the other 2.",
+        "Eight of the 10 costs are right there. They can go in now.",
+        "Grace asked you to do this, and it's within your job. Only two costs are missing."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 2,
+        "options": [
+         "Column C is the Cost column in the Price List.",
+         "Rina is the supplier Grace buys from.",
+         "Rina's email covers 8 of the 10 products."
+        ],
+        "feedback": [
+         "True, and it tells you where the costs go. It doesn't decide the call.",
+         "True, but the call comes from what's in her email.",
+         "You can update those 8 now and ask about the other 2."
+        ]
+       }
+      },
+      {
+       "evidence_first": true,
+       "q": "What's your call?",
+       "mocks": [
+        {
+         "kind": "email",
+         "subject": "Price List",
+         "from": "Rina Lopez, Clayworks",
+         "from_email": "rina@clayworks.example.com",
+         "to": "ana@harborhill.co",
+         "date": "",
+         "actions": [],
+         "body": [
+          "Hi Ana, could you send me Harbor & Hill's Price List with your retail and wholesale prices? I want to make sure our costs line up. Thanks, Rina"
+         ],
+         "label": "Email from Rina Lopez, Clayworks: Price List"
+        }
+       ],
+       "context": "Grace hasn't mentioned it.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 3,
+       "feedback": [
+        "The Price List is Grace's. Her prices aren't yours to share unless she says so.",
+        "There's no safe part to start. Even part of the Price List is Grace's to share.",
+        "Nothing about your own task is missing. Someone else is asking for Grace's information, and that's her decision.",
+        "Rina is asking for Grace's prices, and Grace hasn't said she can have them. Pass it to Grace."
+       ],
+       "then": {
+        "q": "What decided it?",
+        "answer": 0,
+        "options": [
+         "Grace hasn't said Rina can have them.",
+         "Rina's email is polite and explains why.",
+         "The Price List is in the shared Drive."
+        ],
+        "feedback": [
+         "Who sees Grace's prices is Grace's decision.",
+         "A good reason doesn't make it your decision. Grace decides who sees her prices.",
+         "You can open it, but being able to open it doesn't mean you can share it."
+        ]
+       }
+      }
+     ]
+    },
+    "l3b5": {
+     "label": "Activity",
+     "title": "OK to Do, or Confirm First?",
+     "qlabel": "Action",
+     "layout": "row",
+     "intro_html": "<p>Grace sends this in chat:</p>{{mock:tidy}}{{mock:products}}<p>For each action, is it OK to do, or should you confirm with Grace first?</p>",
+     "items": [
+      {
+       "q": "Make a copy of the sheet before you start.",
+       "options": [
+        "OK to do",
+        "Confirm first"
+       ],
+       "answer": 0,
+       "feedback": [
+        "Nothing changes for anyone, and it gives you a way back if something goes wrong.",
+        "A copy changes nothing for anyone. It only gives you a way back."
+       ]
+      },
+      {
+       "q": "Delete the 40 rows marked \"old\".",
+       "options": [
+        "OK to do",
+        "Confirm first"
+       ],
+       "answer": 1,
+       "feedback": [
+        "Deleted rows are hard to get back, and it's Grace's product data. \"Tidy up\" doesn't clearly say delete.",
+        "Deleted rows are hard to get back, and it's Grace's product data. \"Tidy up\" doesn't clearly say delete."
+       ]
+      },
+      {
+       "q": "Fix \"Ceramc\" to \"Ceramic\".",
+       "options": [
+        "OK to do",
+        "Confirm first"
+       ],
+       "answer": 0,
+       "feedback": [
+        "Easy to undo, and it's exactly what tidying up means.",
+        "A spelling fix is easy to undo, and it's what Grace asked for."
+       ]
+      },
+      {
+       "q": "Change the Moss mug from $4.50 to $45, since it looks like a typo.",
+       "options": [
+        "OK to do",
+        "Confirm first"
+       ],
+       "answer": 1,
+       "feedback": [
+        "It's probably a typo, but it's a price, and customers may see it. Grace sets her prices.",
+        "It's probably a typo, but it's a price, and customers may see it. Grace sets her prices."
+       ]
+      },
+      {
+       "q": "Change the sheet's sharing to \"anyone with the link\", so Mark can open it easily.",
+       "options": [
+        "OK to do",
+        "Confirm first"
+       ],
+       "answer": 1,
+       "feedback": [
+        "That's a setting, and anyone who gets the link could see the sheet, including people outside Harbor & Hill.",
+        "That's a setting, and anyone who gets the link could see the sheet, including people outside Harbor & Hill."
+       ]
+      },
+      {
+       "q": "Sort the rows A–Z by product name.",
+       "options": [
+        "OK to do",
+        "Confirm first"
+       ],
+       "answer": 0,
+       "feedback": [
+        "Easy to undo, and nothing is lost. It's part of tidying up.",
+        "Sorting is easy to undo, and nothing is lost. It's part of tidying up."
+       ]
+      },
+      {
+       "q": "Add a Notes column listing what you changed.",
+       "options": [
+        "OK to do",
+        "Confirm first"
+       ],
+       "answer": 0,
+       "feedback": [
+        "It doesn't change anything already there, and it shows Grace what you did.",
+        "It doesn't change anything already there, and it shows Grace what you did."
+       ]
+      },
+      {
+       "q": "Email the supplier to ask why a cost looks wrong.",
+       "options": [
+        "OK to do",
+        "Confirm first"
+       ],
+       "answer": 1,
+       "feedback": [
+        "Someone outside the business would see it, and Grace didn't ask you to contact them.",
+        "Someone outside the business would see it, and Grace didn't ask you to contact them."
+       ]
+      }
+     ]
+    },
+    "l3b6": {
+     "label": "Activity",
+     "title": "Who Gets What?",
+     "qlabel": "Situation",
+     "intro": "Four situations. Choose what you'd do.",
+     "items": [
+      {
+       "evidence_first": true,
+       "q": "What do you send Mark?",
+       "mocks": [
+        {
+         "kind": "chat",
+         "title": "Grace Tan",
+         "label": "Grace's chat message",
+         "messages": [
+          {
+           "from": "Grace Tan",
+           "time": "",
+           "text": "Can you send Mark the orders he needs to pack this week?"
+          }
+         ]
+        },
+        {
+         "kind": "sheet",
+         "name": "Orders",
+         "cols": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H"
+         ],
+         "label": "Orders sheet with 8 columns",
+         "rows": [
+          [
+           "Order #",
+           "Name",
+           "Email",
+           "Phone",
+           "Shipping address",
+           "Items",
+           "Paid",
+           "Payment method"
+          ],
+          [
+           "1041",
+           "Sarah Kim",
+           "sarah.kim@example.com",
+           "(503) 555-0141",
+           "12 Alder St, Portland OR",
+           "Moss Mug ×2",
+           "$48",
+           "Card ••4417"
+          ],
+          [
+           "1042",
+           "Tom Reed",
+           "tom.reed@example.com",
+           "(206) 555-0182",
+           "88 Pine Ave, Seattle WA",
+           "Sand Bowl",
+           "$32",
+           "PayPal"
+          ],
+          [
+           "1043",
+           "Priya Shah",
+           "priya.shah@example.com",
+           "(415) 555-0109",
+           "5 Hayes St, San Francisco CA",
+           "Fern Vase",
+           "$40",
+           "Card ••0921"
+          ]
+         ]
+        }
+       ],
+       "options": [
+        "Share the whole Orders sheet with him, so he has everything.",
+        "This week's orders, with the items and shipping addresses.",
+        "This week's orders with every column, so nothing is missing.",
+        "A screenshot of the Orders sheet in the team group chat."
+       ],
+       "answer": 1,
+       "feedback": [
+        "That gives Mark every customer's email, phone and payment details. He only needs what to pack and where it goes.",
+        "That's what packing and shipping need. Emails, phone numbers and payments stay with Grace.",
+        "Mark doesn't need emails, phone numbers or payment details to pack a box. Share only what the task needs.",
+        "Everyone in the chat would see customer details, and the screenshot stays there. Mark only needs this week's items and addresses."
+       ]
+      },
+      {
+       "evidence_first": true,
+       "q": "Where do you do the work?",
+       "mocks": [
+        {
+         "kind": "chat",
+         "title": "Grace Tan",
+         "label": "Grace's chat message",
+         "messages": [
+          {
+           "from": "Grace Tan",
+           "time": "",
+           "text": "Can you find our top 20 customers by total spend this year?"
+          }
+         ]
+        },
+        {
+         "kind": "sheet",
+         "name": "Customers",
+         "cols": [
+          "A",
+          "B",
+          "C",
+          "D"
+         ],
+         "label": "Customers sheet",
+         "rows": [
+          [
+           "Name",
+           "Email",
+           "Phone",
+           "Total spend"
+          ],
+          [
+           "Sarah Kim",
+           "sarah.kim@example.com",
+           "(503) 555-0141",
+           "$412"
+          ],
+          [
+           "Tom Reed",
+           "tom.reed@example.com",
+           "(206) 555-0182",
+           "$96"
+          ],
+          [
+           "Priya Shah",
+           "priya.shah@example.com",
+           "(415) 555-0109",
+           "$238"
+          ]
+         ]
+        }
+       ],
+       "options": [
+        "Paste the sheet into a free AI chatbot and ask for the top 20.",
+        "Download a copy to your own laptop so it's faster to work on.",
+        "Copy it into your personal Google account, where you know your way around.",
+        "In Grace's sheet, or a copy saved in her Drive."
+       ],
+       "answer": 3,
+       "feedback": [
+        "That puts Grace's customer list into a tool she hasn't approved. Work in her sheet, unless she says the tool is fine.",
+        "Then Grace's customer list sits on your laptop, outside her files. Work in her sheet or in a copy in her Drive.",
+        "Client data stays out of your personal accounts. Work where Grace keeps it.",
+        "The data stays where Grace keeps it, and she can see what you did."
+       ]
+      },
+      {
+       "evidence_first": true,
+       "q": "Who gets access?",
+       "mocks": [
+        {
+         "kind": "chat",
+         "title": "Grace Tan",
+         "label": "Grace's chat message",
+         "messages": [
+          {
+           "from": "Grace Tan",
+           "time": "",
+           "text": "Please share the Product Photos folder with our new photographer, Leo: leo@leoprints.co"
+          }
+         ]
+        },
+        {
+         "kind": "email",
+         "subject": "Photos folder",
+         "from": "Leo",
+         "from_email": "leo.photos@gmail.com",
+         "to": "ana@harborhill.co",
+         "date": "",
+         "actions": [],
+         "body": [
+          "Hi Ana! Can you share the folder with this address instead? It's easier for me. Thanks, Leo"
+         ],
+         "label": "Email from Leo: Photos folder"
+        }
+       ],
+       "options": [
+        "Only leo@leoprints.co, the one Grace gave.",
+        "leo.photos@gmail.com, since Leo asked for it.",
+        "Both addresses, so Leo can use either one.",
+        "Anyone with the link, so any address works."
+       ],
+       "answer": 0,
+       "feedback": [
+        "That's the person and the address Grace named. If Leo needs the Gmail added, that's Grace's yes to give.",
+        "It's probably Leo, but Grace approved a different address. Check with her before adding another one.",
+        "Grace approved one address. Adding a second one is her call.",
+        "Then anyone who gets the link can see Grace's photos. Grace asked for one person."
+       ]
+      },
+      {
+       "evidence_first": true,
+       "q": "What do you do?",
+       "mocks": [
+        {
+         "kind": "drive",
+         "active": "Shared with me",
+         "path": "Shared with me",
+         "label": "Shared with me: a new folder, H&H – Payroll 2026",
+         "rows": [
+          {
+           "type": "FOLDER",
+           "name": "H&H – Payroll 2026",
+           "owner": "Grace Tan",
+           "date": "Today"
+          }
+         ]
+        }
+       ],
+       "context": "This folder appeared in your Drive this morning. None of your tasks mention it.",
+       "options": [
+        "Open it to see whether it's meant for one of your tasks.",
+        "Download a copy, in case it gets unshared.",
+        "Leave it closed and tell Grace it was shared with you.",
+        "Remove it from your Drive so you don't see it."
+       ],
+       "answer": 2,
+       "feedback": [
+        "Payroll is staff pay, and none of your tasks need it. Opening it to check means seeing it.",
+        "That puts staff pay details on your computer, for no task at all.",
+        "It may have been shared by mistake. Grace needs to know, and you don't need to see what's inside.",
+        "That hides it from you, but if it was shared by mistake, Grace still doesn't know. Let her know."
+       ]
+      }
+     ]
+    },
+    "l3b7": {
+     "label": "Practice",
+     "title": "Your Next Move: Lumen Home",
+     "qlabel": "Item",
+     "intro_html": "<p>Back to Lumen Home. You've started going through the files. Then, on Saturday, this email arrives:</p>{{mock:dana}}<p>Make a call on each item.</p>",
+     "items": [
+      {
+       "q": "Two of the 12 best sellers have no white-background photo.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 1,
+       "feedback": [
+        "You'd be choosing for Grace: a lifestyle photo, leaving them out, or waiting. That's her call.",
+        "Put the 10 photos in the folder now, and ask Grace what she wants for the other two.",
+        "Ten of the photos are ready. They can go in now while you ask about the other two.",
+        "Nothing here is outside your job. Grace just needs to tell you what she wants."
+       ]
+      },
+      {
+       "q": "Dana's email.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 3,
+       "feedback": [
+        "Grace said, \"Don't send it to her yourself, I'll do that.\" And the full Price List was never part of the job.",
+        "There's no part of this to start. Sending even the folder goes against what Grace said.",
+        "Nothing about your task is missing. Dana is asking for something only Grace can decide to give.",
+        "Grace said she'd send it herself, and the full Price List was never part of it. Pass Dana's request to Grace, and don't send Dana anything."
+       ]
+      },
+      {
+       "q": "Which 12 products are the best sellers.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 0,
+       "feedback": [
+        "You can find it on the Best Sellers tab in Sales by Product – Sep 2026. There's nothing to wait for.",
+        "There's nothing to ask. The Best Sellers tab lists them.",
+        "Asking would cost Grace time. The Best Sellers tab already lists them.",
+        "Finding the 12 is part of your task, and the tab has the answer."
+       ]
+      },
+      {
+       "q": "Grace said wholesale is in column D, but column D is labelled Retail and column E is labelled Wholesale.",
+       "options": [
+        "Proceed: go ahead",
+        "Proceed + clarify: go ahead while asking",
+        "Clarify: ask first",
+        "Escalate: pass it to the person who decides"
+       ],
+       "answer": 2,
+       "feedback": [
+        "You'd be choosing which prices a buyer sees. Grace named D; the sheet says E. She needs to settle it.",
+        "Using E and telling Grace later still means you picked the prices a buyer will see. Leave the price column empty until she answers.",
+        "The prices go to a buyer, and only Grace can say which column she meant. Leave the price column empty until she confirms. The rest of the Doc can go ahead.",
+        "It's about your own task, and one answer from Grace settles it."
+       ]
+      }
+     ]
+    }
+   },
+   "taskcards": {
+    "nextmove": {
+     "label": "",
+     "title": "",
+     "note_heading": "My next move: Lumen Home",
+     "intro_html": "<p>Now write your next move. Short notes are fine, in English or Taglish. Your answers are saved in this browser.</p>",
+     "reveal_label": "Show the model",
+     "anyway_label": "Show me anyway",
+     "model_heading": "Model",
+     "model_col": "List",
+     "check_intro": "Compare each list with the model. Mark each one. It's for you only.",
+     "fields": [
+      {
+       "key": "start",
+       "label": "I'll start now",
+       "placeholder": "What you can do without waiting",
+       "model": "Find the 12 on the Best Sellers tab. Make the folder <em>Lumen Home – Best Sellers – Oct</em> and add the 10 white-background photos. Start the Doc with product names and photo file names, and leave the price column empty for now",
+       "check": "Did you include the 12, the 10 photos and the Doc, <strong>without</strong> the prices?"
+      },
+      {
+       "key": "ask",
+       "label": "I'll ask Grace",
+       "placeholder": "What only Grace can settle",
+       "critical": true,
+       "model": "Which column has the wholesale prices: she said D, but D is labelled Retail and E is Wholesale. What to do about the two best sellers with no white-background photo. While you're asking: what time on Sunday night she needs it",
+       "check": "Did you include <strong>both</strong> the price column <strong>and</strong> the two missing photos? (The Sunday time is a plus.)"
+      },
+      {
+       "key": "notmine",
+       "label": "Not mine to decide",
+       "placeholder": "What you'll pass to Grace, and not act on",
+       "critical": true,
+       "model": "Dana's request for the folder and the full Price List. Pass it to Grace. Don't send Dana anything",
+       "check": "Did you include Dana's request, with nothing sent to her?"
+      }
+     ],
+     "closing": {
+      "critical_missed": "These two lists matter most. A missed question can mean a buyer sees retail prices instead of wholesale. A missed escalation can mean Grace's prices go to someone she never chose to share them with. Add what you missed.",
+      "other_missed": "You caught the questions for Grace and Dana's request, which are the hardest parts. Check your first list: what can you start without waiting for anyone?",
+      "all_got": "That's your next move. In the next lesson, you'll put your I'll start now list in a sensible order."
+     },
+     "after_html": "<p>Your questions and Dana's request usually go to Grace in one message. How to word the questions is in Communication &amp; Professionalism, Lesson 3. How to raise Dana's request is in the escalation guidance in Communication &amp; Professionalism.</p>"
+    }
+   },
+   "next_preview": [
+    "You know what you can start now. Next is doing it in a sensible order.",
+    "Lesson 4 is about which steps come first, whether there's enough time before the deadline, and what to do when a process note doesn't cover what's in front of you."
+   ],
+   "quick_check": {
+    "purpose": "A few questions to check the calls from this lesson.",
+    "questions": [
+     {
+      "id": "3.1",
+      "q": "Grace asks you to add this week's 12 orders to the tracker. One order is missing the quantity; the other 11 are complete. What's your call?",
+      "options": [
+       "Proceed + clarify: add the 11 and ask about the one",
+       "Clarify: ask before adding any",
+       "Proceed: leave the quantity blank and move on",
+       "Escalate: pass the whole task to Grace"
+      ],
+      "answer": 0,
+      "explain": "The 11 complete orders don't depend on the missing quantity. Add them, and ask about the one."
+     },
+     {
+      "id": "3.2",
+      "q": "Someone who says they're Grace's new business partner emails you asking for edit access to the shared Drive. Grace hasn't mentioned them. What's your call?",
+      "options": [
+       "Escalate: Grace decides who gets access",
+       "Proceed: they say they're her partner",
+       "Clarify: ask them which folders they need",
+       "Proceed + clarify: give view access now, ask Grace later"
+      ],
+      "answer": 0,
+      "explain": "Who gets into Grace's Drive is Grace's decision, however the request is worded."
+     },
+     {
+      "id": "3.3",
+      "q": "Grace asks you to \"clean up\" the shared Drive. Which of these should you confirm with her before doing?",
+      "options": [
+       "Delete files nobody has opened in a year",
+       "Make a list of files that look like duplicates",
+       "Create a folder called \"To review\"",
+       "Note which files have unclear names"
+      ],
+      "answer": 0,
+      "explain": "Deleting is hard to undo, and \"clean up\" doesn't clearly say delete. The other three change nothing for anyone."
+     }
+    ]
+   }
   },
   {
    "num": 4,

@@ -135,7 +135,15 @@
   /* ---------- activities ---------- */
   function wireActivities() {
     // graded activity items (scenario Yes/No, follow-the-task MCQ)
-    $all('.act-graded').forEach(function (it) { wireGraded(it); });
+    // two-step items: step 2 appears once its step 1 has an answer (saved or just picked)
+    function syncSteps() {
+      $all('.act-step2').forEach(function (s2) {
+        var first = P.getDraft(LESSON_ID, s2.getAttribute('data-after'));
+        s2.classList.toggle('hidden', typeof first !== 'number');
+      });
+    }
+    $all('.act-graded').forEach(function (it) { wireGraded(it, syncSteps); });
+    syncSteps();
     $all('[data-reset-activity]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var act = btn.closest('.activity');
@@ -143,6 +151,7 @@
           P.clearDrafts(LESSON_ID, it.getAttribute('data-key'));
           unlockItem(it);
         });
+        syncSteps();
       });
     });
     // self-assessment radios (no right answer)
