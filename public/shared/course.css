@@ -449,3 +449,22 @@ kbd{display:inline-block;font:600 .82em/1.3 Inter,system-ui,sans-serif;backgroun
 .stage-marker{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:30px 0 4px;padding:10px 0 6px;border-top:3px solid var(--green)}
 .stage-marker .stage-label{font-weight:800;letter-spacing:.14em;color:var(--green);font-size:1rem}
 .stage-marker .stage-q{color:var(--charcoal);font-size:.98rem}
+/* Part 5 Final Challenge: work packet panel, two-part questions, Task Card compare */
+.packet .packet-part{border:1px solid var(--line);border-radius:10px;background:#fff;margin:6px 0}
+.packet .packet-part>summary{cursor:pointer;padding:10px 12px;font-weight:700;color:var(--green);list-style-position:inside}
+.packet .packet-part[open]>summary{border-bottom:1px solid var(--line)}
+.packet .packet-body{padding:6px 12px 10px}
+.assess-q .assess-qtext{font-weight:700;margin:10px 0 6px}
+.fc-part{margin:14px 0 6px}
+.fc-tc-table td{vertical-align:top}
+.fc-tc-table .fc-mine{white-space:pre-wrap;overflow-wrap:anywhere}
+.review-stage{margin:12px 0 2px;letter-spacing:.08em;color:var(--green)}
+@media(max-width:600px){
+.fc-tc-table thead{display:none}
+.fc-tc-table,.fc-tc-table tbody,.fc-tc-table tr,.fc-tc-table td{display:block;width:auto}
+.fc-tc-table tr{border-bottom:2px solid var(--line);padding:4px 0}
+.fc-tc-table td{border:0;padding:3px 10px}
+.fc-tc-table td[data-h]::before{content:attr(data-h);display:block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+}
+.table-wrap table.stage-table{min-width:0}
+@media(max-width:600px){.table-wrap table.fc-tc-table{min-width:0}}

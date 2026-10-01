@@ -490,6 +490,58 @@ def fnv(s: str) -> str:
     return format(h, "08x")
 
 
+STAGES = ["READ", "DECIDE", "DO", "CHECK"]
+
+
+def obscure(text: str) -> str:
+    """Keep a string out of plain view in the public page (not encryption): UTF-8 XOR SALT, base64."""
+    import base64
+    b = text.encode("utf-8"); k = SALT.encode("utf-8")
+    return base64.b64encode(bytes(c ^ k[i % len(k)] for i, c in enumerate(b))).decode("ascii")
+
+
+def challenge_item(n, q):
+    """One Final Challenge question -> public data (hashes only, no answers).
+    Types: single, two (two parts, one point only if both right), multi (perfect match),
+    order (any workable order; step ids scrambled so the model order isn't visible)."""
+    import itertools
+    t = q["type"]
+    evidence = "".join(render_mock(m) for m in q.get("evidence", []))
+    out = {"n": n, "type": t, "stage": q["stage"], "review": q["review"],
+           "html": evidence + f'<p class="assess-qtext">{q["q"]}</p>', "short": q.get("short", q["q"])}
+    assert q["stage"] in STAGES and re.match(r"Lesson [1-6]$", q["review"]), n
+    if t == "single":
+        assert 0 <= q["answer"] < len(q["options"]) and len(q["options"]) >= 2, n
+        out["options"] = [esc(o) for o in q["options"]]
+        out["k"] = fnv(f"{SALT}|{n}|{q['answer']}")
+    elif t == "two":
+        a = [p["answer"] for p in q["parts"]]
+        assert all(0 <= p["answer"] < len(p["options"]) for p in q["parts"]) and len(a) == 2, n
+        out["parts"] = [{"label": p["label"], "options": [esc(o) for o in p["options"]]} for p in q["parts"]]
+        out["k"] = fnv(f"{SALT}|{n}|{a[0]},{a[1]}")
+    elif t == "multi":
+        items = q["items"]
+        assert any(i["key"] for i in items) and not all(i["key"] for i in items), n
+        out["mode"] = q["mode"]
+        out["items"] = [i["text"] for i in items]
+        out["ks"] = [fnv(f"{SALT}|{n}|{j}|{1 if i['key'] else 0}") for j, i in enumerate(items)]
+    elif t == "order":
+        steps = q["steps"]
+        ids = [st["id"] for st in steps]
+        scr = {st["id"]: fnv(f"{SALT}|{n}|step|{st['id']}|{st['text']}")[:6] for st in steps}
+        assert len(set(scr.values())) == len(ids), n
+        workable = [p for p in itertools.permutations(ids)
+                    if all(p.index(a) < p.index(b) for a, b in q["rules"])]
+        assert (ids[0],) and tuple(ids) in workable, (n, "model order breaks a rule")
+        assert len(workable) == q["expect_workable"], (n, len(workable))
+        listed = sorted(steps, key=lambda st: scr[st["id"]])        # neutral order: by scrambled id
+        out["steps"] = [{"id": scr[st["id"]], "text": st["text"]} for st in listed]
+        out["ks"] = sorted(fnv(f"{SALT}|{n}|" + ",".join(scr[x] for x in p)) for p in workable)
+    else:
+        raise ValueError(t)
+    return out
+
+
 def build_final():
     """Final Challenge page + hashed question data.
 
@@ -519,15 +571,27 @@ def build_final():
 """)
         return "placeholder (not written yet)"
     src = json.loads(FINAL_SRC.read_text(encoding="utf-8"))
-    qs = []
-    for n, q in enumerate(src["questions"], 1):
-        assert 0 <= q["answer"] < len(q["options"]) == 4, n
-        qs.append({"n": n, "html": q["q"], "options": [esc(o) for o in q["options"]],
-                   "k": fnv(f"{SALT}|{n}|{q['answer']}"), "review": q["review"]})
-    assert qs, "Final Challenge has no questions"  # count is set by the locked blueprint
+    qs = [challenge_item(n, q) for n, q in enumerate(src["questions"], 1)]
+    assert len(qs) == 12, len(qs)                      # locked blueprint: 12 scored questions, 3 per stage
+    for st in STAGES:
+        assert sum(1 for q in qs if q["stage"] == st) == 3, st
+    # The model Task Card would give away scored answers, so it is kept out of plain view
+    # (same idea as the hashed key) and only decoded on the result page.
+    model = {k: obscure(v) for k, v in src["taskcard"]["model"].items()}
     write(data_js, "/* Final Challenge questions. Answers are hashed, not stored as letters. */\n"
-          "window.CW_CHALLENGE = " + json.dumps(qs, ensure_ascii=False, indent=1) + ";\nwindow.CW_SALT = " + json.dumps(SALT) + ";\n")
+          "window.CW_CHALLENGE = " + json.dumps(qs, ensure_ascii=False, indent=1) + ";\nwindow.CW_SALT = " + json.dumps(SALT) + ";\n"
+          "window.CW_TC_MODEL = " + json.dumps(model) + ";\n")
 
+    l1_fields = LESSONS[0]["taskcards"]["lumen"]["fields"]
+    tc_fields = "".join(
+        f'<div class="tc-field"><label class="field-label" for="fc-tc-{f["key"]}">{esc(f["label"])}</label>'
+        f'<textarea class="response" id="fc-tc-{f["key"]}" data-fc-tc="{f["key"]}" data-label="{esc(f["label"])}" placeholder="{esc(f["placeholder"])}"></textarea></div>'
+        for f in l1_fields)
+    packet = "".join(
+        f'<details class="packet-part"><summary>{esc(p["title"])}</summary><div class="packet-body">'
+        + p.get("html", "") + "".join(render_mock(m) for m in p.get("mocks", [])) + '</div></details>'
+        for p in src["packet"])
+    how = "".join(f"<li>{h}</li>" for h in src["how_it_works"])
     root = "../"
     page = f"""{head(f"{FINAL_LABEL} — {COURSE} | PVA Academy", root)}
 <body data-root="{root}" data-next-course="{NEXT_COURSE[1]}">
@@ -539,14 +603,17 @@ def build_final():
 <div class="section-label">{FINAL_LABEL}</div><div class="folder-tab">{len(qs)} questions</div>
 <h1 style="font:700 clamp(1.7rem,4vw,2.3rem)/1.15 Fraunces,Georgia,serif;color:var(--green);margin:0 0 10px">{esc(COURSE)} — {FINAL_LABEL}</h1>
 {src["intro_html"]}
-<div class="key-idea"><strong>How it works</strong><ul style="margin:.4em 0 0">
-<li>One question at a time. Your answers are saved in this browser as you go.</li>
-<li><strong>There is no pass mark.</strong> This challenge is diagnostic: your score shows what's solid and which lessons are worth another look.</li>
-<li>After you submit, you'll see your score and a link to the lesson behind any answer that didn't match. You can take it again as many times as you like.</li>
-<li>{esc(COURSE)} is complete when all {TOTAL} lessons are marked complete and you've submitted this challenge once.</li>
-</ul></div>
+<div class="key-idea"><strong>How it works</strong><ul style="margin:.4em 0 0">{how}</ul></div>
 <div id="gate" class="callout hidden"></div>
 <div class="hero-actions"><button class="btn" type="button" id="startBtn">Start the challenge</button></div>
+</section>
+<section class="card hidden packet" id="packet" aria-label="Your work packet">
+<div class="section-label">Your work packet</div><p class="small" style="margin:0 0 8px">{esc(src["packet_intro"])}</p>{packet}
+</section>
+<section class="card hidden" id="taskCardStep">
+<div class="stage-marker" style="margin-top:0;border-top:0;padding-top:0"><span class="stage-label">READ</span><span class="stage-q">What exactly is being asked?</span></div>
+<h2>Your Task Card</h2>{src["taskcard"]["intro"]}{tc_fields}
+<div class="assess-nav"><span></span><button type="button" class="btn" id="startQsBtn">Start the questions</button></div>
 </section>
 <section class="card hidden" id="assessRunner" aria-live="polite"></section>
 <section class="card hidden" id="assessResult"></section>
